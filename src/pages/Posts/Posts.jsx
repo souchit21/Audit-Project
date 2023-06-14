@@ -15,6 +15,7 @@ import SelectFileButton from "./image";
 import { Button } from "bootstrap";
 import { post } from "jquery";
 import MaterialTable from 'material-table-jspdf-fix';
+import { notifyError } from "../../utils/notifyToasts";
 const pageSize = 10;
 const Posts = () => {
   const history = useHistory();
@@ -23,7 +24,7 @@ const Posts = () => {
   console.log('9',userToken);
   const tokenArray = [];
   tokenArray.push(parseInt(userToken, 10));
-  console.log('26', tokenArray);
+  console.log('27', tokenArray);
   // useEffect(()=>{
   //   loadCategories();
   // },[]);
@@ -33,10 +34,14 @@ const Posts = () => {
 
 const PostToken = async(e)=>{
   // e.preventDefault();
-  console.log('31', tokenArray)
-  const result = await axios.get('https://c764-103-68-187-186.ngrok-free.app/audit/getAuditswithAuditorId?auditorToken='+[tokenArray]);
-  setAuditDetails(result.data.Data)
+ // console.log('37', tokenArray)
+  try{
+    const result = await axios.get('https://3cfd-103-68-187-186.ngrok-free.app/audit/getCombinedDataWithAuditorToken?auditeeToken='+[tokenArray]);
+  setAuditDetails(result.data)
   console.log("34",result);
+  }catch(err){
+    notifyError("no audit found");
+  }
 }
 const renderStatusDropdown = rowData => {
   return (
@@ -59,7 +64,7 @@ const handleStatusChange = async(event, rowData) => {
   //   id: rowData._id,
   //   status: value
   // };
-  const result = await axios.post('https://c764-103-68-187-186.ngrok-free.app/audit/editAuditofAuditor',{
+  const result = await axios.post('https://3cfd-103-68-187-186.ngrok-free.app/audit/editAuditofAuditor',{
     id: rowData._id,
     AuditorAcceptationStatus:value,
   });
@@ -78,7 +83,13 @@ const handleStatusChange = async(event, rowData) => {
    // {title:'Auditee Name', field:'auditeeId.username'},
     {title:'Date', field:'Date'},
     // {title:'Status', field:'Astatus'},
-    {title: 'Link to Audit', field:'auditLink'},
+    {title: 'Link to checklist', field:'checklist_Link',
+    render: rowData => (
+      <button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small" }} onClick={() => window.open(rowData.checklist_Link, '_blank')}>
+        View Checklist
+      </button>
+    )
+   },
     { title: 'Status', field: 'AuditorAcceptationStatus', render: renderStatusDropdown },
     
     // {title:'End Date', field:'auditEndDate'},   
@@ -103,7 +114,7 @@ const handleStatusChange = async(event, rowData) => {
    return (
     <Layout>
       
-      <div className="container">
+      <div className="container" style={{height: "600px",  overflow: "auto"}}>
 
         <MaterialTable style={{
             margin: "60px 0px 30px 20px",

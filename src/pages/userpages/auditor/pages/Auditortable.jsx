@@ -10,16 +10,25 @@ import ALayout from "../Layout/ALayout";
 // import EditCategoriesModal from "../../components/Modal/EditCategoriesModal";
 // // import UserModal from "../../components/Modal/USerModal";
 import axios from 'axios'
+import { notifyError } from "../../../../utils/notifyToasts";
 // import './image'
 // import SelectFileButton from "./image";
 // import { Button } from "bootstrap";
 // import { post } from "jquery";
 import MaterialTable from 'material-table-jspdf-fix';
+import DateSelectionModal from "../DateSelectionModal";
+
 const pageSize = 10;
 const AuditorTable = () => {
   const history = useHistory();
   // const api_url = process.env.REACT_APP_api_url;
+
   const [auditDetails,setAuditDetails] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedDate, setSelectedDate] = useState("");
+
+
+
   const userToken = JSON.parse(localStorage.getItem('user'))?.token;
   console.log('9',userToken);
   const tokenArray = [];
@@ -33,12 +42,18 @@ const AuditorTable = () => {
   const PostToken = async(e)=>{
     // e.preventDefault();
     console.log('34', tokenArray)
-    const result = await axios.get('https://f92c-103-68-187-186.ngrok-free.app/audit/getAuditswithAuditorId?auditorToken='+[tokenArray]);
-    setAuditDetails(result.data.Data)
-    console.log("37",result);
+    try{
+    const result = await axios.get('https://3cfd-103-68-187-186.ngrok-free.app/audit/getCombinedDataWithAuditorToken?auditeeToken='+[tokenArray]);
+    setAuditDetails(result.data)
+    console.log("38",result);
+    }
+    catch(err){
+      notifyError('no audit found');
+    }
   }
   const renderStatusDropdown = rowData => {
     return (
+      <>
       <select
         value={rowData.AuditorAcceptationStatus}
         onChange={event => handleStatusChange(event, rowData)}
@@ -47,27 +62,49 @@ const AuditorTable = () => {
         <option value="Accept">Accept</option>
         <option value="Not available">Not available</option>
       </select>
+
+      {isModalOpen && (
+        <DateSelectionModal
+          onClose={() => setIsModalOpen(false)}
+          onSave={date => {
+            setSelectedDate(date);
+            // Update the rowData with the selected date
+            //rowData.PreferredDate = date;
+            // Call the API or perform other necessary actions
+          }}
+        />
+      )}
+      </>
     );
-  };
-  
+  }
+
   const handleStatusChange = async(event, rowData) => {
-   
     const {value} = event.target;
     rowData.AuditorAcceptationStatus  = value;
+    if(value == "Not available"){
+      setIsModalOpen(true);
+    }
     // const data = {
     //   id: rowData._id,
     //   status: value
     // };
-    const result = await axios.post('https://f92c-103-68-187-186.ngrok-free.app/audit/editAuditofAuditor',{
+    const result = await axios.post('https://3cfd-103-68-187-186.ngrok-free.app/audit/editAuditofAuditor',{
       id: rowData._id,
       AuditorAcceptationStatus:value,
+      //AuditorpreferredDate:selectedDate
     });
+    console.log('96', result);
+    console.log('97', selectedDate);
+    const dresult = await axios.post('https://3cfd-103-68-187-186.ngrok-free.app/audit/editAuditofAuditor1',{
+      id: rowData._id,
+      AuditorpreferredDate:selectedDate
+    });
+    console.log('100', dresult)
     window.location.reload();
-    console.log('66', result);
+    
   };
-  // useEffect(()=>{
-  //   loadCategories();
-  // },[]);
+
+  
   
  
   const columns = [
@@ -81,7 +118,13 @@ const AuditorTable = () => {
    // {title:'Auditee Name', field:'auditeeId.username'},
     {title:'Date', field:'Date'},
     // {title:'Status', field:'Astatus'},
-    {title: 'Link to Audit', field:'auditLink'},
+    {title: 'Link to checklist', field:'checklist_Link',
+    render: rowData => (
+      <button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small" }} onClick={() => window.open(rowData.checklist_Link, '_blank')}>
+        View Checklist
+      </button>
+    )
+   },
     { title: 'Status', field: 'AuditorAcceptationStatus', render: renderStatusDropdown },    
     // {title:'End Date', field:'auditEndDate'},   
     // {title:'Scope', field:'scope'},

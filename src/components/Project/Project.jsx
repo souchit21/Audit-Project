@@ -85,9 +85,9 @@ const Project = ({ project }) => {
   
   const loadCategories = async()=>{
      try{
-      const result = await axios.get("https://c764-103-68-187-186.ngrok-free.app/audit/getAllAudit");
-      // console.log('88', result);
-      setAuditDetails(result.data.data);
+      const result = await axios.get("https://3cfd-103-68-187-186.ngrok-free.app/audit/getCombinedData");
+      setAuditDetails(result.data);
+      console.log('90', auditDetails);
      }catch(err){
       notifyError('No audits to show');
      }
@@ -95,7 +95,7 @@ const Project = ({ project }) => {
       // setPagination(_(result.data.getorders).slice(0).take(pageSize).value())
       
   }
-  console.log("91",auditDetails)
+  //console.log("91",auditDetails)
 
   // const styles = {
   //   Accepted: {color: 'green'},
@@ -147,8 +147,8 @@ const Project = ({ project }) => {
     { title: 'Serial no', field: 'tableData.id', render:rowData => { return( <p>{rowData.tableData.id+1}</p> ) } },
     // {title:'Order placed Date & Time', field:'createdAt',render: rowData => moment(rowData.createdAt).format("DD-MM-YYYY HH:mm:ss")},
     {title:'Date', field:'Date'},
-    {title:'Scope', field:'Scope'},
-    {title:'Audit Type', field:'auditType'},
+    // {title:'Scope', field:'Scope'},
+    // {title:'Audit Type', field:'auditType'},
     
     // {title:'Delivery Address', field:'deliveryAddress[0]'},
     {title:'Auditor Name', field:'auditTeam'},
@@ -194,6 +194,7 @@ const Project = ({ project }) => {
       <div>
         
         <FormContainer/>
+        <div style={{ height: "600px", width:"1200px", overflow: "auto", marginLeft:"10px", marginRight: "10px"}}>
         <MaterialTable style={{
             margin: "60px 20px 30px 20px",
             boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
@@ -241,6 +242,7 @@ const Project = ({ project }) => {
           },
         }}
         />
+        </div>
       </div>
   );
   

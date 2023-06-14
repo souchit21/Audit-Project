@@ -14,6 +14,7 @@ import axios from 'axios'
 // import SelectFileButton from "./image";
 // import { Button } from "bootstrap";
 // import { post } from "jquery";
+import { notifyError } from "../../../../utils/notifyToasts";
 import MaterialTable from 'material-table-jspdf-fix';
 const pageSize = 10;
 const AuditeeTable = () => {
@@ -50,7 +51,7 @@ const AuditeeTable = () => {
     //   id: rowData._id,
     //   status: value
     // };
-    const result = await axios.post('https://f92c-103-68-187-186.ngrok-free.app/audit/editAuditofAuditee',{
+    const result = await axios.post('https://3cfd-103-68-187-186.ngrok-free.app/audit/editAuditofAuditee',{
       id: rowData._id,
       AuditeeAcceptationStatus:value,
     });
@@ -61,10 +62,14 @@ const AuditeeTable = () => {
   const PostToken = async(e)=>{
     // e.preventDefault();
     console.log('34', tokenArray)
-    const result = await axios.get('https://f92c-103-68-187-186.ngrok-free.app/audit/getAuditswithAuditeeId?auditeeToken='+[tokenArray]);
-    setAuditDetails(result.data.Data)
+    try{
+    const result = await axios.get('https://3cfd-103-68-187-186.ngrok-free.app/audit/getCombinedDataWithAuditeeToken?auditeeToken='+[tokenArray]);
+    setAuditDetails(result.data);
     // console.log("37",result.data.Data);
     console.log("38",auditDetails);
+    }catch(err){
+      notifyError('no audit found');
+    }
   }
   // useEffect(()=>{
   //   loadCategories();
@@ -82,7 +87,13 @@ const AuditeeTable = () => {
    // {title:'Auditee Name', field:'auditeeId.username'},
     {title:'Date', field:'Date'},
     // {title:'Status', field:'Astatus'},
-    {title: 'Link to Audit', field:'auditLink'},
+    {title: 'Link to checklist', field:'checklist_Link',
+    render: rowData => (
+      <button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small" }} onClick={() => window.open(rowData.checklist_Link, '_blank')}>
+        View Checklist
+      </button>
+    )
+   },
     { title: 'Status', field: 'AuditeeAcceptationStatus', render: renderStatusDropdown },
     
     // {title:'End Date', field:'auditEndDate'},   
