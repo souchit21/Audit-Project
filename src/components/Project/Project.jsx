@@ -84,9 +84,13 @@ const Project = ({ project }) => {
   },[]);
   
   const loadCategories = async()=>{
+     try{
       const result = await axios.get("https://c764-103-68-187-186.ngrok-free.app/audit/getAllAudit");
       // console.log('88', result);
-      setAuditDetails(result.data.data)
+      setAuditDetails(result.data.data);
+     }catch(err){
+      notifyError('No audits to show');
+     }
 
       // setPagination(_(result.data.getorders).slice(0).take(pageSize).value())
       
