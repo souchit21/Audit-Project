@@ -16,6 +16,8 @@ import axios from 'axios'
 // import { post } from "jquery";
 import { notifyError } from "../../../../utils/notifyToasts";
 import MaterialTable from 'material-table-jspdf-fix';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 const pageSize = 10;
 const AuditeeTable = () => {
   const history = useHistory();
@@ -51,7 +53,7 @@ const AuditeeTable = () => {
     //   id: rowData._id,
     //   status: value
     // };
-    const result = await axios.post('https://3cfd-103-68-187-186.ngrok-free.app/audit/editAuditofAuditee',{
+    const result = await axios.post('https://d88d-103-68-187-186.ngrok-free.app/audit/editAuditofAuditee',{
       id: rowData._id,
       AuditeeAcceptationStatus:value,
     });
@@ -63,7 +65,7 @@ const AuditeeTable = () => {
     // e.preventDefault();
     console.log('34', tokenArray)
     try{
-    const result = await axios.get('https://3cfd-103-68-187-186.ngrok-free.app/audit/getCombinedDataWithAuditeeToken?auditeeToken='+[tokenArray]);
+    const result = await axios.get('https://d88d-103-68-187-186.ngrok-free.app/audit/getCombinedDataWithAuditeeToken?auditeeToken='+[tokenArray]);
     setAuditDetails(result.data);
     // console.log("37",result.data.Data);
     console.log("38",auditDetails);
@@ -95,6 +97,20 @@ const AuditeeTable = () => {
     )
    },
     { title: 'Status', field: 'AuditeeAcceptationStatus', render: renderStatusDropdown },
+    // {
+    //   title: 'Preferred Date',
+    //   field: 'preferredDate',
+    //   render: rowData => (
+    //     <DatePicker
+    //       selected={rowData.preferredDate ? new Date(rowData.preferredDate) : null}
+    //       onChange={date => handlePreferredDateChange(date, rowData)}
+    //       dateFormat="dd/MM/yyyy"
+    //       isClearable
+    //       placeholderText="Select a date"
+    //     />
+    //   ),
+    // },
+
     
     // {title:'End Date', field:'auditEndDate'},   
     // {title:'Scope', field:'scope'},

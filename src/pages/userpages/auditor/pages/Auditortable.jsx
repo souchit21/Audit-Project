@@ -11,12 +11,15 @@ import ALayout from "../Layout/ALayout";
 // // import UserModal from "../../components/Modal/USerModal";
 import axios from 'axios'
 import { notifyError } from "../../../../utils/notifyToasts";
+import FileUploadModal from "./FileUploadModal ";
 // import './image'
 // import SelectFileButton from "./image";
 // import { Button } from "bootstrap";
 // import { post } from "jquery";
 import MaterialTable from 'material-table-jspdf-fix';
-import DateSelectionModal from "../DateSelectionModal";
+//import DateSelectionModal from "../DateSelectionModal";
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const pageSize = 10;
 const AuditorTable = () => {
@@ -24,8 +27,7 @@ const AuditorTable = () => {
   // const api_url = process.env.REACT_APP_api_url;
 
   const [auditDetails,setAuditDetails] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedDate, setSelectedDate] = useState("");
+
 
 
 
@@ -43,7 +45,7 @@ const AuditorTable = () => {
     // e.preventDefault();
     console.log('34', tokenArray)
     try{
-    const result = await axios.get('https://3cfd-103-68-187-186.ngrok-free.app/audit/getCombinedDataWithAuditorToken?auditeeToken='+[tokenArray]);
+    const result = await axios.get('https://d88d-103-68-187-186.ngrok-free.app/audit/getCombinedDataWithAuditorToken?auditeeToken='+[tokenArray]);
     setAuditDetails(result.data)
     console.log("38",result);
     }
@@ -60,20 +62,8 @@ const AuditorTable = () => {
       >
         <option >Select an option</option>
         <option value="Accept">Accept</option>
-        <option value="Not available">Not available</option>
+        <option value="REJECTED">Not available</option>
       </select>
-
-      {isModalOpen && (
-        <DateSelectionModal
-          onClose={() => setIsModalOpen(false)}
-          onSave={date => {
-            setSelectedDate(date);
-            // Update the rowData with the selected date
-            //rowData.PreferredDate = date;
-            // Call the API or perform other necessary actions
-          }}
-        />
-      )}
       </>
     );
   }
@@ -81,37 +71,47 @@ const AuditorTable = () => {
   const handleStatusChange = async(event, rowData) => {
     const {value} = event.target;
     rowData.AuditorAcceptationStatus  = value;
-    if(value == "Not available"){
-      setIsModalOpen(true);
-    }
     // const data = {
     //   id: rowData._id,
     //   status: value
     // };
-    const result = await axios.post('https://3cfd-103-68-187-186.ngrok-free.app/audit/editAuditofAuditor',{
+    const result = await axios.post('https://d88d-103-68-187-186.ngrok-free.app/audit/editAuditofAuditor',{
       id: rowData._id,
       AuditorAcceptationStatus:value,
       //AuditorpreferredDate:selectedDate
     });
     console.log('96', result);
-    console.log('97', selectedDate);
-    const dresult = await axios.post('https://3cfd-103-68-187-186.ngrok-free.app/audit/editAuditofAuditor1',{
-      id: rowData._id,
-      AuditorpreferredDate:selectedDate
-    });
-    console.log('100', dresult)
+    
     window.location.reload();
     
   };
 
   
+  const handlePreferredDateChange = async(date, rowData) =>{
+    console.log('89',date);
+    console.log('90',rowData);
+    if(rowData.AuditorAcceptationStatus==="REJECTED"){
+    const dresult = await axios.post('https://d88d-103-68-187-186.ngrok-free.app/audit/editAuditofAuditor1',{
+      id: rowData._id,
+      AuditorpreferredDate:date
+    });
+    console.log('100', dresult)
+  }
+  else{
+    alert('you have already accepted the date')
+  }
+  }
+
   
+  
+
  
   const columns = [
     // {title:'Order Id', field:'orderId',render:rowData=><Link  to={`/order/display/${rowData._id}`} target='_blank'>{rowData.orderId}</Link>},
     { title: 'Serial no', field: 'tableData.id', render:rowData => { return( <p>{rowData.tableData.id+1}</p> ) } },
     // {title:'Order placed Date & Time', field:'createdAt',render: rowData => moment(rowData.createdAt).format("DD-MM-YYYY HH:mm:ss")},
     {title:'Audit Type', field:'auditType'},
+    
     
     // {title:'Delivery Address', field:'deliveryAddress[0]'},
     // {title:'Auditor Name', field:'auditorId.username'},
@@ -125,7 +125,29 @@ const AuditorTable = () => {
       </button>
     )
    },
-    { title: 'Status', field: 'AuditorAcceptationStatus', render: renderStatusDropdown },    
+    { title: 'Status', field: 'AuditorAcceptationStatus', render: renderStatusDropdown }, 
+    {
+      title: 'Preferred Date',
+      field: 'preferredDate',
+      render: rowData => (
+        <DatePicker
+          value=""
+          selected={rowData.preferredDate ? new Date(rowData.preferredDate) : null}
+          onChange={date => handlePreferredDateChange(date, rowData)}
+          dateFormat="dd/MM/yyyy"
+          placeholderText="dd-mm-yyyy"
+          />
+    
+      
+      ),
+    },   
+    {title:'Upload Audit', field:'Audit file', render:rowData=><Link to={`/uploadAudit/${rowData._id}`}><button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small" }} >Upload audit</button></Link>},
+    {title:'Link to audit', field:'Audit_Link', 
+    render: rowData => (
+      <button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small" }} onClick={() => window.open(rowData.Audit_Link, '_blank')}>
+        View Audit
+      </button>
+    )},
     // {title:'End Date', field:'auditEndDate'},   
     // {title:'Scope', field:'scope'},
 
@@ -151,7 +173,7 @@ const AuditorTable = () => {
       <div className="container">
 
         <MaterialTable style={{
-            margin: "60px 0px 30px 20px",
+            margin: "40px 0px 30px 20px",
             boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
             borderRadius: "8px",
             width: "97%",

@@ -18,7 +18,7 @@ import AuditorTable from "./pages/userpages/auditor/pages/Auditortable";
 import AuditeeTable from "./pages/userpages/auditor/pages/Auditeetable";
 import  Auditor from "../src/pages/userpages/auditor/auditor";
 import  Auditee from "../src/pages/userpages/auditee/auditee";
-
+import FileUploadModal from "./pages/userpages/auditor/pages/FileUploadModal ";
 // import Orders from "./pages/Orders/OrderDetails";
 import Order from "./pages/Order/Order.jsx"
 import Clients from "./pages/Clients/Clients";
@@ -62,6 +62,7 @@ function App() {
         <PrivateRoute path="/auditortable" component={AuditorTable} />
         <PrivateRoute path="/auditeetable" component={AuditeeTable} />
         <PrivateRoute path="/addnewChecklist" component={AddnewChecklist} />
+        <PrivateRoute path="/uploadAudit/:id" component={FileUploadModal} />
         {/* <PrivateRoute path="/auditee" component={Auditee} /> */}
   
         {/* <PrivateRoute path="/order" component={Orders} /> */}
