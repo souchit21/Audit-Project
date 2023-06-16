@@ -29,7 +29,7 @@ const SearchModal = () => {
       </div>
       <Dialog open={open} onClose={handleClose} className="search-modal">
         <DialogTitle sx={{ m: 0, p: 2 }}>
-          Search
+          {/* Search */}
           {handleClose ? (
             <IconButton
               aria-label="close"

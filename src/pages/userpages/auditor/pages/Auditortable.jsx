@@ -45,7 +45,7 @@ const AuditorTable = () => {
     // e.preventDefault();
     console.log('34', tokenArray)
     try{
-    const result = await axios.get('https://d88d-103-68-187-186.ngrok-free.app/audit/getCombinedDataWithAuditorToken?auditeeToken='+[tokenArray]);
+    const result = await axios.get('https://8204-103-68-187-186.ngrok-free.app/audit/getCombinedDataWithAuditorToken?auditeeToken='+[tokenArray]);
     setAuditDetails(result.data)
     console.log("38",result);
     }
@@ -75,7 +75,7 @@ const AuditorTable = () => {
     //   id: rowData._id,
     //   status: value
     // };
-    const result = await axios.post('https://d88d-103-68-187-186.ngrok-free.app/audit/editAuditofAuditor',{
+    const result = await axios.post('https://8204-103-68-187-186.ngrok-free.app/audit/editAuditofAuditor',{
       id: rowData._id,
       AuditorAcceptationStatus:value,
       //AuditorpreferredDate:selectedDate
@@ -86,16 +86,19 @@ const AuditorTable = () => {
     
   };
 
-  
+  const [selectedDate, setSelectedDate] = useState("");
   const handlePreferredDateChange = async(date, rowData) =>{
+    setSelectedDate(date);
+    
     console.log('89',date);
-    console.log('90',rowData);
+    //console.log('90',rowData);
     if(rowData.AuditorAcceptationStatus==="REJECTED"){
-    const dresult = await axios.post('https://d88d-103-68-187-186.ngrok-free.app/audit/editAuditofAuditor1',{
+    const dresult = await axios.post('https://8204-103-68-187-186.ngrok-free.app/audit/editAuditofAuditor1',{
       id: rowData._id,
       AuditorpreferredDate:date
     });
     console.log('100', dresult)
+    console.log('101', selectedDate);
   }
   else{
     alert('you have already accepted the date')
@@ -131,12 +134,13 @@ const AuditorTable = () => {
       field: 'preferredDate',
       render: rowData => (
         <DatePicker
-          value=""
-          selected={rowData.preferredDate ? new Date(rowData.preferredDate) : null}
+          
           onChange={date => handlePreferredDateChange(date, rowData)}
+          selected={selectedDate}
           dateFormat="dd/MM/yyyy"
           placeholderText="dd-mm-yyyy"
           />
+        // <input type="date" name="date" value={selectedDate} onChange={}
     
       
       ),

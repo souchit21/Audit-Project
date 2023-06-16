@@ -36,7 +36,7 @@ const PostToken = async(e)=>{
   // e.preventDefault();
  // console.log('37', tokenArray)
   try{
-    const result = await axios.get('https://d88d-103-68-187-186.ngrok-free.app/audit/getCombinedDataWithAuditorToken?auditeeToken='+[tokenArray]);
+    const result = await axios.get('https://6a66-103-68-187-186.ngrok-free.app/audit/getCombinedDataWithAuditorToken?auditeeToken='+[tokenArray]);
   setAuditDetails(result.data)
   console.log("34",result);
   }catch(err){
@@ -64,7 +64,7 @@ const handleStatusChange = async(event, rowData) => {
   //   id: rowData._id,
   //   status: value
   // };
-  const result = await axios.post('https://d88d-103-68-187-186.ngrok-free.app/audit/editAuditofAuditor',{
+  const result = await axios.post('https://6a66-103-68-187-186.ngrok-free.app/audit/editAuditofAuditor',{
     id: rowData._id,
     AuditorAcceptationStatus:value,
   });
