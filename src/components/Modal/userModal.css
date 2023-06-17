@@ -1,0 +1,11 @@
+.row{
+    display: flex;
+    padding: 5px;
+    margin: 4px;
+
+}
+.col-md-8{
+    display: flex;
+    padding: 3px;
+    background-color: aliceblue;
+}

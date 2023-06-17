@@ -10,6 +10,8 @@ import ALayout from "../Layout/ALayout";
 // import EditCategoriesModal from "../../components/Modal/EditCategoriesModal";
 // import UserModal from "../../components/Modal/USerModal";
 import axios from 'axios'
+import moment from 'moment';
+
 // import './image'
 // import SelectFileButton from "./image";
 // import { Button } from "bootstrap";
@@ -53,7 +55,7 @@ const AuditeeTable = () => {
     //   id: rowData._id,
     //   status: value
     // };
-    const result = await axios.post('https://8204-103-68-187-186.ngrok-free.app/audit/editAuditofAuditee',{
+    const result = await axios.post('https://07ec-103-68-187-186.ngrok-free.app/audit/editAuditofAuditee',{
       id: rowData._id,
       AuditeeAcceptationStatus:value,
     });
@@ -65,10 +67,10 @@ const AuditeeTable = () => {
     // e.preventDefault();
     console.log('34', tokenArray)
     try{
-    const result = await axios.get('https://8204-103-68-187-186.ngrok-free.app/audit/getCombinedDataWithAuditeeToken?auditeeToken='+[tokenArray]);
+    const result = await axios.get('https://07ec-103-68-187-186.ngrok-free.app/audit/getCombinedDataWithAuditeeToken?auditeeToken='+[tokenArray]);
     setAuditDetails(result.data);
     // console.log("37",result.data.Data);
-    console.log("38",auditDetails);
+    console.log("73",result);
     }catch(err){
       notifyError('no audit found');
     }
@@ -96,15 +98,28 @@ const AuditeeTable = () => {
   //     </button>
   //   )
   //  },
+    
+    { title: 'Auditor Preferred Date', field: 'AuditorpreferredDate',
+    render: rowData => moment(rowData.AuditorpreferredDate).format("DD-MM-YYYY")
+  },    
     { title: 'Status', field: 'AuditeeAcceptationStatus', render: renderStatusDropdown },
-    { title: 'Auditor Preferred Date', field: 'AuditorpreferredDate' },    
     // {title:'Upload Audit', field:'Audit file', render:rowData=><Link to={`/uploadAudit/${rowData._id}`}><button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small" }} >Upload audit</button></Link>},
     {title:'Link to audit', field:'Audit_Link', 
     render: rowData => (
-      <button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small" }} onClick={() => window.open(rowData.Audit_Link, '_blank')}>
+      <button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small" }} 
+      // onClick={() => window.open(rowData.Audit_Link, '_blank')}
+      onClick={() => {
+        if (rowData.Audit_Link) {
+          window.open(rowData.Audit_Link, '_blank');
+        } else {
+          alert('Auditor has not uploaded audit yet');
+        }
+      }}
+      >
         View Audit
       </button>
     )},
+   
     // {
     //   title: 'Preferred Date',
     //   field: 'preferredDate',

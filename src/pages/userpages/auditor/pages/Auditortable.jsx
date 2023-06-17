@@ -3,7 +3,9 @@ import SearchBar from "material-ui-search-bar";
 import { useHistory, useParams,Link } from "react-router-dom";
 // import { useDispatch, useSelector } from "react-redux";
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
-import ALayout from "../Layout/ALayout"; 
+import ALayout from "../Layout/ALayout";
+import moment from 'moment';
+
 // import "./Profile.css";
 // import _ from 'lodash';
 // import CategoriesModal from "../../components/Modal/CategoriesModal";
@@ -45,7 +47,7 @@ const AuditorTable = () => {
     // e.preventDefault();
     console.log('34', tokenArray)
     try{
-    const result = await axios.get('https://8204-103-68-187-186.ngrok-free.app/audit/getCombinedDataWithAuditorToken?auditeeToken='+[tokenArray]);
+    const result = await axios.get('https://07ec-103-68-187-186.ngrok-free.app/audit/getCombinedDataWithAuditorToken?auditeeToken='+[tokenArray]);
     setAuditDetails(result.data)
     console.log("38",result);
     }
@@ -75,7 +77,7 @@ const AuditorTable = () => {
     //   id: rowData._id,
     //   status: value
     // };
-    const result = await axios.post('https://8204-103-68-187-186.ngrok-free.app/audit/editAuditofAuditor',{
+    const result = await axios.post('https://07ec-103-68-187-186.ngrok-free.app/audit/editAuditofAuditor',{
       id: rowData._id,
       AuditorAcceptationStatus:value,
       //AuditorpreferredDate:selectedDate
@@ -86,19 +88,22 @@ const AuditorTable = () => {
     
   };
 
-  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedDates, setSelectedDates] = useState("");
   const handlePreferredDateChange = async(date, rowData) =>{
-    setSelectedDate(date);
+    setSelectedDates(prevSelectedDates => ({
+      ...prevSelectedDates,
+      [rowData.tableData.id]: date,
+    }));
     
     console.log('89',date);
     //console.log('90',rowData);
     if(rowData.AuditorAcceptationStatus==="REJECTED"){
-    const dresult = await axios.post('https://8204-103-68-187-186.ngrok-free.app/audit/editAuditofAuditor1',{
+    const dresult = await axios.post('https://07ec-103-68-187-186.ngrok-free.app/audit/editAuditofAuditor1',{
       id: rowData._id,
       AuditorpreferredDate:date
     });
     console.log('100', dresult)
-    console.log('101', selectedDate);
+    console.log('101', selectedDates);
   }
   else{
     alert('you have already accepted the date')
@@ -128,27 +133,42 @@ const AuditorTable = () => {
       </button>
     )
    },
-    { title: 'Status', field: 'AuditorAcceptationStatus', render: renderStatusDropdown }, 
+    { title: 'Auditor Status', field: 'AuditorAcceptationStatus', render: renderStatusDropdown }, 
     {
       title: 'Preferred Date',
-      field: 'preferredDate',
-      render: rowData => (
+      field: 'AuditorpreferredDate',
+      render: rowData => {
+        const dateValue = rowData.AuditorpreferredDate ? new Date(rowData.AuditorpreferredDate) : null;
+        //const formattedDate = dateValue ? `${('0' + dateValue.getDate()).slice(-2)}-${('0' + (dateValue.getMonth() + 1)).slice(-2)}-${dateValue.getFullYear()}` : '';
+        return(
         <DatePicker
           
           onChange={date => handlePreferredDateChange(date, rowData)}
-          selected={selectedDate}
+          selected={ selectedDates[rowData.tableData.id] || dateValue }
           dateFormat="dd/MM/yyyy"
           placeholderText="dd-mm-yyyy"
           />
+        )
+      }
+    },
+    { title: 'Auditee Status', field: 'AuditeeAcceptationStatus' },
+        
+        
         // <input type="date" name="date" value={selectedDate} onChange={}
     
-      
-      ),
-    },   
     {title:'Upload Audit', field:'Audit file', render:rowData=><Link to={`/uploadAudit/${rowData._id}`}><button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small" }} >Upload audit</button></Link>},
     {title:'Link to audit', field:'Audit_Link', 
     render: rowData => (
-      <button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small" }} onClick={() => window.open(rowData.Audit_Link, '_blank')}>
+      <button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small" }} 
+      onClick={() => {
+        if (rowData.Audit_Link) {
+          window.open(rowData.Audit_Link, '_blank');
+        } else {
+          alert('Audit has not been yet uploaded');
+        }
+      }}
+      
+      >
         View Audit
       </button>
     )},
@@ -194,10 +214,14 @@ const AuditorTable = () => {
           sorting: true,
           headerStyle: {
             backgroundColor: ' rgb(169, 25, 25)',
-            color: '#FFF'
+            color: '#FFF',
+            padding: '8px', // Example: adding padding to header cells
+            textAlign: 'center',
           },
           rowStyle: {
             backgroundColor: 'white',
+            padding: '5px', // Example: adding padding to header cells
+            //textAlign: 'center',
           },
           // selection: true,
           // filtering: true,  

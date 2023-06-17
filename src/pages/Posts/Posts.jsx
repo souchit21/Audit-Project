@@ -6,6 +6,8 @@ import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import Layout from "../../components/Layout/Layout";
 import "./Profile.css";
 import _ from 'lodash';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import CategoriesModal from "../../components/Modal/CategoriesModal";
 import EditCategoriesModal from "../../components/Modal/EditCategoriesModal";
 // import UserModal from "../../components/Modal/USerModal";
@@ -36,7 +38,7 @@ const PostToken = async(e)=>{
   // e.preventDefault();
  // console.log('37', tokenArray)
   try{
-    const result = await axios.get('https://6a66-103-68-187-186.ngrok-free.app/audit/getCombinedDataWithAuditorToken?auditeeToken='+[tokenArray]);
+    const result = await axios.get('https://07ec-103-68-187-186.ngrok-free.app/audit/getCombinedDataWithAuditorToken?auditeeToken='+[tokenArray]);
   setAuditDetails(result.data)
   console.log("34",result);
   }catch(err){
@@ -51,7 +53,7 @@ const renderStatusDropdown = rowData => {
     >
       <option >Select an option</option>
       <option value="Accept">Accept</option>
-      <option value="Not available">Not available</option>
+      <option value="REJECTED">Not available</option>
     </select>
   );
 };
@@ -64,13 +66,34 @@ const handleStatusChange = async(event, rowData) => {
   //   id: rowData._id,
   //   status: value
   // };
-  const result = await axios.post('https://6a66-103-68-187-186.ngrok-free.app/audit/editAuditofAuditor',{
+  const result = await axios.post('https://07ec-103-68-187-186.ngrok-free.app/audit/editAuditofAuditor',{
     id: rowData._id,
     AuditorAcceptationStatus:value,
   });
   window.location.reload();
   console.log('66', result);
 };
+const [selectedDates, setSelectedDates] = useState("");
+const handlePreferredDateChange = async(date, rowData) =>{
+  setSelectedDates(prevSelectedDates => ({
+    ...prevSelectedDates,
+    [rowData.tableData.id]: date,
+  }));
+  
+  console.log('89',date);
+  //console.log('90',rowData);
+  if(rowData.AuditorAcceptationStatus==="REJECTED"){
+  const dresult = await axios.post('https://07ec-103-68-187-186.ngrok-free.app/audit/editAuditofAuditor1',{
+    id: rowData._id,
+    AuditorpreferredDate:date
+  });
+  console.log('100', dresult)
+  console.log('101', selectedDates);
+}
+else{
+  alert('you have already accepted the date')
+}
+}
  
   const columns = [
     // {title:'Order Id', field:'orderId',render:rowData=><Link  to={`/order/display/${rowData._id}`} target='_blank'>{rowData.orderId}</Link>},
@@ -90,8 +113,42 @@ const handleStatusChange = async(event, rowData) => {
       </button>
     )
    },
-    { title: 'Status', field: 'AuditorAcceptationStatus', render: renderStatusDropdown },
-    
+    { title: 'Auditor Status', field: 'AuditorAcceptationStatus', render: renderStatusDropdown },
+    {
+      title: 'Preferred Date',
+      field: 'AuditorpreferredDate',
+      render: rowData => {
+        const dateValue = rowData.AuditorpreferredDate ? new Date(rowData.AuditorpreferredDate) : null;
+        //const formattedDate = dateValue ? `${('0' + dateValue.getDate()).slice(-2)}-${('0' + (dateValue.getMonth() + 1)).slice(-2)}-${dateValue.getFullYear()}` : '';
+        return(
+        <DatePicker
+          
+          onChange={date => handlePreferredDateChange(date, rowData)}
+          selected={ selectedDates[rowData.tableData.id] || dateValue }
+          dateFormat="dd/MM/yyyy"
+          placeholderText="dd-mm-yyyy"
+          />
+        )
+      }
+    }, 
+    { title: 'Auditee Status', field: 'AuditeeAcceptationStatus' },
+    {title:'Upload Audit', field:'Audit file', render:rowData=><Link to={`/uploadAudit/${rowData._id}`}><button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small" }} >Upload audit</button></Link>},
+    {title:'Link to audit', field:'Audit_Link', 
+    render: rowData => (
+      <button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small" }} 
+      
+      onClick={() => {
+        if (rowData.Audit_Link) {
+          window.open(rowData.Audit_Link, '_blank');
+        } else {
+          alert('Audit has not been yet uploaded');
+        }
+      }}
+      
+      >
+        View Audit
+      </button>
+    )},
     // {title:'End Date', field:'auditEndDate'},   
     // {title:'Scope', field:'scope'},
 

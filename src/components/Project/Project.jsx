@@ -59,6 +59,8 @@ import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import ReportIcon from '@mui/icons-material/Report';
 import FormContainer from "../Modal/FormContainer";
 import axios from 'axios';
+import moment from 'moment';
+
 import Sidebar from "../../pages/sideBar/sideBar";
 // import { MenuItem,Select, FormControl } from '@material-ui/core';
 
@@ -85,9 +87,9 @@ const Project = ({ project }) => {
   
   const loadCategories = async()=>{
      try{
-      const result = await axios.get("https://6a66-103-68-187-186.ngrok-free.app/audit/getCombinedData");
+      const result = await axios.get("https://07ec-103-68-187-186.ngrok-free.app/audit/getCombinedData");
       setAuditDetails(result.data);
-      console.log('90', auditDetails);
+      console.log('90', result);
      }catch(err){
       notifyError('No audits to show');
      }
@@ -144,8 +146,9 @@ const Project = ({ project }) => {
 
   const columns = [
     // {title:'Order Id', field:'orderId',render:rowData=><Link  to={`/order/display/${rowData._id}`} target='_blank'>{rowData.orderId}</Link>},
-    { title: 'Serial no', field: 'tableData.id', render:rowData => { return( <p>{rowData.tableData.id+1}</p> ) } },
+    //{ title: 'Serial no', field: 'tableData.id', render:rowData => { return( <p>{rowData.tableData.id+1}</p> ) } },
     // {title:'Order placed Date & Time', field:'createdAt',render: rowData => moment(rowData.createdAt).format("DD-MM-YYYY HH:mm:ss")},
+    {title:'View Audit', field:'audit', render:rowData=><Link to={`/user/update/${rowData._id}`}>View</Link>},
     {title:'Date', field:'Date'},
     // {title:'Scope', field:'Scope'},
     // {title:'Audit Type', field:'auditType'},
@@ -157,19 +160,31 @@ const Project = ({ project }) => {
       <p>{rowData.auditee.join(', ')}</p>
     )
     },
-    {title: 'Link to Audit', field:'auditLink'},
+   
     {   title:'Auditor Status', 
         field:'AuditorAcceptationStatus',
-        // render: rowData => {
-        //   // Logic to determine the dynamic value based on rowData
-        //   const dynamicValue; // Replace this with your logic
-        //   if(rowData==false) dynamicValue = 'A'
-          
-        //   // Return the dynamic value to be displayed in the cell
-        //   return <p>{dynamicValue}</p>;
-        // }
-  },
-    {title:'Auditee Status', field:'AuditeeAcceptationStatus'},
+ },
+ {   title:'Auditee Status', 
+        field:'AuditeeAcceptationStatus',
+ },
+  { title: 'Auditor Preferred Date', field: 'AuditorpreferredDate',
+  render: rowData => moment(rowData.AuditorpreferredDate).format("DD-MM-YYYY")
+}, 
+{title:'Link to audit', field:'Audit_Link', 
+    render: rowData => (
+      <button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small" }} 
+      // onClick={() => window.open(rowData.Audit_Link, '_blank')}
+      onClick={() => {
+        if (rowData.Audit_Link) {
+          window.open(rowData.Audit_Link, '_blank');
+        } else {
+          alert('Auditor has not uploaded audit yet');
+        }
+      }}
+      >
+        View Audit
+      </button>
+    )},
     
     // {title:'End Date', field:'auditEndDate'},   
     // {title:'Scope', field:'scope'},
@@ -212,13 +227,13 @@ const Project = ({ project }) => {
           },
           cellStyle: {
             fontWeight: 'normal', // Change the font weight here
-            fontSize: '15px',
+            fontSize: '14px',
           },
           sorting: true,
           headerStyle: {
             backgroundColor: ' rgb(169, 25, 25)',
             color: '#FFF',
-            fontSize: '16px'
+            fontSize: '15px'
           },
           rowStyle: {
             backgroundColor: 'white',

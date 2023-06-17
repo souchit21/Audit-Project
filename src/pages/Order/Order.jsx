@@ -7,6 +7,7 @@ import Layout from "../../components/Layout/Layout";
 import MaterialTable from 'material-table-jspdf-fix';
 import "./Profile.css";
 import _ from 'lodash';
+import moment from 'moment';
 import CategoriesModal from "../../components/Modal/CategoriesModal";
 import EditCategoriesModal from "../../components/Modal/EditCategoriesModal";
 // import UserModal from "../../components/Modal/USerModal";
@@ -37,7 +38,7 @@ const Order = () => {
    // console.log('34', tokenArray)
    
     try{
-      const result = await axios.get('https://6a66-103-68-187-186.ngrok-free.app/audit/getCombinedDataWithAuditeeToken?auditeeToken='+[tokenArray]);
+      const result = await axios.get('https://07ec-103-68-187-186.ngrok-free.app/audit/getCombinedDataWithAuditeeToken?auditeeToken='+[tokenArray]);
     setAuditDetails(result.data)
     // console.log("37",result.data.Data);
     console.log("40",auditDetails);
@@ -69,7 +70,7 @@ const Order = () => {
     //   id: rowData._id,
     //   status: value
     // };
-    const result = await axios.post('https://6a66-103-68-187-186.ngrok-free.app/audit/editAuditofAuditee',{
+    const result = await axios.post('https://07ec-103-68-187-186.ngrok-free.app/audit/editAuditofAuditee',{
       id: rowData._id,
       AuditeeAcceptationStatus:value,
     });
@@ -88,15 +89,35 @@ const Order = () => {
     // {title:'Auditor Name', field:'auditorId.username'},
    // {title:'Auditee Name', field:'auditeeId.username'},
     {title:'Date', field:'Date'},
+    
     // {title:'Status', field:'Astatus'},
-    {title: 'Link to checklist', field:'checklist_Link',
-    render: rowData => (
-      <button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small" }} onClick={() => window.open(rowData.checklist_Link, '_blank')}>
-        View Checklist
-      </button>
-    )
-   },
+  //   {title: 'Link to checklist', field:'checklist_Link',
+  //   render: rowData => (
+  //     <button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small" }} onClick={() => window.open(rowData.checklist_Link, '_blank')}>
+  //       View Checklist
+  //     </button>
+  //   )
+  //  },
+  { title: 'Auditor Preferred Date', field: 'AuditorpreferredDate',
+    render: rowData => moment(rowData.AuditorpreferredDate).format("DD-MM-YYYY")
+  }, 
     { title: 'Status', field: 'AuditeeAcceptationStatus', render: renderStatusDropdown },
+    // {title:'Upload Audit', field:'Audit file', render:rowData=><Link to={`/uploadAudit/${rowData._id}`}><button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small" }} >Upload audit</button></Link>},
+    {title:'Link to audit', field:'Audit_Link', 
+    render: rowData => (
+      <button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small" }} 
+      //onClick={() => window.open(rowData.Audit_Link, '_blank')}
+      onClick={() => {
+        if (rowData.Audit_Link) {
+          window.open(rowData.Audit_Link, '_blank');
+        } else {
+          alert('Auditor has not uploaded audit yet');
+        }
+      }}
+      >
+        View Audit
+      </button>
+    )},
     
     // {title:'End Date', field:'auditEndDate'},   
     // {title:'Scope', field:'scope'},

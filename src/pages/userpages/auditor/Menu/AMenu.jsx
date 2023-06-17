@@ -81,7 +81,7 @@ const AMenu = () => {
                 if (history.location.pathname === "/") {
                   window.location.reload();
                 } else {
-                  history.push("/");
+                  history.push("/login");
                 }
               }}
             >
