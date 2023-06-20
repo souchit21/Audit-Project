@@ -19,6 +19,7 @@ import AuditeeTable from "./pages/userpages/auditor/pages/Auditeetable";
 import  Auditor from "../src/pages/userpages/auditor/auditor";
 import  Auditee from "../src/pages/userpages/auditee/auditee";
 import FileUploadModal from "./pages/userpages/auditor/pages/FileUploadModal ";
+import Verifyusers from "./pages/userpages/auditor/pages/usersverification";
 // import Orders from "./pages/Orders/OrderDetails";
 import Order from "./pages/Order/Order.jsx"
 import Clients from "./pages/Clients/Clients";
@@ -28,6 +29,7 @@ import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import ViewAllUsers from "./components/ViewAllUsers/ViewAllUsers";
 import EditCategoriesModal from "./components/Modal/EditCategoriesModal";
 import UserModal from "./components/Modal/UserModal";
+import UserDetails from "./components/Modal/UserDetails"
 import AddAudit from "./components/Modal/addAudit";                                                           
 import EditPostModal from "./components/Modal/EditPostModal";
 import AddnewChecklist from "./pages/addnewchecklist/addnewChecklist";
@@ -63,6 +65,9 @@ function App() {
         <PrivateRoute path="/auditeetable" component={AuditeeTable} />
         <PrivateRoute path="/addnewChecklist" component={AddnewChecklist} />
         <PrivateRoute path="/uploadAudit/:id" component={FileUploadModal} />
+        <PrivateRoute path="/user/verification" component={Verifyusers} />
+        <PrivateRoute path="/userdetails/:id" component={UserDetails} />
+
         {/* <PrivateRoute path="/auditee" component={Auditee} /> */}
   
         {/* <PrivateRoute path="/order" component={Orders} /> */}

@@ -87,7 +87,7 @@ useEffect (() => {
 // }
 
 const loadUser = async() =>{
-    const result = await axios.get('https://07ec-103-68-187-186.ngrok-free.app/audit/getAuditwithId?id='+id);
+    const result = await axios.get('https://96d0-103-68-187-186.ngrok-free.app/audit/getAuditwithId?id='+id);
     setAuditDetails(result.data.data);
     console.log('90', result.data.data);
     console.log("91", auditDetails)
@@ -99,7 +99,7 @@ const loadUser = async() =>{
             
         <div>
    
-        <Box sx={{ ...style, width: 900 }}> 
+        <Box sx={{ ...style, width: 900, marginTop:20 }}> 
           <form >
           <h2 id="parent-modal-title" style={{marginLeft:"70px"}}>Audit Details</h2>
             <div className="row">
@@ -107,8 +107,8 @@ const loadUser = async() =>{
                 <div className="col-md-8">
 
                 <div className="form-group" style={{marginTop:"10px"}}>
-                <label>Date</label>
-                <input type="text" className="form-control" id="Date" name="Date"  value={Date} />
+                  <label>Date</label>
+                  <input type="text" className="form-control" id="Date" name="Date"  value={Date} />
                 </div>
 
                 <div className="form-group">
@@ -168,7 +168,7 @@ const loadUser = async() =>{
                     <label>Auditor Preferred Date</label>
                     <input type="text" className="form-control" id="AuditorpreferredDate" name="AuditorpreferredDate"  value={AuditorpreferredDate} />
                 </div>
-                <button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small" }} 
+                <button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small", width:"14%", height:"5%", marginLeft:"2%" }} 
                   onClick={() => {
                     if (Audit_Link) {
                       window.open(Audit_Link, '_blank');
@@ -183,7 +183,7 @@ const loadUser = async() =>{
                 
                 
                 <div className="col-md-4">
-                    <button className="btn btn-primary" style={{marginLeft:"2px"}} onClick={()=>{
+                    <button className="btn btn-primary" style={{marginLeft:"5%"}} onClick={()=>{
                           history.push("/")
                     }}>close</button>
                 </div>

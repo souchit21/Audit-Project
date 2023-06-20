@@ -38,7 +38,7 @@ const PostToken = async(e)=>{
   // e.preventDefault();
  // console.log('37', tokenArray)
   try{
-    const result = await axios.get('https://07ec-103-68-187-186.ngrok-free.app/audit/getCombinedDataWithAuditorToken?auditeeToken='+[tokenArray]);
+    const result = await axios.get('https://96d0-103-68-187-186.ngrok-free.app/audit/getCombinedDataWithAuditorToken?auditeeToken='+[tokenArray]);
   setAuditDetails(result.data)
   console.log("34",result);
   }catch(err){
@@ -66,7 +66,7 @@ const handleStatusChange = async(event, rowData) => {
   //   id: rowData._id,
   //   status: value
   // };
-  const result = await axios.post('https://07ec-103-68-187-186.ngrok-free.app/audit/editAuditofAuditor',{
+  const result = await axios.post('https://96d0-103-68-187-186.ngrok-free.app/audit/editAuditofAuditor',{
     id: rowData._id,
     AuditorAcceptationStatus:value,
   });
@@ -83,7 +83,7 @@ const handlePreferredDateChange = async(date, rowData) =>{
   console.log('89',date);
   //console.log('90',rowData);
   if(rowData.AuditorAcceptationStatus==="REJECTED"){
-  const dresult = await axios.post('https://07ec-103-68-187-186.ngrok-free.app/audit/editAuditofAuditor1',{
+  const dresult = await axios.post('https://96d0-103-68-187-186.ngrok-free.app/audit/editAuditofAuditor1',{
     id: rowData._id,
     AuditorpreferredDate:date
   });

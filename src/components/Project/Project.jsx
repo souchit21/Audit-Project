@@ -87,7 +87,7 @@ const Project = ({ project }) => {
   
   const loadCategories = async()=>{
      try{
-      const result = await axios.get("https://07ec-103-68-187-186.ngrok-free.app/audit/getCombinedData");
+      const result = await axios.get("https://96d0-103-68-187-186.ngrok-free.app/audit/getCombinedData");
       setAuditDetails(result.data);
       console.log('90', result);
      }catch(err){

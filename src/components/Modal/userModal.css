@@ -9,3 +9,10 @@
     padding: 3px;
     background-color: aliceblue;
 }
+.form-group{
+    margin: 4px;
+}
+.form-control{
+    margin-left: 30%;
+    width: 50%;
+}

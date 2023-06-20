@@ -81,7 +81,7 @@ const Login = () => {
     console.log('81', process.env.REACT_APP_api_url);
 
     try {
-      let url = 'https://07ec-103-68-187-186.ngrok-free.app/user/login';
+      let url = 'https://96d0-103-68-187-186.ngrok-free.app/user/login';
        let data=await axios.post(url, {
         token:loginData.token,
         password:loginData.password,

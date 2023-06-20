@@ -6,6 +6,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import AddIcon from '@mui/icons-material/Add';
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import LogoutIcon from "@mui/icons-material/Logout";
+import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import "./Menu.css";
 import { isAuthenticated, getUser } from "../../utils/auth";
 import GroupsIcon from '@mui/icons-material/Groups';
@@ -51,6 +52,12 @@ const Menu = () => {
         <div className="items">
           <AddIcon />
           &nbsp;&nbsp;<span>Add new checklist</span>
+          </div>
+        </Link>
+        <Link to="/user/verification" className="menu-item">
+        <div className="items">
+        <VerifiedUserIcon/>
+          &nbsp;&nbsp;<span>Verify new users</span>
           </div>
         </Link>
         
