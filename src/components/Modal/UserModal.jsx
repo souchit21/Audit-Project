@@ -50,7 +50,7 @@ const UserModal =  ()=>{
 //   setUser(result.data)
 // }
 const {id} = useParams();
-   
+//const [newAuditorTokens, setAuditorTokens] = useState([]);
 const [auditDetails,setAuditDetails] = useState ({
   Audit_Link:"",
   AuditeeAcceptationStatus:"",
@@ -87,11 +87,34 @@ useEffect (() => {
 // }
 
 const loadUser = async() =>{
-    const result = await axios.get('https://96d0-103-68-187-186.ngrok-free.app/audit/getAuditwithId?id='+id);
+    const result = await axios.get('https://719e-103-68-187-186.ngrok-free.app/audit/getAuditwithId?id='+id);
     setAuditDetails(result.data.data);
     console.log('90', result.data.data);
-    console.log("91", auditDetails)
-    console.log("92",id)
+    console.log("91", auditDetails);
+    //setAuditorTokens(auditorTokens);
+    //console.log("95",newAuditorTokens)
+}
+//console.log('96',auditorTokens);
+//console.log('78', newAuditorTokens);
+const onInputchange = e => {
+  //setUser({...userdetails,[e.target.name]: e.target.value})
+  setAuditDetails({...auditDetails,[e.target.name]: e.target.value})
+};
+console.log('102', auditorTokens)
+
+const handleUpdate = async(e)=>{
+  e.preventDefault();
+  //setAuditorTokens(auditorTokens);
+  console.log('109', auditorTokens);
+  const data ={
+    id: auditDetails._id,
+    newAuditorToken: auditorTokens
+  }
+  console.log('113', data);
+  const result = await axios.post('https://719e-103-68-187-186.ngrok-free.app/audit/editAudit',data);
+  console.log('110', result);
+  //history.push("/login")
+  // console.log("138",result);
 }
       return (
         <>
@@ -144,13 +167,17 @@ const loadUser = async() =>{
                 </div>
 
                 <div className="form-group">
-                    <label>auditeeTokens</label>
+                    <label>Auditee Tokens</label>
                     <input type="text" className="form-control" id="auditeeTokens" name="auditeeTokens"  value={auditeeTokens} />
                 </div>
+                
 
                 <div className="form-group">
-                    <label>auditorTokens</label>
-                    <input type="text" className="form-control" id="auditorTokens" name="auditorTokens"  value={auditorTokens} />
+                    <label>Auditor Tokens</label>
+                    <input type="text" className="form-control" id="auditorTokens" name="auditorTokens"  value={auditorTokens} onChange={e=>onInputchange(e)} />
+                </div>
+                <div className="col-md-4">
+                    <button className="btn btn-primary" style={{marginLeft:"5%"}} onClick={handleUpdate}>Update</button>
                 </div>
                 <div className="form-group">
                     <label>NC_Flag</label>
@@ -187,6 +214,7 @@ const loadUser = async() =>{
                           history.push("/")
                     }}>close</button>
                 </div>
+                
             </div>
         </form>
         </Box>

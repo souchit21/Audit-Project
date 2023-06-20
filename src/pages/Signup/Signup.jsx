@@ -152,7 +152,7 @@ const Signup = () => {
   console.log('151', formData);
   const adduser = async(e)=>{
     e.preventDefault();
-    const result = await axios.post('https://f92c-103-68-187-186.ngrok-free.app/user/register',formData);
+    const result = await axios.post('https://719e-103-68-187-186.ngrok-free.app/user/register',formData);
     history.push("/login")
     // console.log("138",result);
   }

@@ -1,0 +1,36 @@
+.table{
+    display: flex;
+    flex-direction: column;
+}
+.row_1{
+    display: flex;
+}
+.colmn_1{
+    display: flex;
+    flex-direction: column;
+    line-height: 2rem;
+}
+.colmn_2{
+    display: flex;
+    flex-direction: column;
+}
+.label{
+    /* padding: 3px; */
+}
+.input{
+    height: 30px;
+}
+.form-control{
+    height: 100%;
+    width: auto;
+}
+.btn{
+    background-color: rgb(169, 25, 25);
+    border-radius: 4px;
+    color: white;
+
+}
+.skills{
+    display: flex;
+    flex-direction: column;
+}

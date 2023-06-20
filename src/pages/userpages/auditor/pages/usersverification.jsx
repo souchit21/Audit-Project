@@ -59,7 +59,7 @@ const Verifyusers = () => {
     console.log('54', data);
     
     axios
-      .post(`https://96d0-103-68-187-186.ngrok-free.app/user/editVerificationStatus?id=${data.id}&verified=${data.verified}`)
+      .post(`https://719e-103-68-187-186.ngrok-free.app/user/editVerificationStatus?id=${data.id}&verified=${data.verified}`)
       .then(result => {
         console.log('59', result)
         //setNonverifiedusers(result.data.data);
@@ -94,7 +94,7 @@ const Verifyusers = () => {
     // e.preventDefault();
    // console.log('34', tokenArray)
     try{
-    const result = await axios.get('https://96d0-103-68-187-186.ngrok-free.app/user/nonVerifiedAccounts');
+    const result = await axios.get('https://719e-103-68-187-186.ngrok-free.app/user/nonVerifiedAccounts');
     setNonverifiedusers(result.data.nonverifiedAccounts);
     setCount({
         unverified: result.data.countnonverified,

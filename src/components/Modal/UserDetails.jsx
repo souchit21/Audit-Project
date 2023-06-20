@@ -7,16 +7,17 @@ import axios from 'axios';
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
 import Sidebar from "../../pages/sideBar/sideBar";
 import MaterialTable from 'material-table-jspdf-fix';
-
-import "../Modal/userModal.css"
+import Layout from "../Layout/Layout";
+import "../Modal/UserDetails.css"
+import { Padding } from "@mui/icons-material";
 const style = {
     position: 'absolute',
-    top: '30%',
+    top: '40%',
     left: '60%',
     transform: 'translate(-50%, -50%)',
     width: '900px !important',
     bgcolor: 'background.paper',
-
+    heigh:'auto',
     boxShadow: 24,
     pt: 2,
     px: 4,
@@ -41,14 +42,16 @@ const UserDetails =  ()=>{
         SupplierAudit: false,
         AS9100: false,
         MfgProcessFDY: false,
+        MfgProcessMCshop: false,
         ProductFDY: false,
         ProductMCshop: false,
         QMS: false,
         verified: false,
-        _id:""
+        _id:"",
+        password:""
     });
     const {username, email, department, token, number, isAdmin, isAuditee, isAuditor, AS9100, MfgProcessFDY,
-        ProductFDY, ProductMCshop, QMS, verified, _id } = userdetails;
+        ProductFDY, ProductMCshop, QMS, verified, _id, MfgProcessMCshop, SupplierAudit } = userdetails;
 
     useEffect (() => {
         loadUser();
@@ -57,76 +60,99 @@ const UserDetails =  ()=>{
 
 
     const loadUser = async() =>{
-        const result = await axios.get('https://96d0-103-68-187-186.ngrok-free.app/user/getUserwithUserId?id='+id);
+        const result = await axios.get('https://719e-103-68-187-186.ngrok-free.app/user/getUserwithUserId?id='+id);
         setUserDetails(result.data.data);
         console.log('59', result.data.data);
         console.log("91", userdetails)
         console.log("92",id)
     }
-    // const columns = [
-    //     // {title:'Order Id', field:'orderId',render:rowData=><Link  to={`/order/display/${rowData._id}`} target='_blank'>{rowData.orderId}</Link>},
-    //     { title: 'Serial no', field: 'tableData.id', render:rowData => { return( <p>{rowData.tableData.id+1}</p> ) } },
-    //    // {title:'View user', field:'user', render:rowData=><Link to={`/userdetails/${rowData._id}`}>View</Link>},
 
-    //     {title:'Token Number', field:'token'},
-        
-     
-    //     {title:'Name', field:'username'},
-      
-    //     {title:'Number', field:'number'},
-    //     { title: 'Department', field: 'department'},
-    //     {title:'Verification', field:'verified'},
-      
-    //   ]
       return (
         <>
-        <Sidebar />
-            
-        <div>
-        {/* <MaterialTable style={{
-            margin: "60px 0px 30px 20px",
-            boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
-            borderRadius: "8px",
-            width: "97%",
-        }} 
-        title="Details of user" 
-        data={userdetails}
-        columns={columns}
+       
+            <Layout>
+   
+            <Box sx={{ ...style, width: 900, marginTop:20 }}> 
+          <form >
+          <h2 id="parent-modal-title" style={{marginLeft:"10px"}}>User Details</h2>
+          <div className="table" >
+            <div className="row_1">
+                <div className="colmn_1">
+                      <div><label>Username</label></div>
+                      <div><label>Email</label></div>
+                      <div><label>Department</label></div>
+                      <div><label>Token Number</label></div>
+                      <div><label>number</label></div>
+                      <div className="skills">
+                        <div><h5>Skills</h5></div>
+                          <div className="label"><label>isAdmin</label></div>
+                          <div className="label"><label>isAuditee</label></div>
+                          <div className="label"><label>isAuditor</label></div>
+                          <div className="label"><label>SupplierAudit</label></div>
+                          <div className="label"><label>AS9100</label></div>
+                          <div className="label"><label>MfgProcessFDY</label></div>
+                          <div className="label"><label>MfgProcessMCshop</label></div>
+                          <div className="label"><label>ProductFDY</label></div>
+                          <div className="label"><label>ProductMCshop</label></div>
+                          <div className="label"><label>QMS</label></div>
+                          <div className="label"><label>verified</label></div>
+                      </div>
 
-        options = {{
-          exportButton:true,
-          exportButtonFieldStyle:{
+                      
+                </div>      
+                <div className="colmn_2">
+                    <div className="input"><input type="text" className="form-control" id="username" name="username"  value={username} /></div>
+                    <div className="input"><input type="text" className="form-control" id="email" name="email"  value={email} /></div>
+                    <div className="input"><input type="text" className="form-control" id="department" name="department"  value={department} /></div>
+                    <div className="input"><input type="text" className="form-control" id="token" name="token"  value={token} /></div>
+                    <div className="input"><input type="text" className="form-control" id="number" name="number"  value={number} /></div>
 
-          },
-          headerStyle: {
-            backgroundColor: ' rgb(169, 25, 25)',
-            color: '#FFF'
-          },
-          rowStyle: {
-            backgroundColor: 'white',
-          },
-          // selection: true,
-          // filtering: true,  
-          grouping: false,
-          actionsColumnIndex: -1,
-          pageSizeOptions: [5,10, 20],
-          search: true,
-          searchFieldStyle: {
-            width: '100%',
-            backgroundColor: '#fff',
-            border: '1px solid #AAA',
-            borderRadius: '4px',
-            paddingLeft: '8px',
-            '::placeholder': {
-              color: 'black',
-              fontStyle: 'italic'
-            }
-          },
-        }}
-        /> */}
-            
+                    <div className="skills">
+                      <div><h5 style={{marginLeft:"80px"}}>Status</h5></div>
+                        <div className="input"><input type="text" className="form-control" id="isAdmin" name="isAdmin"  value={isAdmin} /></div>
+                        <div className="input"><input type="text" className="form-control" id="isAuditee" name="isAuditee"  value={isAuditee} /></div>
+                        <div className="input"><input type="text" className="form-control" id="isAuditor" name="isAuditor"  value={isAuditor} /></div>
+                        <div className="input"><input type="text" className="form-control" id="SupplierAudit" name="SupplierAudit"  value={SupplierAudit} /></div>
+                        <div className="input"><input type="text" className="form-control" id="AS9100" name="AS9100"  value={AS9100} /></div>
+                        <div className="input"><input type="text" className="form-control" id="MfgProcessFDY" name="MfgProcessFDY"  value={MfgProcessFDY} /></div>
+                        <div className="input"><input type="text" className="form-control" id="MfgProcessMCshop" name="MfgProcessMCshop"  value={MfgProcessMCshop} /></div>
+                        <div className="input"><input type="text" className="form-control" id="ProductFDY" name="ProductFDY"  value={ProductFDY} /></div>
+                        <div className="input"><input type="text" className="form-control" id="ProductMCshop" name="ProductMCshop"  value={ProductMCshop} /></div>
+                        <div className="input"><input type="text" className="form-control" id="QMS" name="QMS"  value={QMS} /></div>
+                        <div className="input"><input type="text" className="form-control" id="verified" name="verified"  value={verified} /></div>
+                    </div>
 
-        </div>
+                </div>
+            </div>
+
+      
+                <div className="row_2">
+                    {/* <div className="btn-1">
+                        <button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small", width:"14%", height:"5%", marginLeft:"2%" }} 
+                          onClick={() => {
+                            if (Audit_Link) {
+                              window.open(Audit_Link, '_blank');
+                            } else {
+                              alert('Audit has not been yet uploaded');
+                            }
+                          }}
+                          
+                          >
+                            View Audit
+                          </button>
+                    </div> */}
+                        
+                    <div className="button">   
+                            <button className="btn" onClick={()=>{
+                                  history.push("/")
+                            }}>Close</button>
+                    </div> 
+                </div>
+           </div>
+        </form>
+         </Box>
+       
+        </Layout>
         </>
       );
     };
