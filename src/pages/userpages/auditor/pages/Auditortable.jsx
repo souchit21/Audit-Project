@@ -47,7 +47,7 @@ const AuditorTable = () => {
     // e.preventDefault();
     console.log('34', tokenArray)
     try{
-    const result = await axios.get('https://719e-103-68-187-186.ngrok-free.app/audit/getCombinedDataWithAuditorToken?auditeeToken='+[tokenArray]);
+    const result = await axios.get('https://8702-103-68-187-186.ngrok-free.app/audit/getCombinedDataWithAuditorToken?auditeeToken='+[tokenArray]);
     setAuditDetails(result.data)
     console.log("38",result);
     }
@@ -77,7 +77,7 @@ const AuditorTable = () => {
     //   id: rowData._id,
     //   status: value
     // };
-    const result = await axios.post('https://719e-103-68-187-186.ngrok-free.app/audit/editAuditofAuditor',{
+    const result = await axios.post('https://8702-103-68-187-186.ngrok-free.app/audit/editAuditofAuditor',{
       id: rowData._id,
       AuditorAcceptationStatus:value,
       //AuditorpreferredDate:selectedDate
@@ -98,7 +98,7 @@ const AuditorTable = () => {
     console.log('89',date);
     //console.log('90',rowData);
     if(rowData.AuditorAcceptationStatus==="REJECTED"){
-    const dresult = await axios.post('https://719e-103-68-187-186.ngrok-free.app/audit/editAuditofAuditor1',{
+    const dresult = await axios.post('https://8702-103-68-187-186.ngrok-free.app/audit/editAuditofAuditor1',{
       id: rowData._id,
       AuditorpreferredDate:date
     });
@@ -172,6 +172,29 @@ const AuditorTable = () => {
         View Audit
       </button>
     )},
+    {title:'NC', field:'NC', render:rowData=>
+    <Link to={`/view/ncaud/${rowData._id}`}>
+    <button
+      style={{
+          marginTop:'4%',
+          backgroundColor: "rgb(169, 25, 25)",
+          borderRadius: "4px",
+          color: "white",
+          padding: "5px",
+          fontSize: "small",
+          width:"80%"
+
+      }}
+      onClick={() => {
+        // Handle the click event for the second button
+        // You can add your own logic here
+      }}
+    >
+      View NCs
+    </button>
+    </Link>
+
+  },
     // {title:'End Date', field:'auditEndDate'},   
     // {title:'Scope', field:'scope'},
 
@@ -215,12 +238,11 @@ const AuditorTable = () => {
           headerStyle: {
             backgroundColor: ' rgb(169, 25, 25)',
             color: '#FFF',
-            padding: '8px', // Example: adding padding to header cells
-            textAlign: 'center',
+            padding: '4px', // Example: adding padding to header cells
           },
           rowStyle: {
             backgroundColor: 'white',
-            padding: '5px', // Example: adding padding to header cells
+            padding: '3px', // Example: adding padding to header cells
             //textAlign: 'center',
           },
           // selection: true,

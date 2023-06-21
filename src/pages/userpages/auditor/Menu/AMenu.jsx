@@ -47,7 +47,12 @@ const AMenu = () => {
           &nbsp;&nbsp;<span>Auditee</span>
           </div>
         </Link>
-        
+        <Link to="/login" className="menu-item">
+        <div className="items">
+        <LogoutIcon />
+          &nbsp;&nbsp;<span>Logout</span>
+          </div>
+        </Link>
         {/* <Link to="/posts" className="menu-item">
           <ExploreIcon />
           &nbsp;&nbsp;<span>Posts</span>
@@ -61,7 +66,7 @@ const AMenu = () => {
           &nbsp;&nbsp;<span>Order Details</span>
         </Link> */}
         
-        {isAuthenticated() && (
+        {/* {isAuthenticated() && ( */}
           <>
             {/* <Link to={`/profile/${getUser().username}`} className="menu-item">
               <PersonIcon />
@@ -74,7 +79,7 @@ const AMenu = () => {
               <GroupWorkIcon />
               &nbsp;&nbsp;<span>Pending Order</span>
             </Link> */}
-            <div
+            {/* <div
               className="items"
               onClick={() => {
                 localStorage.removeItem("user");
@@ -87,9 +92,9 @@ const AMenu = () => {
             >
               <LogoutIcon />
               &nbsp;&nbsp;<span>Logout</span>
-            </div>
+            </div> */}
           </>
-        )}
+        
       </div>
     </div>
   );

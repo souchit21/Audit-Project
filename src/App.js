@@ -20,6 +20,9 @@ import  Auditor from "../src/pages/userpages/auditor/auditor";
 import  Auditee from "../src/pages/userpages/auditee/auditee";
 import FileUploadModal from "./pages/userpages/auditor/pages/FileUploadModal ";
 import Verifyusers from "./pages/userpages/auditor/pages/usersverification";
+import RaiseNC from "./components/Modal/raiseNC";
+import ViewNC from "./components/Modal/viewNC";
+import ViewNC_Aud from "./pages/userpages/auditor/pages/viewNC_AUD";
 // import Orders from "./pages/Orders/OrderDetails";
 import Order from "./pages/Order/Order.jsx"
 import Clients from "./pages/Clients/Clients";
@@ -67,6 +70,9 @@ function App() {
         <PrivateRoute path="/uploadAudit/:id" component={FileUploadModal} />
         <PrivateRoute path="/user/verification" component={Verifyusers} />
         <PrivateRoute path="/userdetails/:id" component={UserDetails} />
+        <PrivateRoute path="/raise/nc/:id" component={RaiseNC} />
+        <PrivateRoute path="/view/nc/:id" component={ViewNC} />
+        <PrivateRoute path="/view/ncaud/:id" component={ViewNC_Aud} />
 
         {/* <PrivateRoute path="/auditee" component={Auditee} /> */}
   

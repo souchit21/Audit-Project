@@ -87,7 +87,7 @@ const Project = ({ project }) => {
   
   const loadCategories = async()=>{
      try{
-      const result = await axios.get("https://719e-103-68-187-186.ngrok-free.app/audit/getCombinedData");
+      const result = await axios.get("https://8702-103-68-187-186.ngrok-free.app/audit/getCombinedData");
       setAuditDetails(result.data);
       console.log('90', result);
      }catch(err){
@@ -185,6 +185,44 @@ const Project = ({ project }) => {
         View Audit
       </button>
     )},
+    {title:'NC', field:'NC', render:rowData=>
+    <div className="nc-btns">
+    <Link to={`/raise/nc/${rowData._id}`}>
+      <button
+        style={{
+          backgroundColor: "rgb(169, 25, 25)",
+          borderRadius: "4px",
+          color: "white",
+          padding: "5px",
+          fontSize: "small",
+          width:"80%"
+        }}
+      >
+        Raise NC
+      </button>
+    </Link >
+    <Link to={`/view/nc/${rowData._id}`}>
+    <button
+      style={{
+          marginTop:'4%',
+          backgroundColor: "rgb(169, 25, 25)",
+          borderRadius: "4px",
+          color: "white",
+          padding: "5px",
+          fontSize: "small",
+          width:"80%"
+
+      }}
+      onClick={() => {
+        // Handle the click event for the second button
+        // You can add your own logic here
+      }}
+    >
+      View NCs
+    </button>
+    </Link>
+  </div>
+  },
     
     // {title:'End Date', field:'auditEndDate'},   
     // {title:'Scope', field:'scope'},
