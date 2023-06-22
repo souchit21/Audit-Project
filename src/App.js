@@ -23,6 +23,10 @@ import Verifyusers from "./pages/userpages/auditor/pages/usersverification";
 import RaiseNC from "./components/Modal/raiseNC";
 import ViewNC from "./components/Modal/viewNC";
 import ViewNC_Aud from "./pages/userpages/auditor/pages/viewNC_AUD";
+import UploadEvidence from "./components/Modal/uploadEvidence";
+import ViewEvidence from "./components/Modal/viewEvidence";
+import UploadEvidenceAud from "./pages/userpages/auditor/pages/uploadEvidenceAud";
+import ViewEvidenceAud from "./pages/userpages/auditor/pages/viewEvidenceAud";
 // import Orders from "./pages/Orders/OrderDetails";
 import Order from "./pages/Order/Order.jsx"
 import Clients from "./pages/Clients/Clients";
@@ -73,6 +77,12 @@ function App() {
         <PrivateRoute path="/raise/nc/:id" component={RaiseNC} />
         <PrivateRoute path="/view/nc/:id" component={ViewNC} />
         <PrivateRoute path="/view/ncaud/:id" component={ViewNC_Aud} />
+        <PrivateRoute path="/uploadEvidence/:id" component={UploadEvidence} />
+        <PrivateRoute path="/viewEvidence/:id" component={ViewEvidence} />
+        <PrivateRoute path="/uploadEvidenceAud/:id" component={UploadEvidenceAud} />
+        <PrivateRoute path="/viewEvidenceAud/:id" component={ViewEvidenceAud} />
+
+
 
         {/* <PrivateRoute path="/auditee" component={Auditee} /> */}
   

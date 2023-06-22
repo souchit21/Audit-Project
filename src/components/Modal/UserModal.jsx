@@ -116,6 +116,9 @@ const handleUpdate = async(e)=>{
   //history.push("/login")
   // console.log("138",result);
 }
+const handleClose = async (e) =>{
+  history.push("/");
+};
       return (
         <>
         <Sidebar />
@@ -125,6 +128,8 @@ const handleUpdate = async(e)=>{
         <Box sx={{ ...style, width: 900, marginTop:20 }}> 
           <form >
           <h2 id="parent-modal-title" style={{marginLeft:"70px"}}>Audit Details</h2>
+          <span style={{ float: "right", cursor: "pointer" }} onClick={handleClose}>X</span>
+
             <div className="row">
                 
                 <div className="col-md-8">

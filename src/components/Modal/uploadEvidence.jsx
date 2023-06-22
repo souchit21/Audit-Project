@@ -8,7 +8,7 @@ import EditProfileModal from "../EditProfileModal/EditProfileModal";
 import Sidebar from "../../pages/sideBar/sideBar";
 import MaterialTable from 'material-table-jspdf-fix';
 import Layout from "../Layout/Layout";
-import "../Modal/raiseNC.css"
+import "../Modal/uploadEvidence.css"
 import { Padding } from "@mui/icons-material";
 import { notifyError } from "../../utils/notifyToasts";
 const style = {
@@ -18,22 +18,20 @@ const style = {
     transform: 'translate(-50%, -50%)',
     width: '900px !important',
     bgcolor: 'background.paper',
-    height:'50%',
+    height:'80%',
     boxShadow: 24,
     pt: 2,
     px: 4,
     pb: 3,
-    justifyContent:'center',
-    alignItems: 'center'
   };
 
 
-const RaiseNC =  ()=>{
+const UploadEvidence =  ()=>{
     const history = useHistory();
 
     const {id} = useParams();
     console.log('31', id)
-    const [NC_LINKS,setNC_LINKS] = useState ([]);
+    const [Evidences ,setEvidences] = useState ([]);
     const [selectedFiles, setSelectedFiles] = useState([]);
     const handleFileChange = (event) => {
     setSelectedFiles(event.target.files);
@@ -53,8 +51,8 @@ const RaiseNC =  ()=>{
                 formData
                 );
                 console.log('95', response);
-                setNC_LINKS(response.data);
-                console.log('78', NC_LINKS)
+                setEvidences(response.data);
+                console.log('78', Evidences)
                 
             } catch (err) {
                 notifyError("Files couldn't be uploaded");
@@ -64,12 +62,12 @@ const RaiseNC =  ()=>{
         e.preventDefault();
         const data = {
             id: id,
-            NC_Link: NC_LINKS
+            Proof_Link: Evidences
         }
         console.log('90', data);
         try{
             const result = await axios.post(
-                "https://52b7-103-68-187-186.ngrok-free.app/audit/uploadNcform",
+                "https://52b7-103-68-187-186.ngrok-free.app/audit/uploadProof",
                 data
             );
             console.log('96', result)
@@ -87,26 +85,26 @@ const RaiseNC =  ()=>{
        
             <Layout>
    
-            <Box sx={{ ...style , marginTop:20 }}> 
-          
+            <Box sx={{ ...style, width: 900, marginTop:20 }}> 
+          <form >
           <span style={{ float: "right", cursor: "pointer" }} onClick={handleClose}>X</span>
           <div className="table" >
             <div className="row_1">
-                <div className="downloadNC">
-                        <div style={{marginRight:'63%'}}><label>Download NC form</label></div>
+                {/* <div className="downloadNC">
+                        <div><label>Download NC form</label></div>
                     
                         <div className="input1"><button 
-                            className="btn-nc"
+                            className="btn"
                             onClick={() => {
                                 }}>Download </button>
                         </div>
-                </div>
+                </div> */}
 
                        
-                <div className="upload-1">
-                        <h6 style={{marginRight:'2%'}}>Add NC file</h6>
+                <div className="upload1">
+                        <h6>Add Evidence</h6>
                         <input type="file" onChange={handleFileChange} multiple/>
-                        <button className="btn-1"  onClick={handleUpload}>Upload</button>
+                        <button className="btn1"  onClick={handleUpload}>Upload</button>
                 </div>
                        
                 
@@ -117,12 +115,18 @@ const RaiseNC =  ()=>{
                 <div className="row_2">
                    
                     <div className="button">   
-                            <button className="btn-2" onClick={PostLinks
+                            <button className="Btn" onClick={PostLinks
                             }>Submit</button>
                     </div> 
+                        
+                    {/* <div className="button">   
+                            <button className="btn" onClick={()=>{
+                                  history.push("/")
+                            }}>Close</button>
+                    </div>  */}
                 </div>
            </div>
-        
+        </form>
          </Box>
        
         </Layout>
@@ -130,4 +134,4 @@ const RaiseNC =  ()=>{
       );
     };
   
-  export default RaiseNC
+  export default UploadEvidence

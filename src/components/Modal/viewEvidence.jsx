@@ -26,12 +26,12 @@ const style = {
   };
 
 
-const ViewNC =  ()=>{
+const ViewEvidence =  ()=>{
     const history = useHistory();
 
     const {id} = useParams();
     console.log('31', id)
-    const [NC_Links,setNCLinks] = useState ([]);
+    const [Proof_Link,setProofLinks] = useState ([]);
 
     useEffect (() => {
         loadUser();
@@ -41,15 +41,15 @@ const ViewNC =  ()=>{
 
     const loadUser = async() =>{
         const result = await axios.get('https://52b7-103-68-187-186.ngrok-free.app/audit/getAuditwithId?id='+id);
-        setNCLinks(result.data.data.NC_Link);
+        setProofLinks(result.data.data.Proof_Link);
         //console.log('44', result);
-        console.log("45", NC_Links)
+        console.log("45", Proof_Link)
         //console.log("92",id)
     }
-    const data = NC_Links.map((link) => ({
-        heading: 'Link',
+    const data = Proof_Link.map((link) => ({
+        heading: 'Evidence',
         value: <button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small"}}
-        onClick={() => window.open(link, "_blank")}>View NC</button>,
+        onClick={() => window.open(link, "_blank")}>View </button>,
     }));
     
       const columns = [
@@ -68,7 +68,7 @@ const ViewNC =  ()=>{
                             borderRadius: '8px',
                             width: '97%',
                         }}
-                        title="Details of user"
+                        title="Evidences"
                         data={data}
                         columns={columns}
                         options={{
@@ -104,4 +104,4 @@ const ViewNC =  ()=>{
       );
     };
   
-  export default ViewNC
+  export default ViewEvidence

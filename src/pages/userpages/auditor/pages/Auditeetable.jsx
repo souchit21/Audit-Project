@@ -41,8 +41,8 @@ const AuditeeTable = () => {
         onChange={event => handleStatusChange(event, rowData)}
       >
         <option >Select an option</option>
-        <option value="Accept">Accept</option>
-        <option value="REJECTED">Not available</option>
+        <option value="Accepted">Accept</option>
+        <option value="Rejected">Not available</option>
       </select>
     );
   };
@@ -55,7 +55,7 @@ const AuditeeTable = () => {
     //   id: rowData._id,
     //   status: value
     // };
-    const result = await axios.post('https://8702-103-68-187-186.ngrok-free.app/audit/editAuditofAuditee',{
+    const result = await axios.post('https://52b7-103-68-187-186.ngrok-free.app/audit/editAuditofAuditee',{
       id: rowData._id,
       AuditeeAcceptationStatus:value,
     });
@@ -67,7 +67,7 @@ const AuditeeTable = () => {
     // e.preventDefault();
     console.log('34', tokenArray)
     try{
-    const result = await axios.get('https://8702-103-68-187-186.ngrok-free.app/audit/getCombinedDataWithAuditeeToken?auditeeToken='+[tokenArray]);
+    const result = await axios.get('https://52b7-103-68-187-186.ngrok-free.app/audit/getCombinedDataWithAuditeeToken?auditeeToken='+[tokenArray]);
     setAuditDetails(result.data);
     // console.log("37",result.data.Data);
     console.log("73",result);
@@ -78,7 +78,24 @@ const AuditeeTable = () => {
   // useEffect(()=>{
   //   loadCategories();
   // },[]);
+  const renderStatus = (rowData, field) => {
+    let statusColor = '';
+    if (rowData[field] === 'Accepted') {
+      statusColor = 'green';
+    } else if (rowData[field] === 'Rejected') {
+      statusColor = 'red';
+    }
+    else if (rowData[field] === 'Pending') {
+      statusColor = '#FFA41B';
+    }
   
+    return (
+      <span style={{ color: statusColor }}>
+        {rowData[field]}
+      </span>
+    );
+  };
+   
  
   const columns = [
     // {title:'Order Id', field:'orderId',render:rowData=><Link  to={`/order/display/${rowData._id}`} target='_blank'>{rowData.orderId}</Link>},
@@ -103,6 +120,8 @@ const AuditeeTable = () => {
     render: rowData => moment(rowData.AuditorpreferredDate).format("DD-MM-YYYY")
   },    
     { title: 'Status', field: 'AuditeeAcceptationStatus', render: renderStatusDropdown },
+    { title: 'Admin Status', field: 'AdminAcceptationStatus', render: rowData => renderStatus(rowData, 'AdminAcceptationStatus')},
+
     // {title:'Upload Audit', field:'Audit file', render:rowData=><Link to={`/uploadAudit/${rowData._id}`}><button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small" }} >Upload audit</button></Link>},
     {title:'Link to audit', field:'Audit_Link', 
     render: rowData => (
@@ -138,6 +157,30 @@ const AuditeeTable = () => {
       }}
     >
       View NCs
+    </button>
+    </Link>
+
+  },
+  {title:'Evidences', field:'evidence', render:rowData=>
+  
+    <Link to={`/viewEvidenceAud/${rowData._id}`}>
+    <button
+      style={{
+          marginTop:'4%',
+          backgroundColor: "rgb(169, 25, 25)",
+          borderRadius: "4px",
+          color: "white",
+          padding: "5px",
+          fontSize: "small",
+          width:"80%"
+
+      }}
+      onClick={() => {
+        // Handle the click event for the second button
+        // You can add your own logic here
+      }}
+    >
+      View 
     </button>
     </Link>
 

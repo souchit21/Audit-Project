@@ -38,7 +38,7 @@ const Order = () => {
    // console.log('34', tokenArray)
    
     try{
-      const result = await axios.get('https://8702-103-68-187-186.ngrok-free.app/audit/getCombinedDataWithAuditeeToken?auditeeToken='+[tokenArray]);
+      const result = await axios.get('https://52b7-103-68-187-186.ngrok-free.app/audit/getCombinedDataWithAuditeeToken?auditeeToken='+[tokenArray]);
     setAuditDetails(result.data)
     // console.log("37",result.data.Data);
     console.log("40",auditDetails);
@@ -56,8 +56,8 @@ const Order = () => {
         onChange={event => handleStatusChange(event, rowData)}
       >
         <option >Select an option</option>
-        <option value="Accept">Accept</option>
-        <option value="Not available">Not available</option>
+        <option value="Accepted">Accept</option>
+        <option value="Rejected">Not available</option>
       </select>
     );
   };
@@ -70,7 +70,7 @@ const Order = () => {
     //   id: rowData._id,
     //   status: value
     // };
-    const result = await axios.post('https://8702-103-68-187-186.ngrok-free.app/audit/editAuditofAuditee',{
+    const result = await axios.post('https://52b7-103-68-187-186.ngrok-free.app/audit/editAuditofAuditee',{
       id: rowData._id,
       AuditeeAcceptationStatus:value,
     });
@@ -78,6 +78,23 @@ const Order = () => {
     console.log('66', result);
   };
   //console.log('63', auditDetails);
+  const renderStatus = (rowData, field) => {
+    let statusColor = '';
+    if (rowData[field] === 'Accepted') {
+      statusColor = 'green';
+    } else if (rowData[field] === 'Rejected') {
+      statusColor = 'red';
+    }
+    else if (rowData[field] === 'Pending') {
+      statusColor = '#FFA41B';
+    }
+  
+    return (
+      <span style={{ color: statusColor }}>
+        {rowData[field]}
+      </span>
+    );
+  };
  
   const columns = [
     // {title:'Order Id', field:'orderId',render:rowData=><Link  to={`/order/display/${rowData._id}`} target='_blank'>{rowData.orderId}</Link>},
@@ -102,6 +119,8 @@ const Order = () => {
     render: rowData => moment(rowData.AuditorpreferredDate).format("DD-MM-YYYY")
   }, 
     { title: 'Status', field: 'AuditeeAcceptationStatus', render: renderStatusDropdown },
+    { title: 'Admin Status', field: 'AdminAcceptationStatus', render: rowData => renderStatus(rowData, 'AdminAcceptationStatus')},
+
     // {title:'Upload Audit', field:'Audit file', render:rowData=><Link to={`/uploadAudit/${rowData._id}`}><button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small" }} >Upload audit</button></Link>},
     {title:'Link to audit', field:'Audit_Link', 
     render: rowData => (
@@ -141,6 +160,28 @@ const Order = () => {
     </Link>
 
   },
+  {title: 'Evidence', field:'Evidence', render:rowData=>
+<Link to={`/viewEvidence/${rowData._id}`}>
+    <button
+      style={{
+          marginTop:'4%',
+          backgroundColor: "rgb(169, 25, 25)",
+          borderRadius: "4px",
+          color: "white",
+          padding: "5px",
+          fontSize: "small",
+          width:"80%"
+
+      }}
+      onClick={() => {
+        // Handle the click event for the second button
+        // You can add your own logic here
+      }}
+    >
+      View 
+    </button>
+    </Link>
+}
     
     // {title:'End Date', field:'auditEndDate'},   
     // {title:'Scope', field:'scope'},
@@ -159,7 +200,7 @@ const Order = () => {
    return (
     <Layout>
       
-    <div className="container">
+    <div className="container" style={{ height: "600px", width:"1200px", overflow: "auto", marginLeft:"10px", marginRight: "10px"}}>
 
       <MaterialTable style={{
           margin: "60px 0px 30px 20px",

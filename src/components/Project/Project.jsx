@@ -4,6 +4,8 @@ import * as React from 'react';
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { MenuItem,Select, FormControl } from '@material-ui/core';
+
 import {
   updateUpvoteCount,
   setSavedProjects,
@@ -71,15 +73,10 @@ const Project = ({ project }) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const [auditDetails,setAuditDetails] = useState([]);
-  const [pagination , setPagination] = useState();
-  const [currentPage , setCurrentPage] = useState(1);
-  const [query,setQuery]= useState();
-  const [deliveryStatuses, setDeliveryStatuses] = useState([
-    { value: 'Accepted', label: 'Accepted' },
+  const [verificationStatuses, setVerificationStatuses] = useState([
+    { value: 'Rejected', label: 'Rejected' },
+    { value: 'Accepted', label: 'Approved' },
     { value: 'Pending', label: 'Pending' },
-    { value: 'In-Progress', label: 'In-Progress' },
-    { value: 'Delivered', label: 'Delivered' },
-    { value: 'Declined', label: 'Declined' },
   ]);
   useEffect(()=>{
     loadCategories();
@@ -87,7 +84,7 @@ const Project = ({ project }) => {
   
   const loadCategories = async()=>{
      try{
-      const result = await axios.get("https://8702-103-68-187-186.ngrok-free.app/audit/getCombinedData");
+      const result = await axios.get("https://52b7-103-68-187-186.ngrok-free.app/audit/getCombinedData");
       setAuditDetails(result.data);
       console.log('90', result);
      }catch(err){
@@ -97,58 +94,55 @@ const Project = ({ project }) => {
       // setPagination(_(result.data.getorders).slice(0).take(pageSize).value())
       
   }
-  //console.log("91",auditDetails)
+  const styles = {
+    Rejected: { color: 'red' },
+    Accepted : { color: 'green' },
+    Pending : {color: '#FFA41B'}
+  };
+  const handleVerificationStatusChange = (event, rowData) => {
+    const data = {
+      id: rowData._id,
+      AdminAcceptationStatus: event.target.value
+    };
+    console.log('54', data);
+    
+    axios
+      .post(`https://52b7-103-68-187-186.ngrok-free.app/audit/editDateAdmin1?id=${data.id}&AdminAcceptationStatus=${data.AdminAcceptationStatus}`)
+      .then(result => {
+        console.log('59', result)
+        //setNonverifiedusers(result.data.data);
+        window.location.reload();
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
+  const renderVerificationStatus = (rowData) => {
+    //console.log('66', rowData)
 
-  // const styles = {
-  //   Accepted: {color: 'green'},
-  //   Delivered: { color: 'green' },
-  //   Pending: { color: 'orange' },
-  //   "In-Progress": { color: 'blue' },
-  //   default: { color: 'red' },
-  // };
-
-  // const handleDeliveryStatusChange = (event, rowData) => {
-  //   const data = {
-  //     id: rowData._id,
-  //     deliveryStatus: event.target.value
-  //   };
-
-  //   axios
-  //     .put(`http://localhost:9955/payment/updateOrderAdmin?id=${data.id}&deliveryStatus=${data.deliveryStatus}`)
-  //     .then(result => {
-  //       setOrders(result.data.orders);
-  //       window.location.reload();
-  //     })
-  //     .catch(error => {
-  //       console.error(error);
-  //     });
-  // };
-
-  // const renderDeliveryStatus = (rowData) => {
-  //   const currentStyle = styles[rowData.deliveryStatus] || styles.default;
-  //   return (
-  //     <Select
-  //       value={rowData.deliveryStatus}
-  //       onChange={(event) => handleDeliveryStatusChange(event, rowData)}
-  //       style={currentStyle}
-  //     >
-  //       {deliveryStatuses.map((status) => (
-  //         <MenuItem key={status.value} value={status.value} style={styles[status.value] || styles.default}>
-  //           {status.label}
-  //         </MenuItem>
-  //       ))}
-  //     </Select>
-  //   );
-  // };
+    const currentStyle = styles[rowData.AdminAcceptationStatus] || styles.default;
   
-  
-  
+    return (
+      <Select
+        value={rowData.AdminAcceptationStatus}
+        onChange={(event) => handleVerificationStatusChange(event, rowData)}
+        style={{currentStyle , width:'100%'} }
+      >
+        {verificationStatuses.map((status) => (
+          <MenuItem key={status.value} value={status.value} style={styles[status.value] || styles.default}>
+            {status.label}
+          </MenuItem>
+        ))}
+      </Select>
+    );
+  };
+
 
   const columns = [
     // {title:'Order Id', field:'orderId',render:rowData=><Link  to={`/order/display/${rowData._id}`} target='_blank'>{rowData.orderId}</Link>},
     //{ title: 'Serial no', field: 'tableData.id', render:rowData => { return( <p>{rowData.tableData.id+1}</p> ) } },
     // {title:'Order placed Date & Time', field:'createdAt',render: rowData => moment(rowData.createdAt).format("DD-MM-YYYY HH:mm:ss")},
-    {title:'View Audit', field:'audit', render:rowData=><Link to={`/user/update/${rowData._id}`}>View</Link>},
+    {title:'Audit Details', field:'audit', render:rowData=><Link to={`/user/update/${rowData._id}`}>View</Link>},
     {title:'Date', field:'Date'},
     // {title:'Scope', field:'Scope'},
     // {title:'Audit Type', field:'auditType'},
@@ -161,15 +155,20 @@ const Project = ({ project }) => {
     )
     },
    
-    {   title:'Auditor Status', 
-        field:'AuditorAcceptationStatus',
- },
- {   title:'Auditee Status', 
-        field:'AuditeeAcceptationStatus',
- },
+//     {   title:'Auditor Status', 
+//         field:'AuditorAcceptationStatus',
+//  },
+//  {   title:'Auditee Status', 
+//         field:'AuditeeAcceptationStatus',
+//  },
   { title: 'Auditor Preferred Date', field: 'AuditorpreferredDate',
   render: rowData => moment(rowData.AuditorpreferredDate).format("DD-MM-YYYY")
 }, 
+{ title: 'Approve Date', field: 'AdminAcceptationStatus',
+  render: renderVerificationStatus
+
+  },
+
 {title:'Link to audit', field:'Audit_Link', 
     render: rowData => (
       <button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small" }} 
@@ -223,6 +222,28 @@ const Project = ({ project }) => {
     </Link>
   </div>
   },
+  {title: 'Evidence', field:'Evidence', render:rowData=>
+  <Link to={`/viewEvidence/${rowData._id}`}>
+      <button
+        style={{
+            marginTop:'4%',
+            backgroundColor: "rgb(169, 25, 25)",
+            borderRadius: "4px",
+            color: "white",
+            padding: "5px",
+            fontSize: "small",
+            width:"80%"
+  
+        }}
+        onClick={() => {
+          // Handle the click event for the second button
+          // You can add your own logic here
+        }}
+      >
+        View 
+      </button>
+      </Link>
+  }
     
     // {title:'End Date', field:'auditEndDate'},   
     // {title:'Scope', field:'scope'},

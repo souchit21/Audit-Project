@@ -47,12 +47,12 @@ const AMenu = () => {
           &nbsp;&nbsp;<span>Auditee</span>
           </div>
         </Link>
-        <Link to="/login" className="menu-item">
+        {/* <Link to="/login" className="menu-item">
         <div className="items">
         <LogoutIcon />
           &nbsp;&nbsp;<span>Logout</span>
           </div>
-        </Link>
+        </Link> */}
         {/* <Link to="/posts" className="menu-item">
           <ExploreIcon />
           &nbsp;&nbsp;<span>Posts</span>
@@ -66,38 +66,28 @@ const AMenu = () => {
           &nbsp;&nbsp;<span>Order Details</span>
         </Link> */}
         
-        {/* {isAuthenticated() && ( */}
+        {isAuthenticated() && (
           <>
-            {/* <Link to={`/profile/${getUser().username}`} className="menu-item">
-              <PersonIcon />
-              &nbsp;&nbsp;<span>Profile</span>
-            </Link> */}
-            
-
-
-            {/* <Link to="/PendingOrder" className="menu-item">
-              <GroupWorkIcon />
-              &nbsp;&nbsp;<span>Pending Order</span>
-            </Link> */}
-            {/* <div
-              className="items"
-              onClick={() => {
-                localStorage.removeItem("user");
-                if (history.location.pathname === "/") {
-                  window.location.reload();
-                } else {
-                  history.push("/login");
-                }
-              }}
-            >
-              <LogoutIcon />
-              &nbsp;&nbsp;<span>Logout</span>
-            </div> */}
+              <div
+                className="items"
+                onClick={() => {
+                  localStorage.removeItem("user");
+                  if (history.location.pathname === "/") {
+                    window.location.reload();
+                  } else {
+                    history.push("/login");
+                  }
+                }}
+              >
+                <LogoutIcon />
+                &nbsp;&nbsp;<span>Logout</span>
+              </div>
           </>
-        
-      </div>
+      )
+    }
+</div>
     </div>
   );
-};
+}
 
 export default AMenu;
