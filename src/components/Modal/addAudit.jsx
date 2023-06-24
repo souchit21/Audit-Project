@@ -14,6 +14,8 @@ import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 // import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { format } from 'date-fns';
 import { notifyError } from "../../utils/notifyToasts";
+import { notifySuccess } from "../../utils/notifyToasts";
+
 import "./addAudit.css";
 const style = {
     position: 'absolute',
@@ -163,6 +165,7 @@ const AddAudit =  ()=>{
       const file1 = await axios.post('https://c764-103-68-187-186.ngrok-free.app/audit/convertXlsxToJsonAndStorefinal',formData);
       console.log('161', file1)
       history.push("/");
+      notifySuccess("Successfully Uploaded")
     }catch (err) {
       // toggleLoading(type, false);
       notifyError("not uploaded");

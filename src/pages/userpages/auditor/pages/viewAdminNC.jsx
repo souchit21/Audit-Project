@@ -4,11 +4,9 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import {useHistory, useParams} from 'react-router-dom';
 import axios from 'axios';
-import EditProfileModal from "../EditProfileModal/EditProfileModal";
-import Sidebar from "../../pages/sideBar/sideBar";
-import Layout from "../Layout/Layout";
-import "../Modal/UserDetails.css"
-import { Padding } from "@mui/icons-material";
+
+import ALayout from "../Layout/ALayout"; 
+
 import MaterialTable from 'material-table-jspdf-fix';
 
 const style = {
@@ -26,12 +24,12 @@ const style = {
   };
 
 
-const ViewEvidence =  ()=>{
+const ViewAdminNC_Aud =  ()=>{
     const history = useHistory();
 
     const {id} = useParams();
     console.log('31', id)
-    const [Proof_Link,setProofLinks] = useState ([]);
+    const [AdminNC_Links,setNCLinks] = useState ([]);
 
     useEffect (() => {
         loadUser();
@@ -40,16 +38,33 @@ const ViewEvidence =  ()=>{
 
 
     const loadUser = async() =>{
-        const result = await axios.get('https://1269-103-68-187-186.ngrok-free.app/audit/getAuditwithId?id='+id);
-        setProofLinks(result.data.data.Proof_Link);
+        const result = await axios.get('https://03b6-103-68-187-186.ngrok-free.app/audit/getAuditwithId?id='+id);
+        setNCLinks(result.data.data.Admin_NC_Link);
         //console.log('44', result);
-        console.log("45", Proof_Link)
+        console.log("45", AdminNC_Links)
         //console.log("92",id)
     }
-    const data = Proof_Link.map((link) => ({
-        heading: 'Evidence',
-        value: <button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small"}}
-        onClick={() => window.open(link, "_blank")}>View </button>,
+    // const data = NC_Links.map((link) => ({
+    //     heading: 'Link',
+    //     value: <button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small"}}
+    //     onClick={() => window.open(link, "_blank")}>View NC</button>,
+    // }));
+
+
+    const data = AdminNC_Links.map((link) => ({
+      heading: 'Link',
+      value: (
+        <button
+          style={{
+            backgroundColor: "rgb(169, 25, 25)",
+            borderRadius: "4px",
+            color: "white",
+            padding: "5px",
+            fontSize: "small"
+          }}
+          onClick={() => window.open(link, "_blank")}>View NC</button>
+
+      ),
     }));
     
       const columns = [
@@ -60,7 +75,7 @@ const ViewEvidence =  ()=>{
       return (
         <>
        
-            <Layout>
+            <ALayout>
                     <MaterialTable
                         style={{
                             margin: '60px 0px 30px 20px',
@@ -68,7 +83,7 @@ const ViewEvidence =  ()=>{
                             borderRadius: '8px',
                             width: '97%',
                         }}
-                        title="Evidences"
+                        title="Details of user"
                         data={data}
                         columns={columns}
                         options={{
@@ -99,9 +114,9 @@ const ViewEvidence =  ()=>{
                         }}
                 />
        
-        </Layout>
+        </ALayout>
         </>
       );
     };
   
-  export default ViewEvidence
+  export default ViewAdminNC_Aud

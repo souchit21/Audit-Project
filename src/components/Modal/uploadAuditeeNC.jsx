@@ -30,12 +30,12 @@ const style = {
   };
 
 
-const RaiseNC =  ()=>{
+const UploadAuditeeNC =  ()=>{
     const history = useHistory();
 
     const {id} = useParams();
     console.log('31', id)
-    const [NC_LINKS,setNC_LINKS] = useState ([]);
+    const [AuditeeNC_LINKS,setNC_LINKS] = useState ([]);
     const [selectedFiles, setSelectedFiles] = useState([]);
     const handleFileChange = (event) => {
     setSelectedFiles(event.target.files);
@@ -51,12 +51,12 @@ const RaiseNC =  ()=>{
             console.log('88', formData);
             try {
                 const response = await axios.post(
-                "https://1269-103-68-187-186.ngrok-free.app/NcUpload/uploadNcAudit",
+                "https://03b6-103-68-187-186.ngrok-free.app/NcUpload/uploadNcAudit",
                 formData
                 );
                 console.log('95', response);
                 setNC_LINKS(response.data);
-                console.log('78', NC_LINKS)
+                console.log('78', AuditeeNC_LINKS)
                 notifySuccess("Successfully Uploaded")
                 
             } catch (err) {
@@ -67,12 +67,12 @@ const RaiseNC =  ()=>{
         e.preventDefault();
         const data = {
             id: id,
-            NC_Link: NC_LINKS
+            Auditee_NC_Link: AuditeeNC_LINKS
         }
         console.log('90', data);
         try{
             const result = await axios.post(
-                "https://1269-103-68-187-186.ngrok-free.app/audit/uploadNcform",
+                "https://03b6-103-68-187-186.ngrok-free.app/audit/uploadAuditeeNcform",
                 data
             );
             console.log('96', result)
@@ -86,8 +86,8 @@ const RaiseNC =  ()=>{
 
 
       return (
+        <>
        
-       <>
             <Layout>
    
             <Box sx={{ ...style , marginTop:20 }}> 
@@ -130,8 +130,7 @@ const RaiseNC =  ()=>{
        
         </Layout>
         </>
-       
       );
     };
   
-  export default RaiseNC
+  export default UploadAuditeeNC

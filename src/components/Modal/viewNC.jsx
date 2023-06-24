@@ -4,11 +4,9 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import {useHistory, useParams} from 'react-router-dom';
 import axios from 'axios';
-import EditProfileModal from "../EditProfileModal/EditProfileModal";
-import Sidebar from "../../pages/sideBar/sideBar";
+
 import Layout from "../Layout/Layout";
-import "../Modal/UserDetails.css"
-import { Padding } from "@mui/icons-material";
+
 import MaterialTable from 'material-table-jspdf-fix';
 
 const style = {
@@ -40,16 +38,40 @@ const ViewNC =  ()=>{
 
 
     const loadUser = async() =>{
-        const result = await axios.get('https://52b7-103-68-187-186.ngrok-free.app/audit/getAuditwithId?id='+id);
+        const result = await axios.get('https://03b6-103-68-187-186.ngrok-free.app/audit/getAuditwithId?id='+id);
         setNCLinks(result.data.data.NC_Link);
         //console.log('44', result);
         console.log("45", NC_Links)
         //console.log("92",id)
     }
+    // const data = NC_Links.map((link) => ({
+    //     heading: 'Link',
+    //     value: <button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small"}}
+    //     onClick={() => window.open(link, "_blank")}>View NC</button>,
+    // }));
+    // const handleOpenLink = (link) => {
+    //   const embedUrl = `https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(link)}`;
+    //   const win = window.open('', '_blank');
+    //   win.document.write(`<iframe src="${embedUrl}" width="100%" height="100%"></iframe>`);
+    // };
+    
+
     const data = NC_Links.map((link) => ({
-        heading: 'Link',
-        value: <button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small"}}
-        onClick={() => window.open(link, "_blank")}>View NC</button>,
+      heading: 'Link',
+      value: (
+        <button
+          style={{
+            backgroundColor: "rgb(169, 25, 25)",
+            borderRadius: "4px",
+            color: "white",
+            padding: "5px",
+            fontSize: "small"
+          }}
+          onClick={() => window.open(link, "_blank")}
+        >
+          View NC
+        </button>
+      ),
     }));
     
       const columns = [
@@ -103,5 +125,5 @@ const ViewNC =  ()=>{
         </>
       );
     };
-  
+
   export default ViewNC

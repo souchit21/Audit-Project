@@ -22,11 +22,18 @@ import FileUploadModal from "./pages/userpages/auditor/pages/FileUploadModal ";
 import Verifyusers from "./pages/userpages/auditor/pages/usersverification";
 import RaiseNC from "./components/Modal/raiseNC";
 import ViewNC from "./components/Modal/viewNC";
+import ViewAuditeeNC from "./components/Modal/viewAuditeeNC";
+import ViewAdminNC from "./components/Modal/viewAdminNC";
 import ViewNC_Aud from "./pages/userpages/auditor/pages/viewNC_AUD";
 import UploadEvidence from "./components/Modal/uploadEvidence";
 import ViewEvidence from "./components/Modal/viewEvidence";
 import UploadEvidenceAud from "./pages/userpages/auditor/pages/uploadEvidenceAud";
 import ViewEvidenceAud from "./pages/userpages/auditor/pages/viewEvidenceAud";
+import ViewAuditeeNC_Aud from "./pages/userpages/auditor/pages/viewAuditeeNC";
+import ViewAdminNC_Aud from "./pages/userpages/auditor/pages/viewAdminNC";
+import UploadAuditeeNC_Aud from "./pages/userpages/auditor/pages/uploadAuditeeNCAud";
+import UploadAdminNC from "./components/Modal/uploadAdminNC";
+import UploadAuditeeNC from "./components/Modal/uploadAuditeeNC";
 // import Orders from "./pages/Orders/OrderDetails";
 import Order from "./pages/Order/Order.jsx"
 import Clients from "./pages/Clients/Clients";
@@ -75,8 +82,19 @@ function App() {
         <PrivateRoute path="/user/verification" component={Verifyusers} />
         <PrivateRoute path="/userdetails/:id" component={UserDetails} />
         <PrivateRoute path="/raise/nc/:id" component={RaiseNC} />
-        <PrivateRoute path="/view/nc/:id" component={ViewNC} />
+        <PrivateRoute path="/uploadAuditeeNCaud/:id" component={UploadAuditeeNC_Aud} />
+        <PrivateRoute path="/uploadAuditeeNC/:id" component={UploadAuditeeNC} />
+        <PrivateRoute path="/uploadAdminNC/:id" component={UploadAdminNC} />
+
+        <PrivateRoute path="/viewnc/:id" component={ViewNC} />
+        <PrivateRoute path="/viewAuditeeNC/:id" component={ViewAuditeeNC} />
+        <PrivateRoute path="/viewAdminNC/:id" component={ViewAdminNC} />
+
         <PrivateRoute path="/view/ncaud/:id" component={ViewNC_Aud} />
+        <PrivateRoute path="/viewAuditeeNCataud/:id" component={ViewAuditeeNC_Aud} />
+        <PrivateRoute path="/viewAdminNCataud/:id" component={ViewAdminNC_Aud} />
+
+
         <PrivateRoute path="/uploadEvidence/:id" component={UploadEvidence} />
         <PrivateRoute path="/viewEvidence/:id" component={ViewEvidence} />
         <PrivateRoute path="/uploadEvidenceAud/:id" component={UploadEvidenceAud} />

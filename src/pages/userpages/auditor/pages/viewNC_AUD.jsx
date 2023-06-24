@@ -38,16 +38,36 @@ const ViewNC_Aud =  ()=>{
 
 
     const loadUser = async() =>{
-        const result = await axios.get('https://8702-103-68-187-186.ngrok-free.app/audit/getAuditwithId?id='+id);
+        const result = await axios.get('https://03b6-103-68-187-186.ngrok-free.app/audit/getAuditwithId?id='+id);
         setNCLinks(result.data.data.NC_Link);
         //console.log('44', result);
         console.log("45", NC_Links)
         //console.log("92",id)
     }
+    // const data = NC_Links.map((link) => ({
+    //     heading: 'Link',
+    //     value: <button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small"}}
+    //     onClick={() => window.open(link, "_blank")}>View NC</button>,
+    // }));
+    
+    
+
     const data = NC_Links.map((link) => ({
-        heading: 'Link',
-        value: <button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small"}}
-        onClick={() => window.open(link, "_blank")}>View NC</button>,
+      heading: 'Link',
+      value: (
+        <button
+          style={{
+            backgroundColor: "rgb(169, 25, 25)",
+            borderRadius: "4px",
+            color: "white",
+            padding: "5px",
+            fontSize: "small"
+          }}
+          onClick={() => window.open(link, "_blank")}
+        >
+          View NC
+        </button>
+      ),
     }));
     
       const columns = [

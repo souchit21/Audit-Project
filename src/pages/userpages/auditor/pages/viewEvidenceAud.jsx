@@ -37,7 +37,7 @@ const ViewEvidenceAud =  ()=>{
 
 
     const loadUser = async() =>{
-        const result = await axios.get('https://52b7-103-68-187-186.ngrok-free.app/audit/getAuditwithId?id='+id);
+        const result = await axios.get('https://03b6-103-68-187-186.ngrok-free.app/audit/getAuditwithId?id='+id);
         setProofLinks(result.data.data.Proof_Link);
         //console.log('44', result);
         console.log("45", Proof_Link)
@@ -46,7 +46,10 @@ const ViewEvidenceAud =  ()=>{
     const data = Proof_Link.map((link) => ({
         heading: 'Evidence',
         value: <button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small"}}
-        onClick={() => window.open(link, "_blank")}> View</button>,
+        onClick={() => window.open(link, "_blank")}
+        > 
+        
+        View</button>,
     }));
     
       const columns = [

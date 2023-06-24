@@ -26,12 +26,12 @@ const style = {
   };
 
 
-const ViewEvidence =  ()=>{
+const ViewAuditeeNC =  ()=>{
     const history = useHistory();
 
     const {id} = useParams();
     console.log('31', id)
-    const [Proof_Link,setProofLinks] = useState ([]);
+    const [Auditee_NC_Link,setNCLinks] = useState ([]);
 
     useEffect (() => {
         loadUser();
@@ -40,18 +40,37 @@ const ViewEvidence =  ()=>{
 
 
     const loadUser = async() =>{
-        const result = await axios.get('https://1269-103-68-187-186.ngrok-free.app/audit/getAuditwithId?id='+id);
-        setProofLinks(result.data.data.Proof_Link);
+        const result = await axios.get('https://03b6-103-68-187-186.ngrok-free.app/audit/getAuditwithId?id='+id);
+        setNCLinks(result.data.data.Auditee_NC_Link);
         //console.log('44', result);
-        console.log("45", Proof_Link)
+        console.log("45", Auditee_NC_Link)
         //console.log("92",id)
     }
-    const data = Proof_Link.map((link) => ({
-        heading: 'Evidence',
+    const data = Auditee_NC_Link.map((link) => ({
+        heading: 'Link',
         value: <button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small"}}
-        onClick={() => window.open(link, "_blank")}>View </button>,
+        onClick={() => window.open(link, "_blank")}>View NC</button>,
     }));
     
+    // const data = NC_Links.map((link) => ({
+    //   heading: 'Link',
+    //   value: (
+    //     <a
+    //       href={'https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(link)}'}
+    //       target="_blank"
+    //       rel="noopener noreferrer"
+    //       style={{
+    //         backgroundColor: "rgb(169, 25, 25)",
+    //         borderRadius: "4px",
+    //         color: "white",
+    //         padding: "5px",
+    //         fontSize: "small"
+    //       }}
+    //     >
+    //       View NC
+    //     </a>
+    //   ),
+    // }));
       const columns = [
         { title: 'Heading', field: 'heading' },
         { title: 'Value', field: 'value' },
@@ -68,7 +87,7 @@ const ViewEvidence =  ()=>{
                             borderRadius: '8px',
                             width: '97%',
                         }}
-                        title="Evidences"
+                        title="Details of user"
                         data={data}
                         columns={columns}
                         options={{
@@ -104,4 +123,4 @@ const ViewEvidence =  ()=>{
       );
     };
   
-  export default ViewEvidence
+  export default ViewAuditeeNC

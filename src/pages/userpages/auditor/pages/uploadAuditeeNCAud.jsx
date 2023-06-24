@@ -4,14 +4,11 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import {useHistory, useParams} from 'react-router-dom';
 import axios from 'axios';
-import EditProfileModal from "../EditProfileModal/EditProfileModal";
-import Sidebar from "../../pages/sideBar/sideBar";
 import MaterialTable from 'material-table-jspdf-fix';
-import Layout from "../Layout/Layout";
-import "../Modal/raiseNC.css"
+import ALayout from "../Layout/ALayout";
 import { Padding } from "@mui/icons-material";
-import { notifyError } from "../../utils/notifyToasts";
-import { notifySuccess } from "../../utils/notifyToasts";
+import { notifyError } from "../../../../utils/notifyToasts"; 
+import { notifySuccess } from "../../../../utils/notifyToasts"; 
 
 const style = {
     position: 'absolute',
@@ -30,12 +27,12 @@ const style = {
   };
 
 
-const RaiseNC =  ()=>{
+const UploadAuditeeNC_Aud =  ()=>{
     const history = useHistory();
 
     const {id} = useParams();
     console.log('31', id)
-    const [NC_LINKS,setNC_LINKS] = useState ([]);
+    const [Auditee_NC_LINKS,setNC_LINKS] = useState ([]);
     const [selectedFiles, setSelectedFiles] = useState([]);
     const handleFileChange = (event) => {
     setSelectedFiles(event.target.files);
@@ -51,12 +48,12 @@ const RaiseNC =  ()=>{
             console.log('88', formData);
             try {
                 const response = await axios.post(
-                "https://1269-103-68-187-186.ngrok-free.app/NcUpload/uploadNcAudit",
+                "https://03b6-103-68-187-186.ngrok-free.app/NcUpload/uploadNcAudit",
                 formData
                 );
                 console.log('95', response);
                 setNC_LINKS(response.data);
-                console.log('78', NC_LINKS)
+                console.log('78', Auditee_NC_LINKS)
                 notifySuccess("Successfully Uploaded")
                 
             } catch (err) {
@@ -67,12 +64,12 @@ const RaiseNC =  ()=>{
         e.preventDefault();
         const data = {
             id: id,
-            NC_Link: NC_LINKS
+            Auditee_NC_Link: Auditee_NC_LINKS
         }
         console.log('90', data);
         try{
             const result = await axios.post(
-                "https://1269-103-68-187-186.ngrok-free.app/audit/uploadNcform",
+                "https://03b6-103-68-187-186.ngrok-free.app/audit/uploadAuditeeNcform",
                 data
             );
             console.log('96', result)
@@ -86,13 +83,13 @@ const RaiseNC =  ()=>{
 
 
       return (
+        <>
        
-       <>
-            <Layout>
+            <ALayout>
    
             <Box sx={{ ...style , marginTop:20 }}> 
           
-          <span style={{ float: "right", cursor: "pointer" }} onClick={handleClose}>X</span>
+          {/* <span style={{ float: "right", cursor: "pointer" }} onClick={handleClose}>X</span> */}
           <div className="table" >
             <div className="row_1">
                 <div className="downloadNC">
@@ -128,10 +125,9 @@ const RaiseNC =  ()=>{
         
          </Box>
        
-        </Layout>
+        </ALayout>
         </>
-       
       );
     };
   
-  export default RaiseNC
+  export default UploadAuditeeNC_Aud

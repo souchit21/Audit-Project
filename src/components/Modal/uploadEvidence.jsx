@@ -11,6 +11,8 @@ import Layout from "../Layout/Layout";
 import "../Modal/uploadEvidence.css"
 import { Padding } from "@mui/icons-material";
 import { notifyError } from "../../utils/notifyToasts";
+import { notifySuccess } from "../../utils/notifyToasts";
+
 const style = {
     position: 'absolute',
     top: '25%',
@@ -47,12 +49,13 @@ const UploadEvidence =  ()=>{
             console.log('88', formData);
             try {
                 const response = await axios.post(
-                "https://52b7-103-68-187-186.ngrok-free.app/NcUpload/uploadNcAudit",
+                "https://1269-103-68-187-186.ngrok-free.app/NcUpload/uploadNcAudit",
                 formData
                 );
                 console.log('95', response);
                 setEvidences(response.data);
                 console.log('78', Evidences)
+                notifySuccess("Successfully Uploaded")
                 
             } catch (err) {
                 notifyError("Files couldn't be uploaded");
@@ -67,7 +70,7 @@ const UploadEvidence =  ()=>{
         console.log('90', data);
         try{
             const result = await axios.post(
-                "https://52b7-103-68-187-186.ngrok-free.app/audit/uploadProof",
+                "https://1269-103-68-187-186.ngrok-free.app/audit/uploadProof",
                 data
             );
             console.log('96', result)

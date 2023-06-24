@@ -10,6 +10,8 @@ import ALayout from "../Layout/ALayout";
 import "./uploadEvidenceAud.css"
 import { Padding } from "@mui/icons-material";
 import { notifyError } from "../../../../utils/notifyToasts";
+import { notifySuccess } from "../../../../utils/notifyToasts";
+
 const style = {
     position: 'absolute',
     top: '25%',
@@ -46,7 +48,7 @@ const UploadEvidenceAud =  ()=>{
             console.log('88', formData);
             try {
                 const response = await axios.post(
-                "https://52b7-103-68-187-186.ngrok-free.app/NcUpload/uploadNcAudit",
+                "https://03b6-103-68-187-186.ngrok-free.app/NcUpload/uploadNcAudit",
                 formData
                 );
                 console.log('95', response);
@@ -66,10 +68,11 @@ const UploadEvidenceAud =  ()=>{
         console.log('90', data);
         try{
             const result = await axios.post(
-                "https://52b7-103-68-187-186.ngrok-free.app/audit/uploadProof",
+                "https://03b6-103-68-187-186.ngrok-free.app/audit/uploadProof",
                 data
             );
             console.log('96', result)
+            notifySuccess("Submitted")
         }catch(err){
             notifyError("Couldn't send links");
         }

@@ -84,7 +84,7 @@ const Project = ({ project }) => {
   
   const loadCategories = async()=>{
      try{
-      const result = await axios.get("https://52b7-103-68-187-186.ngrok-free.app/audit/getCombinedData");
+      const result = await axios.get("https://03b6-103-68-187-186.ngrok-free.app/audit/getCombinedData");
       setAuditDetails(result.data);
       console.log('90', result);
      }catch(err){
@@ -107,7 +107,7 @@ const Project = ({ project }) => {
     console.log('54', data);
     
     axios
-      .post(`https://52b7-103-68-187-186.ngrok-free.app/audit/editDateAdmin1?id=${data.id}&AdminAcceptationStatus=${data.AdminAcceptationStatus}`)
+      .post(`https://03b6-103-68-187-186.ngrok-free.app/audit/editDateAdmin1?id=${data.id}&AdminAcceptationStatus=${data.AdminAcceptationStatus}`)
       .then(result => {
         console.log('59', result)
         //setNonverifiedusers(result.data.data);
@@ -185,7 +185,6 @@ const Project = ({ project }) => {
       </button>
     )},
     {title:'NC', field:'NC', render:rowData=>
-    <div className="nc-btns">
     <Link to={`/raise/nc/${rowData._id}`}>
       <button
         style={{
@@ -200,7 +199,10 @@ const Project = ({ project }) => {
         Raise NC
       </button>
     </Link >
-    <Link to={`/view/nc/${rowData._id}`}>
+  },
+  {title:'Auditee NC Link', field:'NC', render:rowData=>
+  <div>
+    <Link to={`/viewAuditeeNC/${rowData._id}`}>
     <button
       style={{
           marginTop:'4%',
@@ -220,8 +222,50 @@ const Project = ({ project }) => {
       View NCs
     </button>
     </Link>
-  </div>
-  },
+    <Link to={`/uploadAdminNC/${rowData._id}`}>
+    <button
+      style={{
+          marginTop:'4%',
+          backgroundColor: "rgb(169, 25, 25)",
+          borderRadius: "4px",
+          color: "white",
+          padding: "5px",
+          fontSize: "small",
+          width:"80%"
+
+      }}
+      onClick={() => {
+        // Handle the click event for the second button
+        // You can add your own logic here
+      }}
+    >
+      Upload NCs
+    </button>
+    </Link>
+    </div>
+   },
+   {title:'Admin NC Link', field:'NC', render:rowData=>
+    <Link to={`/viewAdminNC/${rowData._id}`}>
+    <button
+      style={{
+          marginTop:'4%',
+          backgroundColor: "rgb(169, 25, 25)",
+          borderRadius: "4px",
+          color: "white",
+          padding: "5px",
+          fontSize: "small",
+          width:"80%"
+
+      }}
+      onClick={() => {
+        // Handle the click event for the second button
+        // You can add your own logic here
+      }}
+    >
+      View NCs
+    </button>
+    </Link>
+   },
   {title: 'Evidence', field:'Evidence', render:rowData=>
   <Link to={`/viewEvidence/${rowData._id}`}>
       <button

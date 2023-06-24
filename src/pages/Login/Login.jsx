@@ -10,6 +10,9 @@ import { doesPropertyExist } from "../../utils/doesPropertyExist";
 import amico from "../../assets/menon-menon-01.jpg";
 import "./Login.css";
 // require('dotenv').config();
+// require('dotenv').config();
+// const abc = process.env.REACT_APP_api_url;
+// console.log("15",abc)
 
 const theme = createTheme({
   palette: {
@@ -81,7 +84,7 @@ const Login = () => {
     console.log('81', process.env.REACT_APP_api_url);
 
     try {
-      let url = 'https://52b7-103-68-187-186.ngrok-free.app/user/login';
+      let url = 'https://03b6-103-68-187-186.ngrok-free.app/user/login';
        let data=await axios.post(url, {
         token:loginData.token,
         password:loginData.password,

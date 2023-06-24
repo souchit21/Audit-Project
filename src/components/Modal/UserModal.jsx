@@ -7,6 +7,8 @@ import axios from 'axios';
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
 import Sidebar from "../../pages/sideBar/sideBar";
 import "../Modal/userModal.css"
+import { notifyError } from "../../utils/notifyToasts";
+import { notifySuccess } from "../../utils/notifyToasts";
 const style = {
     position: 'absolute',
     top: '30%',
@@ -87,7 +89,7 @@ useEffect (() => {
 // }
 
 const loadUser = async() =>{
-    const result = await axios.get('https://719e-103-68-187-186.ngrok-free.app/audit/getAuditwithId?id='+id);
+    const result = await axios.get('https://1269-103-68-187-186.ngrok-free.app/audit/getAuditwithId?id='+id);
     setAuditDetails(result.data.data);
     console.log('90', result.data.data);
     console.log("91", auditDetails);
@@ -111,8 +113,13 @@ const handleUpdate = async(e)=>{
     newAuditorToken: auditorTokens
   }
   console.log('113', data);
-  const result = await axios.post('https://719e-103-68-187-186.ngrok-free.app/audit/editAudit',data);
+  try{const result = await axios.post('https://1269-103-68-187-186.ngrok-free.app/audit/editAudit',data);
   console.log('110', result);
+  notifySuccess('Successfully Updated')
+  }catch(err){
+    notifyError("Couldn't update");
+  }
+
   //history.push("/login")
   // console.log("138",result);
 }

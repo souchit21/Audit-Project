@@ -55,7 +55,7 @@ const AuditeeTable = () => {
     //   id: rowData._id,
     //   status: value
     // };
-    const result = await axios.post('https://52b7-103-68-187-186.ngrok-free.app/audit/editAuditofAuditee',{
+    const result = await axios.post('https://03b6-103-68-187-186.ngrok-free.app/audit/editAuditofAuditee',{
       id: rowData._id,
       AuditeeAcceptationStatus:value,
     });
@@ -67,7 +67,7 @@ const AuditeeTable = () => {
     // e.preventDefault();
     console.log('34', tokenArray)
     try{
-    const result = await axios.get('https://52b7-103-68-187-186.ngrok-free.app/audit/getCombinedDataWithAuditeeToken?auditeeToken='+[tokenArray]);
+    const result = await axios.get('https://03b6-103-68-187-186.ngrok-free.app/audit/getCombinedDataWithAuditeeToken?auditeeToken='+[tokenArray]);
     setAuditDetails(result.data);
     // console.log("37",result.data.Data);
     console.log("73",result);
@@ -139,6 +139,7 @@ const AuditeeTable = () => {
       </button>
     )},
     {title:'NC', field:'NC', render:rowData=>
+    <div>
     <Link to={`/view/ncaud/${rowData._id}`}>
     <button
       style={{
@@ -159,8 +160,75 @@ const AuditeeTable = () => {
       View NCs
     </button>
     </Link>
+    <Link to={`/uploadAuditeeNCaud/${rowData._id}`}>
+    <button
+      style={{
+          marginTop:'4%',
+          backgroundColor: "rgb(169, 25, 25)",
+          borderRadius: "4px",
+          color: "white",
+          padding: "5px",
+          fontSize: "small",
+          width:"80%"
+
+      }}
+      onClick={() => {
+        // Handle the click event for the second button
+        // You can add your own logic here
+      }}
+    >
+      Upload NCs
+    </button>
+    </Link>
+    </div>
 
   },
+  {title:'Auditee NC', field:'NC', render:rowData=>
+  <Link to={`/viewAuditeeNCataud/${rowData._id}`}>
+  <button
+    style={{
+        marginTop:'4%',
+        backgroundColor: "rgb(169, 25, 25)",
+        borderRadius: "4px",
+        color: "white",
+        padding: "5px",
+        fontSize: "small",
+        width:"80%"
+
+    }}
+    onClick={() => {
+      // Handle the click event for the second button
+      // You can add your own logic here
+    }}
+  >
+    View NCs
+  </button>
+  </Link>
+
+},
+{title:'Admin NC', field:'NC', render:rowData=>
+<Link to={`/viewAdminNCataud/${rowData._id}`}>
+<button
+  style={{
+      marginTop:'4%',
+      backgroundColor: "rgb(169, 25, 25)",
+      borderRadius: "4px",
+      color: "white",
+      padding: "5px",
+      fontSize: "small",
+      width:"80%"
+
+  }}
+  onClick={() => {
+    // Handle the click event for the second button
+    // You can add your own logic here
+  }}
+>
+  View NCs
+</button>
+</Link>
+
+},
   {title:'Evidences', field:'evidence', render:rowData=>
   
     <Link to={`/viewEvidenceAud/${rowData._id}`}>
