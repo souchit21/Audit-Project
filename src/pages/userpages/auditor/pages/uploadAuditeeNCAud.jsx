@@ -48,7 +48,7 @@ const UploadAuditeeNC_Aud =  ()=>{
             console.log('88', formData);
             try {
                 const response = await axios.post(
-                "https://03b6-103-68-187-186.ngrok-free.app/NcUpload/uploadNcAudit",
+                "https://b0fa-103-68-187-186.ngrok-free.app/NcUpload/uploadNcAudit",
                 formData
                 );
                 console.log('95', response);
@@ -69,7 +69,7 @@ const UploadAuditeeNC_Aud =  ()=>{
         console.log('90', data);
         try{
             const result = await axios.post(
-                "https://03b6-103-68-187-186.ngrok-free.app/audit/uploadAuditeeNcform",
+                "https://b0fa-103-68-187-186.ngrok-free.app/audit/uploadAuditeeNcform",
                 data
             );
             console.log('96', result)

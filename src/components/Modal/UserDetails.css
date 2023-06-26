@@ -1,36 +1,39 @@
-.table{
+.table-userdetail{
     display: flex;
     flex-direction: column;
 }
-.row_1{
+.row_1-userdetail{
     display: flex;
 }
-.colmn_1{
-    display: flex;
-    flex-direction: column;
-    line-height: 2rem;
-}
-.colmn_2{
+.colmn_1-userdetail{
     display: flex;
     flex-direction: column;
+    line-height: 2.27rem;
 }
-.label{
+.colmn_2-userdetail{
+    display: flex;
+    flex-direction: column;
+}
+.label-userdetail{
     /* padding: 3px; */
 }
-.input{
+.input-userdetail{
     height: 30px;
 }
-.form-control{
-    height: 100%;
+.form-control-userdetail{
+    /* height: 100%; */
+    /* border: solid 0.1px;
+    border-radius: 5px; */
     width: auto;
 }
-.btn{
+.btn-userdetail{
     background-color: rgb(169, 25, 25);
     border-radius: 4px;
     color: white;
-
+    width: auto;
+    padding: 3px;
 }
-.skills{
+.skills-userdetail{
     display: flex;
     flex-direction: column;
 }

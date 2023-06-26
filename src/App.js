@@ -25,8 +25,12 @@ import ViewNC from "./components/Modal/viewNC";
 import ViewAuditeeNC from "./components/Modal/viewAuditeeNC";
 import ViewAdminNC from "./components/Modal/viewAdminNC";
 import ViewNC_Aud from "./pages/userpages/auditor/pages/viewNC_AUD";
+import UploadAuditEvidence from "./components/Modal/UploadAuditEvidence";
+import UploadAuditEvidenceAud from "./pages/userpages/auditor/pages/uploadAuditEvidenceAud";
 import UploadEvidence from "./components/Modal/uploadEvidence";
 import ViewEvidence from "./components/Modal/viewEvidence";
+import ViewAuditEvidence from "./components/Modal/viewAuditEvidences";
+import ViewAuditEvidenceAud from "./pages/userpages/auditor/pages/viewAuditEvidence";
 import UploadEvidenceAud from "./pages/userpages/auditor/pages/uploadEvidenceAud";
 import ViewEvidenceAud from "./pages/userpages/auditor/pages/viewEvidenceAud";
 import ViewAuditeeNC_Aud from "./pages/userpages/auditor/pages/viewAuditeeNC";
@@ -42,7 +46,11 @@ import PageNotFound from "./pages/PageNotFound/PageNotFound";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import ViewAllUsers from "./components/ViewAllUsers/ViewAllUsers";
 import EditCategoriesModal from "./components/Modal/EditCategoriesModal";
+
 import UserModal from "./components/Modal/UserModal";
+import ViewAuditDetails from "./components/Modal/viewAuditDetails";
+import ViewAuditDetailsAud from "./pages/userpages/auditor/pages/viewAuditDetailsAud";
+
 import UserDetails from "./components/Modal/UserDetails"
 import AddAudit from "./components/Modal/addAudit";                                                           
 import EditPostModal from "./components/Modal/EditPostModal";
@@ -94,9 +102,14 @@ function App() {
         <PrivateRoute path="/viewAuditeeNCataud/:id" component={ViewAuditeeNC_Aud} />
         <PrivateRoute path="/viewAdminNCataud/:id" component={ViewAdminNC_Aud} />
 
+        <PrivateRoute path="/uploadauditEvidence/:id" component={UploadAuditEvidence} />
+        <PrivateRoute path="/uploadauditEvidenceAud/:id" component={UploadAuditEvidenceAud} />
 
         <PrivateRoute path="/uploadEvidence/:id" component={UploadEvidence} />
         <PrivateRoute path="/viewEvidence/:id" component={ViewEvidence} />
+        <PrivateRoute path="/viewAuditEvidence/:id" component={ViewAuditEvidence} />
+        <PrivateRoute path="/viewAuditEvidenceAud/:id" component={ViewAuditEvidenceAud} />
+
         <PrivateRoute path="/uploadEvidenceAud/:id" component={UploadEvidenceAud} />
         <PrivateRoute path="/viewEvidenceAud/:id" component={ViewEvidenceAud} />
 
@@ -111,7 +124,10 @@ function App() {
         <PrivateRoute exact path="/" component={Feed} />
         <PrivateRoute exact path="/category/edit/:id" component={EditCategoriesModal}/>
         <PrivateRoute exact path="/category/delete/:id" component={EditCategoriesModal}/>
-        <PrivateRoute exact path="/user/update/:id" component={UserModal}/>
+        <PrivateRoute exact path="/auditdetails/:id" component={UserModal}/>
+        <PrivateRoute exact path="/viewauditdetails/:id" component={ViewAuditDetails}/>
+        <PrivateRoute exact path="/viewauditdetailsaud/:id" component={ViewAuditDetailsAud}/>
+
         <PrivateRoute exact path="/addAudit" component={AddAudit}/>
         <PrivateRoute exact path="/post/update/:id" component={EditPostModal}/>
         <PrivateRoute exact path="/user/display/:id" component={DisplayUserModal}/>

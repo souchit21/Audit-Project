@@ -65,7 +65,7 @@ const UploadEvidence =  ()=>{
         e.preventDefault();
         const data = {
             id: id,
-            Proof_Link: Evidences
+            NC_Proof_Link: Evidences
         }
         console.log('90', data);
         try{
@@ -74,12 +74,13 @@ const UploadEvidence =  ()=>{
                 data
             );
             console.log('96', result)
+            notifySuccess("Successfully submitted")
         }catch(err){
             notifyError("Couldn't send links");
         }
     };
     const handleClose = async (e) =>{
-        history.push("/");
+        history.push("/posts");
       };
 
 

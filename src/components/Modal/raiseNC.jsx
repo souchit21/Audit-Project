@@ -51,7 +51,7 @@ const RaiseNC =  ()=>{
             console.log('88', formData);
             try {
                 const response = await axios.post(
-                "https://1269-103-68-187-186.ngrok-free.app/NcUpload/uploadNcAudit",
+                "https://b0fa-103-68-187-186.ngrok-free.app/NcUpload/uploadNcAudit",
                 formData
                 );
                 console.log('95', response);
@@ -72,7 +72,7 @@ const RaiseNC =  ()=>{
         console.log('90', data);
         try{
             const result = await axios.post(
-                "https://1269-103-68-187-186.ngrok-free.app/audit/uploadNcform",
+                "https://b0fa-103-68-187-186.ngrok-free.app/audit/uploadNcform",
                 data
             );
             console.log('96', result)
@@ -94,7 +94,7 @@ const RaiseNC =  ()=>{
           
           <span style={{ float: "right", cursor: "pointer" }} onClick={handleClose}>X</span>
           <div className="table" >
-            <div className="row_1">
+            <div className="row_1" style={{display:"flex", flexDirection:"column"}}>
                 <div className="downloadNC">
                         <div style={{marginRight:'63%'}}><label>Download NC form</label></div>
                     

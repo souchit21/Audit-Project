@@ -48,12 +48,13 @@ const UploadEvidenceAud =  ()=>{
             console.log('88', formData);
             try {
                 const response = await axios.post(
-                "https://03b6-103-68-187-186.ngrok-free.app/NcUpload/uploadNcAudit",
+                "https://b0fa-103-68-187-186.ngrok-free.app/NcUpload/uploadNcAudit",
                 formData
                 );
                 console.log('95', response);
                 setEvidences(response.data);
                 console.log('78', Evidences)
+                notifySuccess("File Successfully saved")
                 
             } catch (err) {
                 notifyError("Files couldn't be uploaded");
@@ -63,22 +64,23 @@ const UploadEvidenceAud =  ()=>{
         e.preventDefault();
         const data = {
             id: id,
-            Proof_Link: Evidences
+            NC_Proof_Link: Evidences
         }
         console.log('90', data);
         try{
             const result = await axios.post(
-                "https://03b6-103-68-187-186.ngrok-free.app/audit/uploadProof",
+                "https://b0fa-103-68-187-186.ngrok-free.app/audit/uploadProof",
                 data
             );
             console.log('96', result)
+            history.push("/auditeetable");
             notifySuccess("Submitted")
         }catch(err){
             notifyError("Couldn't send links");
         }
     };
     const handleClose = async (e) =>{
-        history.push("/auditortable");
+        history.push("/auditeetable");
       };
 
 

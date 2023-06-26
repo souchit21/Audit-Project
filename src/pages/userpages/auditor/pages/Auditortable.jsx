@@ -47,7 +47,7 @@ const AuditorTable = () => {
     // e.preventDefault();
     console.log('34', tokenArray)
     try{
-    const result = await axios.get('https://03b6-103-68-187-186.ngrok-free.app/audit/getCombinedDataWithAuditorToken?auditeeToken='+[tokenArray]);
+    const result = await axios.get('https://b0fa-103-68-187-186.ngrok-free.app/audit/getCombinedDataWithAuditorToken?auditeeToken='+[tokenArray]);
     setAuditDetails(result.data)
     console.log("38",result);
     }
@@ -63,8 +63,8 @@ const AuditorTable = () => {
         onChange={event => handleStatusChange(event, rowData)}
       >
         <option >Select an option</option>
-        <option value="Accepted">Accept</option>
-        <option value="Rejected">Not available</option>
+        <option value="ACCEPTED">Accept</option>
+        <option value="REJECTED">Not available</option>
       </select>
       </>
     );
@@ -77,7 +77,7 @@ const AuditorTable = () => {
     //   id: rowData._id,
     //   status: value
     // };
-    const result = await axios.post('https://03b6-103-68-187-186.ngrok-free.app/audit/editAuditofAuditor',{
+    const result = await axios.post('https://b0fa-103-68-187-186.ngrok-free.app/audit/editAuditofAuditor',{
       id: rowData._id,
       AuditorAcceptationStatus:value,
       //AuditorpreferredDate:selectedDate
@@ -98,7 +98,7 @@ const AuditorTable = () => {
     console.log('89',date);
     //console.log('90',rowData);
     if(rowData.AuditorAcceptationStatus==="REJECTED"){
-    const dresult = await axios.post('https://1269-103-68-187-186.ngrok-free.app/audit/editAuditofAuditor1',{
+    const dresult = await axios.post('https://b0fa-103-68-187-186.ngrok-free.app/audit/editAuditofAuditor1',{
       id: rowData._id,
       AuditorpreferredDate:date
     });
@@ -111,9 +111,9 @@ const AuditorTable = () => {
   }
   const renderStatus = (rowData, field) => {
     let statusColor = '';
-    if (rowData[field] === 'Accepted') {
+    if (rowData[field] === 'ACCEPTED') {
       statusColor = 'green';
-    } else if (rowData[field] === 'Rejected') {
+    } else if (rowData[field] === 'REJECTED') {
       statusColor = 'red';
     }
     else if (rowData[field] === 'Pending') {
@@ -135,7 +135,7 @@ const AuditorTable = () => {
     // {title:'Order Id', field:'orderId',render:rowData=><Link  to={`/order/display/${rowData._id}`} target='_blank'>{rowData.orderId}</Link>},
     { title: 'Serial no', field: 'tableData.id', render:rowData => { return( <p>{rowData.tableData.id+1}</p> ) } },
     // {title:'Order placed Date & Time', field:'createdAt',render: rowData => moment(rowData.createdAt).format("DD-MM-YYYY HH:mm:ss")},
-    {title:'Audit Type', field:'auditType'},
+    {title:'Audit Details', field:'audit', render:rowData=><Link to={`/viewauditdetailsaud/${rowData._id}`}>View</Link>},
     
     
     // {title:'Delivery Address', field:'deliveryAddress[0]'},
@@ -145,7 +145,7 @@ const AuditorTable = () => {
     // {title:'Status', field:'Astatus'},
     {title: 'Link to checklist', field:'checklist_Link',
     render: rowData => (
-      <button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small" }} onClick={() => window.open(rowData.checklist_Link, '_blank')}>
+      <button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small", width:"auto" }} onClick={() => window.open(rowData.checklist_Link, '_blank')}>
         View Checklist
       </button>
     )
@@ -174,7 +174,35 @@ const AuditorTable = () => {
 
         // <input type="date" name="date" value={selectedDate} onChange={}
     
-    {title:'Upload Audit', field:'Audit file', render:rowData=><Link to={`/uploadAudit/${rowData._id}`}><button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small" }} >Upload audit</button></Link>},
+    {title:'Upload Audit', field:'Audit file', render:rowData=>
+    <div>
+    <Link to={`/uploadAudit/${rowData._id}`}><button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small", width:"auto" }} >Upload audit</button></Link>
+    <Link to={`/uploadauditEvidenceAud/${rowData._id}`}><button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small", marginTop:"2px", width:"auto" }} >Upload audit evidence</button></Link>
+</div>
+  
+  },
+  {title: 'Evidences', field:'Audit evidence', render:rowData=>
+  <Link to={`/viewAuditEvidenceAud/${rowData._id}`}>
+  <button
+    style={{
+        marginTop:'4%',
+        backgroundColor: "rgb(169, 25, 25)",
+        borderRadius: "4px",
+        color: "white",
+        padding: "5px",
+        fontSize: "small",
+        width:"auto"
+
+    }}
+    onClick={() => {
+      // Handle the click event for the second button
+      // You can add your own logic here
+    }}
+  >
+    View 
+  </button>
+  </Link>
+  },
     {title:'Link to audit', field:'Audit_Link', 
     render: rowData => (
       <button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small" }} 
@@ -190,8 +218,8 @@ const AuditorTable = () => {
         View Audit
       </button>
     )},
-    {title:'NC', field:'NC', render:rowData=>
-    <Link to={`/view/ncaud/${rowData._id}`}>
+    {title:'Admin NC', field:'NC', render:rowData=>
+    <Link to={`/viewAdminNCataud/${rowData._id}`}>
     <button
       style={{
           marginTop:'4%',
@@ -200,8 +228,8 @@ const AuditorTable = () => {
           color: "white",
           padding: "5px",
           fontSize: "small",
-          width:"100%"
-
+          width:"auto"
+    
       }}
       onClick={() => {
         // Handle the click event for the second button
@@ -211,30 +239,12 @@ const AuditorTable = () => {
       View NCs
     </button>
     </Link>
-
-  },
-  {title:'Evidences', field:'evidence', render:rowData=>
+    
+    },
+  
+  {title:'NC Evidences', field:'evidence', render:rowData=>
   <div className="nc-btns">
-    <Link to={`/uploadEvidenceAud/${rowData._id}`}>
-    <button
-      style={{
-          marginTop:'4%',
-          backgroundColor: "rgb(169, 25, 25)",
-          borderRadius: "4px",
-          color: "white",
-          padding: "5px",
-          fontSize: "small",
-          width:"80%"
-
-      }}
-      onClick={() => {
-        // Handle the click event for the second button
-        // You can add your own logic here
-      }}
-    >
-      Upload 
-    </button>
-    </Link>
+    
 
     <Link to={`/viewEvidenceAud/${rowData._id}`}>
     <button
@@ -245,7 +255,7 @@ const AuditorTable = () => {
           color: "white",
           padding: "5px",
           fontSize: "small",
-          width:"80%"
+          width:"auto"
 
       }}
       onClick={() => {

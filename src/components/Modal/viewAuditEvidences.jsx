@@ -4,7 +4,10 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import {useHistory, useParams} from 'react-router-dom';
 import axios from 'axios';
-import ALayout from "../Layout/ALayout";
+import EditProfileModal from "../EditProfileModal/EditProfileModal";
+import Sidebar from "../../pages/sideBar/sideBar";
+import Layout from "../Layout/Layout";
+import "../Modal/UserDetails.css"
 import { Padding } from "@mui/icons-material";
 import MaterialTable from 'material-table-jspdf-fix';
 
@@ -23,7 +26,7 @@ const style = {
   };
 
 
-const ViewEvidenceAud =  ()=>{
+const ViewAuditEvidence =  ()=>{
     const history = useHistory();
 
     const {id} = useParams();
@@ -38,7 +41,7 @@ const ViewEvidenceAud =  ()=>{
 
     const loadUser = async() =>{
         const result = await axios.get('https://b0fa-103-68-187-186.ngrok-free.app/audit/getAuditwithId?id='+id);
-        setProofLinks(result.data.data.NC_Proof_Link);
+        setProofLinks(result.data.data.Audit_Proof_Link);
         //console.log('44', result);
         console.log("45", Proof_Link)
         //console.log("92",id)
@@ -46,10 +49,7 @@ const ViewEvidenceAud =  ()=>{
     const data = Proof_Link.map((link) => ({
         heading: 'Evidence',
         value: <button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small"}}
-        onClick={() => window.open(link, "_blank")}
-        > 
-        
-        View</button>,
+        onClick={() => window.open(link, "_blank")}>View </button>,
     }));
     
       const columns = [
@@ -60,7 +60,7 @@ const ViewEvidenceAud =  ()=>{
       return (
         <>
        
-            <ALayout>
+            <Layout>
                     <MaterialTable
                         style={{
                             margin: '60px 0px 30px 20px',
@@ -99,9 +99,9 @@ const ViewEvidenceAud =  ()=>{
                         }}
                 />
        
-        </ALayout>
+        </Layout>
         </>
       );
     };
   
-  export default ViewEvidenceAud
+  export default ViewAuditEvidence

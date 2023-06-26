@@ -60,7 +60,7 @@ const UserDetails =  ()=>{
 
 
     const loadUser = async() =>{
-        const result = await axios.get('https://1269-103-68-187-186.ngrok-free.app/user/getUserwithUserId?id='+id);
+        const result = await axios.get('https://b0fa-103-68-187-186.ngrok-free.app/user/getUserwithUserId?id='+id);
         setUserDetails(result.data.data);
         console.log('59', result.data.data);
         console.log("91", userdetails)
@@ -75,58 +75,58 @@ const UserDetails =  ()=>{
             <Box sx={{ ...style, width: 900, marginTop:20 }}> 
           <form >
           <h2 id="parent-modal-title" style={{marginLeft:"10px"}}>User Details</h2>
-          <div className="table" >
-            <div className="row_1">
-                <div className="colmn_1">
+          <div className="table-userdetail" >
+            <div className="row_1-userdetail">
+                <div className="colmn_1-userdetail">
                       <div><label>Username</label></div>
                       <div><label>Email</label></div>
                       <div><label>Department</label></div>
                       <div><label>Token Number</label></div>
                       <div><label>number</label></div>
-                      <div className="skills">
+                      <div className="skills-userdetail">
                         <div><h5>Skills</h5></div>
-                          <div className="label"><label>isAdmin</label></div>
-                          <div className="label"><label>isAuditee</label></div>
-                          <div className="label"><label>isAuditor</label></div>
-                          <div className="label"><label>SupplierAudit</label></div>
-                          <div className="label"><label>AS9100</label></div>
-                          <div className="label"><label>MfgProcessFDY</label></div>
-                          <div className="label"><label>MfgProcessMCshop</label></div>
-                          <div className="label"><label>ProductFDY</label></div>
-                          <div className="label"><label>ProductMCshop</label></div>
-                          <div className="label"><label>QMS</label></div>
-                          <div className="label"><label>verified</label></div>
+                          <div className="label-userdetail"><label>isAdmin</label></div>
+                          <div className="label-userdetail"><label>isAuditee</label></div>
+                          <div className="label-userdetail"><label>isAuditor</label></div>
+                          <div className="label-userdetail"><label>SupplierAudit</label></div>
+                          <div className="label-userdetail"><label>AS9100</label></div>
+                          <div className="label-userdetail"><label>MfgProcessFDY</label></div>
+                          <div className="label-userdetail"><label>MfgProcessMCshop</label></div>
+                          <div className="label-userdetail"><label>ProductFDY</label></div>
+                          <div className="label-userdetail"><label>ProductMCshop</label></div>
+                          <div className="label-userdetail"><label>QMS</label></div>
+                          <div className="label-userdetail"><label>verified</label></div>
                       </div>
 
                       
                 </div>      
-                <div className="colmn_2">
-                    <div className="input"><input type="text" className="form-control" id="username" name="username"  value={username} /></div>
-                    <div className="input"><input type="text" className="form-control" id="email" name="email"  value={email} /></div>
-                    <div className="input"><input type="text" className="form-control" id="department" name="department"  value={department} /></div>
-                    <div className="input"><input type="text" className="form-control" id="token" name="token"  value={token} /></div>
-                    <div className="input"><input type="text" className="form-control" id="number" name="number"  value={number} /></div>
+                <div className="colmn_2-userdetail">
+                    <div className="input"><input type="text" className="form-control-userdetail" id="username" name="username"  value={username} /></div>
+                    <div className="input"><input type="text" className="form-control-userdetail" id="email" name="email"  value={email} /></div>
+                    <div className="input"><input type="text" className="form-control-userdetail" id="department" name="department"  value={department} /></div>
+                    <div className="input"><input type="text" className="form-control-userdetail" id="token" name="token"  value={token} /></div>
+                    <div className="input"><input type="text" className="form-control-userdetail" id="number" name="number"  value={number} /></div>
 
-                    <div className="skills">
-                      <div><h5 style={{marginLeft:"80px"}}>Status</h5></div>
-                        <div className="input"><input type="text" className="form-control" id="isAdmin" name="isAdmin"  value={isAdmin} /></div>
-                        <div className="input"><input type="text" className="form-control" id="isAuditee" name="isAuditee"  value={isAuditee} /></div>
-                        <div className="input"><input type="text" className="form-control" id="isAuditor" name="isAuditor"  value={isAuditor} /></div>
-                        <div className="input"><input type="text" className="form-control" id="SupplierAudit" name="SupplierAudit"  value={SupplierAudit} /></div>
-                        <div className="input"><input type="text" className="form-control" id="AS9100" name="AS9100"  value={AS9100} /></div>
-                        <div className="input"><input type="text" className="form-control" id="MfgProcessFDY" name="MfgProcessFDY"  value={MfgProcessFDY} /></div>
-                        <div className="input"><input type="text" className="form-control" id="MfgProcessMCshop" name="MfgProcessMCshop"  value={MfgProcessMCshop} /></div>
-                        <div className="input"><input type="text" className="form-control" id="ProductFDY" name="ProductFDY"  value={ProductFDY} /></div>
-                        <div className="input"><input type="text" className="form-control" id="ProductMCshop" name="ProductMCshop"  value={ProductMCshop} /></div>
-                        <div className="input"><input type="text" className="form-control" id="QMS" name="QMS"  value={QMS} /></div>
-                        <div className="input"><input type="text" className="form-control" id="verified" name="verified"  value={verified} /></div>
+                    <div className="skills-userdetail">
+                      <div><h5 style={{marginLeft:"10px"}}>Status</h5></div>
+                        <div className="input"><input type="text" className="form-control-userdetail" id="isAdmin" name="isAdmin"  value={isAdmin} /></div>
+                        <div className="input"><input type="text" className="form-control-userdetail" id="isAuditee" name="isAuditee"  value={isAuditee} /></div>
+                        <div className="input"><input type="text" className="form-control-userdetail" id="isAuditor" name="isAuditor"  value={isAuditor} /></div>
+                        <div className="input"><input type="text" className="form-control-userdetail" id="SupplierAudit" name="SupplierAudit"  value={SupplierAudit} /></div>
+                        <div className="input"><input type="text" className="form-control-userdetail" id="AS9100" name="AS9100"  value={AS9100} /></div>
+                        <div className="input"><input type="text" className="form-control-userdetail" id="MfgProcessFDY" name="MfgProcessFDY"  value={MfgProcessFDY} /></div>
+                        <div className="input"><input type="text" className="form-control-userdetail" id="MfgProcessMCshop" name="MfgProcessMCshop"  value={MfgProcessMCshop} /></div>
+                        <div className="input"><input type="text" className="form-control-userdetail" id="ProductFDY" name="ProductFDY"  value={ProductFDY} /></div>
+                        <div className="input"><input type="text" className="form-control-userdetail" id="ProductMCshop" name="ProductMCshop"  value={ProductMCshop} /></div>
+                        <div className="input"><input type="text" className="form-control-userdetail" id="QMS" name="QMS"  value={QMS} /></div>
+                        <div className="input"><input type="text" className="form-control-userdetail" id="verified" name="verified"  value={verified} /></div>
                     </div>
 
                 </div>
             </div>
 
       
-                <div className="row_2">
+                <div className="row_2-userdetail">
                     {/* <div className="btn-1">
                         <button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small", width:"14%", height:"5%", marginLeft:"2%" }} 
                           onClick={() => {
@@ -142,9 +142,9 @@ const UserDetails =  ()=>{
                           </button>
                     </div> */}
                         
-                    <div className="button">   
-                            <button className="btn" onClick={()=>{
-                                  history.push("/")
+                    <div className="button-userdetail">   
+                            <button className="btn-userdetail" onClick={()=>{
+                                  history.push("/user/verification")
                             }}>Close</button>
                     </div> 
                 </div>

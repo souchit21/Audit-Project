@@ -74,8 +74,8 @@ const Project = ({ project }) => {
   const dispatch = useDispatch();
   const [auditDetails,setAuditDetails] = useState([]);
   const [verificationStatuses, setVerificationStatuses] = useState([
-    { value: 'Rejected', label: 'Rejected' },
-    { value: 'Accepted', label: 'Approved' },
+    { value: 'REJECTED', label: 'Rejected' },
+    { value: 'ACCEPTED', label: 'Approved' },
     { value: 'Pending', label: 'Pending' },
   ]);
   useEffect(()=>{
@@ -84,7 +84,7 @@ const Project = ({ project }) => {
   
   const loadCategories = async()=>{
      try{
-      const result = await axios.get("https://03b6-103-68-187-186.ngrok-free.app/audit/getCombinedData");
+      const result = await axios.get("https://b0fa-103-68-187-186.ngrok-free.app/audit/getCombinedData");
       setAuditDetails(result.data);
       console.log('90', result);
      }catch(err){
@@ -95,8 +95,8 @@ const Project = ({ project }) => {
       
   }
   const styles = {
-    Rejected: { color: 'red' },
-    Accepted : { color: 'green' },
+    REJECTED: { color: 'red' },
+    ACCEPTED : { color: 'green' },
     Pending : {color: '#FFA41B'}
   };
   const handleVerificationStatusChange = (event, rowData) => {
@@ -107,7 +107,7 @@ const Project = ({ project }) => {
     console.log('54', data);
     
     axios
-      .post(`https://03b6-103-68-187-186.ngrok-free.app/audit/editDateAdmin1?id=${data.id}&AdminAcceptationStatus=${data.AdminAcceptationStatus}`)
+      .post(`https://b0fa-103-68-187-186.ngrok-free.app/audit/editDateAdmin1?id=${data.id}&AdminAcceptationStatus=${data.AdminAcceptationStatus}`)
       .then(result => {
         console.log('59', result)
         //setNonverifiedusers(result.data.data);
@@ -142,7 +142,7 @@ const Project = ({ project }) => {
     // {title:'Order Id', field:'orderId',render:rowData=><Link  to={`/order/display/${rowData._id}`} target='_blank'>{rowData.orderId}</Link>},
     //{ title: 'Serial no', field: 'tableData.id', render:rowData => { return( <p>{rowData.tableData.id+1}</p> ) } },
     // {title:'Order placed Date & Time', field:'createdAt',render: rowData => moment(rowData.createdAt).format("DD-MM-YYYY HH:mm:ss")},
-    {title:'Audit Details', field:'audit', render:rowData=><Link to={`/user/update/${rowData._id}`}>View</Link>},
+    {title:'Audit Details', field:'audit', render:rowData=><Link to={`/auditdetails/${rowData._id}`}>View</Link>},
     {title:'Date', field:'Date'},
     // {title:'Scope', field:'Scope'},
     // {title:'Audit Type', field:'auditType'},
@@ -171,7 +171,8 @@ const Project = ({ project }) => {
 
 {title:'Link to audit', field:'Audit_Link', 
     render: rowData => (
-      <button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small" }} 
+      <div>
+      <button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small", width:'auto' }} 
       // onClick={() => window.open(rowData.Audit_Link, '_blank')}
       onClick={() => {
         if (rowData.Audit_Link) {
@@ -181,32 +182,54 @@ const Project = ({ project }) => {
         }
       }}
       >
-        View Audit
+        View 
       </button>
+      <Link to={`/viewAuditEvidence/${rowData._id}`}>
+          <button
+            style={{
+                marginTop:'5%',
+                backgroundColor: "#007BFF",
+                borderRadius: "4px",
+                color: "white",
+                padding: "5px",
+                fontSize: "small",
+                width:"auto"
+      
+            }}
+            onClick={() => {
+              // Handle the click event for the second button
+              // You can add your own logic here
+            }}
+          >
+            Proofs
+          </button>
+          </Link>
+      </div>
     )},
+    
     {title:'NC', field:'NC', render:rowData=>
     <Link to={`/raise/nc/${rowData._id}`}>
-      <button
+      {/* <button
         style={{
           backgroundColor: "rgb(169, 25, 25)",
           borderRadius: "4px",
           color: "white",
           padding: "5px",
           fontSize: "small",
-          width:"80%"
+          width:"auto"
         }}
-      >
+      > */}
         Raise NC
-      </button>
+      {/* </button> */}
     </Link >
   },
   {title:'Auditee NC Link', field:'NC', render:rowData=>
-  <div>
+  <div style={{display:'flex', flexDirection:"column"}}>
     <Link to={`/viewAuditeeNC/${rowData._id}`}>
-    <button
+    {/* <button
       style={{
           marginTop:'4%',
-          backgroundColor: "rgb(169, 25, 25)",
+          backgroundColor: "#007BFF",
           borderRadius: "4px",
           color: "white",
           padding: "5px",
@@ -218,12 +241,12 @@ const Project = ({ project }) => {
         // Handle the click event for the second button
         // You can add your own logic here
       }}
-    >
+    > */}
       View NCs
-    </button>
+    {/* </button> */}
     </Link>
     <Link to={`/uploadAdminNC/${rowData._id}`}>
-    <button
+    {/* <button
       style={{
           marginTop:'4%',
           backgroundColor: "rgb(169, 25, 25)",
@@ -238,18 +261,18 @@ const Project = ({ project }) => {
         // Handle the click event for the second button
         // You can add your own logic here
       }}
-    >
+    > */}
       Upload NCs
-    </button>
+    {/* </button> */}
     </Link>
     </div>
    },
    {title:'Admin NC Link', field:'NC', render:rowData=>
     <Link to={`/viewAdminNC/${rowData._id}`}>
-    <button
+    {/* <button
       style={{
           marginTop:'4%',
-          backgroundColor: "rgb(169, 25, 25)",
+          backgroundColor: "#007BFF",
           borderRadius: "4px",
           color: "white",
           padding: "5px",
@@ -261,17 +284,17 @@ const Project = ({ project }) => {
         // Handle the click event for the second button
         // You can add your own logic here
       }}
-    >
+    > */}
       View NCs
-    </button>
+    {/* </button> */}
     </Link>
    },
-  {title: 'Evidence', field:'Evidence', render:rowData=>
+  {title: 'NC Evidence', field:'Evidence', render:rowData=>
   <Link to={`/viewEvidence/${rowData._id}`}>
       <button
         style={{
             marginTop:'4%',
-            backgroundColor: "rgb(169, 25, 25)",
+            backgroundColor: "#00CC00",
             borderRadius: "4px",
             color: "white",
             padding: "5px",

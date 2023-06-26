@@ -3,7 +3,7 @@ import {  useState} from "react";
 import Layout from "../../../../components/Layout/Layout";
 import axios from "axios";
 import { Box } from "@mui/material";
-import { notifyError } from "../../../../utils/notifyToasts";
+import { notifyError, notifySuccess } from "../../../../utils/notifyToasts";
 import { useHistory, useParams } from 'react-router-dom';
 const style = {
     position: 'absolute',
@@ -42,10 +42,11 @@ const FileUploadModal = () => {
         //console.log('63', [formData]);
         
         try{
-          const response = await axios.post('https://1269-103-68-187-186.ngrok-free.app/fileUpload/uploadChecklistAudit',formData);
+          const response = await axios.post('https://b0fa-103-68-187-186.ngrok-free.app/fileUpload/uploadChecklistAudit',formData);
           console.log('46', response);
           auditDetails.Audit_Link = response.data;
           console.log('48', auditDetails.Audit_Link)
+          notifySuccess('File successfully saved')
            //history.push("/auditortable");
         }catch(err){
           notifyError("File couldn't upload");
@@ -53,9 +54,11 @@ const FileUploadModal = () => {
       };
       const submit = async(e)=>{
         e.preventDefault();
-        const result = await axios.post('https://1269-103-68-187-186.ngrok-free.app/audit/editAuditform',auditDetails);
+        const result = await axios.post('https://b0fa-103-68-187-186.ngrok-free.app/audit/editAuditform',auditDetails);
         console.log("55",result);
         history.push("/auditortable")
+        notifySuccess('File successfully uploaded')
+
       };
       const handleClose = async (e) =>{
         history.push("/posts");

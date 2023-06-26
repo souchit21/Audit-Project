@@ -4,9 +4,10 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import {useHistory, useParams} from 'react-router-dom';
 import axios from 'axios';
-import moment from "moment";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
 import Sidebar from "../../pages/sideBar/sideBar";
+import moment from 'moment';
+
 import "../Modal/userModal.css"
 import { notifyError } from "../../utils/notifyToasts";
 import { notifySuccess } from "../../utils/notifyToasts";
@@ -25,7 +26,7 @@ const style = {
   };
 
 
-const UserModal =  ()=>{
+const ViewAuditDetails =  ()=>{
     const history = useHistory();
 //     const {id} = useParams();
 //     const [users , setUser] = useState({
@@ -105,28 +106,26 @@ const onInputchange = e => {
 };
 console.log('102', auditorTokens)
 
-const handleUpdate = async(e)=>{
-  e.preventDefault();
-  //setAuditorTokens(auditorTokens);
-  console.log('109', auditorTokens);
-  const data ={
-    id: auditDetails._id,
-    newAuditorToken: auditorTokens
-  }
-  console.log('113', data);
-  try{const result = await axios.post('https://1269-103-68-187-186.ngrok-free.app/audit/editAudit',data);
-  console.log('110', result);
-  notifySuccess('Successfully Updated')
-  }catch(err){
-    notifyError("Couldn't update");
-  }
+// const handleUpdate = async(e)=>{
+//   e.preventDefault();
+//   //setAuditorTokens(auditorTokens);
+//   console.log('109', auditorTokens);
+//   const data ={
+//     id: auditDetails._id,
+//     newAuditorToken: auditorTokens
+//   }
+//   console.log('113', data);
+//   try{const result = await axios.post('https://1269-103-68-187-186.ngrok-free.app/audit/editAudit',data);
+//   console.log('110', result);
+//   notifySuccess('Successfully Updated')
+//   }catch(err){
+//     notifyError("Couldn't update");
+//   }
 
-  //history.push("/login")
-  // console.log("138",result);
-}
-const handleClose = async (e) =>{
-  history.push("/");
-};
+// }
+// const handleClose = async (e) =>{
+//   history.push("/");
+// };
       return (
         <>
         <Sidebar />
@@ -136,7 +135,7 @@ const handleClose = async (e) =>{
         <Box sx={{ ...style, width: 900, marginTop:20 }}> 
           <form >
           <h2 id="parent-modal-title" style={{marginLeft:"70px"}}>Audit Details</h2>
-          <span style={{ float: "right", cursor: "pointer" }} onClick={handleClose}>X</span>
+          {/* <span style={{ float: "right", cursor: "pointer" }} onClick={handleClose}>X</span> */}
 
             <div className="row">
                 
@@ -147,7 +146,10 @@ const handleClose = async (e) =>{
                   <input type="text" className="form-control" id="Date" name="Date"  value={Date} />
                 </div>
 
-              
+                {/* <div className="form-group">
+                    <label>ID</label>
+                    <input type="text" className="form-control" id="_id" name="_id"  value={_id} />
+                </div> */}
 
                 </div>
 
@@ -184,11 +186,11 @@ const handleClose = async (e) =>{
 
                 <div className="form-group">
                     <label>Auditor Tokens</label>
-                    <input type="text" className="form-control" id="auditorTokens" name="auditorTokens"  value={auditorTokens} onChange={e=>onInputchange(e)} />
+                    <input type="text" className="form-control" id="auditorTokens" name="auditorTokens"  value={auditorTokens} />
                 </div>
-                <div className="col-md-4">
+                {/* <div className="col-md-4">
                     <button className="btn btn-primary" style={{marginLeft:"5%"}} onClick={handleUpdate}>Update</button>
-                </div>
+                </div> */}
                 <div className="form-group">
                     <label>NC_Flag</label>
                     <input type="text" className="form-control" id="NC_Flag" name="NC_Flag"  value={NC_Flag} />
@@ -211,6 +213,7 @@ const handleClose = async (e) =>{
                         value={moment(AuditorpreferredDate).format('DD-MM-YYYY')}
                     />
                 </div>
+
                 <button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small", width:"14%", height:"5%", marginLeft:"2%" }} 
                   onClick={() => {
                     if (Audit_Link) {
@@ -225,11 +228,11 @@ const handleClose = async (e) =>{
                   </button>
                 
                 
-                <div className="col-md-4">
+                {/* <div className="col-md-4">
                     <button className="btn btn-primary" style={{marginLeft:"5%"}} onClick={()=>{
                           history.push("/")
                     }}>close</button>
-                </div>
+                </div> */}
                 
             </div>
         </form>
@@ -239,4 +242,4 @@ const handleClose = async (e) =>{
       );
     };
   
-  export default UserModal
+  export default ViewAuditDetails

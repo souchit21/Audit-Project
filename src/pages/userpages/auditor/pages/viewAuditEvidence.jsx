@@ -23,7 +23,7 @@ const style = {
   };
 
 
-const ViewEvidenceAud =  ()=>{
+const ViewAuditEvidenceAud =  ()=>{
     const history = useHistory();
 
     const {id} = useParams();
@@ -38,7 +38,7 @@ const ViewEvidenceAud =  ()=>{
 
     const loadUser = async() =>{
         const result = await axios.get('https://b0fa-103-68-187-186.ngrok-free.app/audit/getAuditwithId?id='+id);
-        setProofLinks(result.data.data.NC_Proof_Link);
+        setProofLinks(result.data.data.Audit_Proof_Link);
         //console.log('44', result);
         console.log("45", Proof_Link)
         //console.log("92",id)
@@ -104,4 +104,4 @@ const ViewEvidenceAud =  ()=>{
       );
     };
   
-  export default ViewEvidenceAud
+  export default ViewAuditEvidenceAud
