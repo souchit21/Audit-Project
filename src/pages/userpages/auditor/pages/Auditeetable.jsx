@@ -55,7 +55,7 @@ const AuditeeTable = () => {
     //   id: rowData._id,
     //   status: value
     // };
-    const result = await axios.post('https://b0fa-103-68-187-186.ngrok-free.app/audit/editAuditofAuditee',{
+    const result = await axios.post('https://00a6-103-68-187-186.ngrok-free.app/audit/editAuditofAuditee',{
       id: rowData._id,
       AuditeeAcceptationStatus:value,
     });
@@ -67,7 +67,7 @@ const AuditeeTable = () => {
     // e.preventDefault();
     console.log('34', tokenArray)
     try{
-    const result = await axios.get('https://b0fa-103-68-187-186.ngrok-free.app/audit/getCombinedDataWithAuditeeToken?auditeeToken='+[tokenArray]);
+    const result = await axios.get('https://00a6-103-68-187-186.ngrok-free.app/audit/getCombinedDataWithAuditeeToken?auditeeToken='+[tokenArray]);
     setAuditDetails(result.data);
     // console.log("37",result.data.Data);
     console.log("73",result);
@@ -99,7 +99,7 @@ const AuditeeTable = () => {
  
   const columns = [
     // {title:'Order Id', field:'orderId',render:rowData=><Link  to={`/order/display/${rowData._id}`} target='_blank'>{rowData.orderId}</Link>},
-    { title: 'Serial no', field: 'tableData.id', render:rowData => { return( <p>{rowData.tableData.id+1}</p> ) } },
+    //{ title: 'Serial no', field: 'tableData.id', render:rowData => { return( <p>{rowData.tableData.id+1}</p> ) } },
     // {title:'Order placed Date & Time', field:'createdAt',render: rowData => moment(rowData.createdAt).format("DD-MM-YYYY HH:mm:ss")},
     {title:'Audit Details', field:'audit', render:rowData=><Link to={`/viewauditdetailsaud/${rowData._id}`}>View</Link>},
     
@@ -138,28 +138,28 @@ const AuditeeTable = () => {
         View Audit
       </button>
     )},
-    {title: 'Evidences', field:'Audit evidence', render:rowData=>
-  <Link to={`/viewAuditEvidenceAud/${rowData._id}`}>
-  <button
-    style={{
-        marginTop:'4%',
-        backgroundColor: "rgb(169, 25, 25)",
-        borderRadius: "4px",
-        color: "white",
-        padding: "5px",
-        fontSize: "small",
-        width:"auto"
+  //   {title: 'Evidences', field:'Audit evidence', render:rowData=>
+  // <Link to={`/viewAuditEvidenceAud/${rowData._id}`}>
+  // <button
+  //   style={{
+  //       marginTop:'4%',
+  //       backgroundColor: "rgb(169, 25, 25)",
+  //       borderRadius: "4px",
+  //       color: "white",
+  //       padding: "5px",
+  //       fontSize: "small",
+  //       width:"auto"
 
-    }}
-    onClick={() => {
-      // Handle the click event for the second button
-      // You can add your own logic here
-    }}
-  >
-    View 
-  </button>
-  </Link>
-  },
+  //   }}
+  //   onClick={() => {
+  //     // Handle the click event for the second button
+  //     // You can add your own logic here
+  //   }}
+  // >
+  //   View 
+  // </button>
+  // </Link>
+  // },
     {title:'NC', field:'NC', render:rowData=>
     <div>
     <Link to={`/view/ncaud/${rowData._id}`}>
@@ -206,7 +206,7 @@ const AuditeeTable = () => {
 
   },
   {title:'NC Evidences', field:'evidence', render:rowData=>
-  <div>
+  <div style={{display:"flex", flexDirection:"column"}}>
     <Link to={`/uploadEvidenceAud/${rowData._id}`}>
     <button
       style={{
@@ -251,52 +251,52 @@ const AuditeeTable = () => {
     </div>
 
   },
-  {title:'Auditee NC', field:'NC', render:rowData=>
-  <Link to={`/viewAuditeeNCataud/${rowData._id}`}>
-  <button
-    style={{
-        marginTop:'4%',
-        backgroundColor: "rgb(169, 25, 25)",
-        borderRadius: "4px",
-        color: "white",
-        padding: "5px",
-        fontSize: "small",
-        width:"auto"
+//   {title:'Auditee NC', field:'NC', render:rowData=>
+//   <Link to={`/viewAuditeeNCataud/${rowData._id}`}>
+//   <button
+//     style={{
+//         marginTop:'4%',
+//         backgroundColor: "rgb(169, 25, 25)",
+//         borderRadius: "4px",
+//         color: "white",
+//         padding: "5px",
+//         fontSize: "small",
+//         width:"auto"
 
-    }}
-    onClick={() => {
-      // Handle the click event for the second button
-      // You can add your own logic here
-    }}
-  >
-    View NCs
-  </button>
-  </Link>
+//     }}
+//     onClick={() => {
+//       // Handle the click event for the second button
+//       // You can add your own logic here
+//     }}
+//   >
+//     View NCs
+//   </button>
+//   </Link>
 
-},
-{title:'Admin NC', field:'NC', render:rowData=>
-<Link to={`/viewAdminNCataud/${rowData._id}`}>
-<button
-  style={{
-      marginTop:'4%',
-      backgroundColor: "rgb(169, 25, 25)",
-      borderRadius: "4px",
-      color: "white",
-      padding: "5px",
-      fontSize: "small",
-      width:"auto"
+// },
+// {title:'Admin NC', field:'NC', render:rowData=>
+// <Link to={`/viewAdminNCataud/${rowData._id}`}>
+// <button
+//   style={{
+//       marginTop:'4%',
+//       backgroundColor: "rgb(169, 25, 25)",
+//       borderRadius: "4px",
+//       color: "white",
+//       padding: "5px",
+//       fontSize: "small",
+//       width:"auto"
 
-  }}
-  onClick={() => {
-    // Handle the click event for the second button
-    // You can add your own logic here
-  }}
->
-  View NCs
-</button>
-</Link>
+//   }}
+//   onClick={() => {
+//     // Handle the click event for the second button
+//     // You can add your own logic here
+//   }}
+// >
+//   View NCs
+// </button>
+// </Link>
 
-},
+// },
   
     // {
     //   title: 'Preferred Date',
@@ -355,7 +355,8 @@ const AuditeeTable = () => {
           sorting: true,
           headerStyle: {
             backgroundColor: ' rgb(169, 25, 25)',
-            color: '#FFF'
+            color: '#FFF',
+            padding:"8px"
           },
           rowStyle: {
             backgroundColor: 'white',

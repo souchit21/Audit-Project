@@ -84,7 +84,7 @@ const Project = ({ project }) => {
   
   const loadCategories = async()=>{
      try{
-      const result = await axios.get("https://b0fa-103-68-187-186.ngrok-free.app/audit/getCombinedData");
+      const result = await axios.get("https://00a6-103-68-187-186.ngrok-free.app/audit/getCombinedData");
       setAuditDetails(result.data);
       console.log('90', result);
      }catch(err){
@@ -107,7 +107,7 @@ const Project = ({ project }) => {
     console.log('54', data);
     
     axios
-      .post(`https://b0fa-103-68-187-186.ngrok-free.app/audit/editDateAdmin1?id=${data.id}&AdminAcceptationStatus=${data.AdminAcceptationStatus}`)
+      .post(`https://00a6-103-68-187-186.ngrok-free.app/audit/editDateAdmin1?id=${data.id}&AdminAcceptationStatus=${data.AdminAcceptationStatus}`)
       .then(result => {
         console.log('59', result)
         //setNonverifiedusers(result.data.data);
@@ -171,8 +171,8 @@ const Project = ({ project }) => {
 
 {title:'Link to audit', field:'Audit_Link', 
     render: rowData => (
-      <div>
-      <button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small", width:'auto' }} 
+      <div style={{display:"flex", flexDirection:"column"}}>
+      <button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small", width:'80%' }} 
       // onClick={() => window.open(rowData.Audit_Link, '_blank')}
       onClick={() => {
         if (rowData.Audit_Link) {
@@ -267,50 +267,50 @@ const Project = ({ project }) => {
     </Link>
     </div>
    },
-   {title:'Admin NC Link', field:'NC', render:rowData=>
-    <Link to={`/viewAdminNC/${rowData._id}`}>
-    {/* <button
-      style={{
-          marginTop:'4%',
-          backgroundColor: "#007BFF",
-          borderRadius: "4px",
-          color: "white",
-          padding: "5px",
-          fontSize: "small",
-          width:"80%"
+  //  {title:'Admin NC Link', field:'NC', render:rowData=>
+  //   <Link to={`/viewAdminNC/${rowData._id}`}>
+  //   <button
+  //     style={{
+  //         marginTop:'4%',
+  //         backgroundColor: "#007BFF",
+  //         borderRadius: "4px",
+  //         color: "white",
+  //         padding: "5px",
+  //         fontSize: "small",
+  //         width:"80%"
 
-      }}
-      onClick={() => {
-        // Handle the click event for the second button
-        // You can add your own logic here
-      }}
-    > */}
-      View NCs
-    {/* </button> */}
-    </Link>
-   },
-  {title: 'NC Evidence', field:'Evidence', render:rowData=>
-  <Link to={`/viewEvidence/${rowData._id}`}>
-      <button
-        style={{
-            marginTop:'4%',
-            backgroundColor: "#00CC00",
-            borderRadius: "4px",
-            color: "white",
-            padding: "5px",
-            fontSize: "small",
-            width:"80%"
+  //     }}
+  //     onClick={() => {
+  //       // Handle the click event for the second button
+  //       // You can add your own logic here
+  //     }}
+  //   >
+  //     View NCs
+  //   </button>
+  //   </Link>
+  //  },
+  // {title: 'NC Evidence', field:'Evidence', render:rowData=>
+  // <Link to={`/viewEvidence/${rowData._id}`}>
+  //     <button
+  //       style={{
+  //           marginTop:'4%',
+  //           backgroundColor: "#00CC00",
+  //           borderRadius: "4px",
+  //           color: "white",
+  //           padding: "5px",
+  //           fontSize: "small",
+  //           width:"80%"
   
-        }}
-        onClick={() => {
-          // Handle the click event for the second button
-          // You can add your own logic here
-        }}
-      >
-        View 
-      </button>
-      </Link>
-  }
+  //       }}
+  //       onClick={() => {
+  //         // Handle the click event for the second button
+  //         // You can add your own logic here
+  //       }}
+  //     >
+  //       View 
+  //     </button>
+  //     </Link>
+  // }
     
     // {title:'End Date', field:'auditEndDate'},   
     // {title:'Scope', field:'scope'},

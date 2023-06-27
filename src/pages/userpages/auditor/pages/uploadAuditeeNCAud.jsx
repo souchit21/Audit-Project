@@ -48,7 +48,7 @@ const UploadAuditeeNC_Aud =  ()=>{
             console.log('88', formData);
             try {
                 const response = await axios.post(
-                "https://b0fa-103-68-187-186.ngrok-free.app/NcUpload/uploadNcAudit",
+                "https://00a6-103-68-187-186.ngrok-free.app/NcUpload/uploadNcAudit",
                 formData
                 );
                 console.log('95', response);
@@ -69,10 +69,12 @@ const UploadAuditeeNC_Aud =  ()=>{
         console.log('90', data);
         try{
             const result = await axios.post(
-                "https://b0fa-103-68-187-186.ngrok-free.app/audit/uploadAuditeeNcform",
+                "https://00a6-103-68-187-186.ngrok-free.app/audit/uploadAuditeeNcform",
                 data
             );
             console.log('96', result)
+            notifySuccess("Successfully Uploaded")
+
         }catch(err){
             notifyError("Couldn't send links");
         }
