@@ -38,7 +38,7 @@ const ViewAuditeeNC_Aud =  ()=>{
 
 
     const loadUser = async() =>{
-        const result = await axios.get('https://00a6-103-68-187-186.ngrok-free.app/audit/getAuditwithId?id='+id);
+        const result = await axios.get('https://bc6c-103-68-187-186.ngrok-free.app/audit/getAuditwithId?id='+id);
         setNCLinks(result.data.data.Auditee_NC_Link);
         console.log('44', result);
         console.log("45", AuditeeNC_Links)
@@ -49,11 +49,11 @@ const ViewAuditeeNC_Aud =  ()=>{
     //     value: <button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small"}}
     //     onClick={() => window.open(link, "_blank")}>View NC</button>,
     // }));
-    const handleOpenLink = (link) => {
-      const embedUrl = `https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(link)}`;
-      const win = window.open('', '_blank');
-      win.document.write(`<iframe src="${embedUrl}" width="100%" height="100%"></iframe>`);
-    };
+    // const handleOpenLink = (link) => {
+    //   const embedUrl = `https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(link)}`;
+    //   const win = window.open('', '_blank');
+    //   win.document.write(`<iframe src="${embedUrl}" width="100%" height="100%"></iframe>`);
+    // };
     
 
     const data = AuditeeNC_Links.map((link) => ({
@@ -67,7 +67,7 @@ const ViewAuditeeNC_Aud =  ()=>{
             padding: "5px",
             fontSize: "small"
           }}
-          onClick={() => handleOpenLink(link)}
+          onClick={() => window.open(link, "_blank")}
         >
           View NC
         </button>

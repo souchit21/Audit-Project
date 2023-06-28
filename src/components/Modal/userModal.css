@@ -65,3 +65,12 @@
     width: auto;
     font-size: small;
 }
+.Close-nc-btn{
+    background-color: rgb(169, 25, 25);
+    border-radius: 4px;
+    color: white;
+    /* height: auto; */
+    padding: 6px;
+    width: auto;
+    font-size: small;
+}

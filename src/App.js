@@ -51,6 +51,8 @@ import UserModal from "./components/Modal/UserModal";
 import ViewAuditDetails from "./components/Modal/viewAuditDetails";
 import ViewAuditDetailsAud from "./pages/userpages/auditor/pages/viewAuditDetailsAud";
 
+import CloseNC from "./components/Modal/CloseNC";
+
 import UserDetails from "./components/Modal/UserDetails"
 import AddAudit from "./components/Modal/addAudit";                                                           
 import EditPostModal from "./components/Modal/EditPostModal";
@@ -97,6 +99,8 @@ function App() {
         <PrivateRoute path="/viewnc/:id" component={ViewNC} />
         <PrivateRoute path="/viewAuditeeNC/:id" component={ViewAuditeeNC} />
         <PrivateRoute path="/viewAdminNC/:id" component={ViewAdminNC} />
+
+        <PrivateRoute path="/closeNC/:id" component={CloseNC} />
 
         <PrivateRoute path="/view/ncaud/:id" component={ViewNC_Aud} />
         <PrivateRoute path="/viewAuditeeNCataud/:id" component={ViewAuditeeNC_Aud} />

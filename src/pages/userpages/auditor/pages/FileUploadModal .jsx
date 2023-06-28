@@ -42,7 +42,7 @@ const FileUploadModal = () => {
         //console.log('63', [formData]);
         
         try{
-          const response = await axios.post('https://00a6-103-68-187-186.ngrok-free.app/fileUpload/uploadChecklistAudit',formData);
+          const response = await axios.post('https://bc6c-103-68-187-186.ngrok-free.app/fileUpload/uploadChecklistAudit',formData);
           console.log('46', response);
           auditDetails.Audit_Link = response.data;
           console.log('48', auditDetails.Audit_Link)
@@ -54,7 +54,7 @@ const FileUploadModal = () => {
       };
       const submit = async(e)=>{
         e.preventDefault();
-        const result = await axios.post('https://00a6-103-68-187-186.ngrok-free.app/audit/editAuditform',auditDetails);
+        const result = await axios.post('https://bc6c-103-68-187-186.ngrok-free.app/audit/editAuditform',auditDetails);
         console.log("55",result);
         // history.push("/auditortable")
         notifySuccess('File successfully uploaded')

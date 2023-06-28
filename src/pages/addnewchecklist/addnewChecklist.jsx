@@ -63,7 +63,7 @@ const AddnewChecklist = () => {
       //console.log('63', [formData]);
       
       try{
-        const response = await axios.post('https://b0fa-103-68-187-186.ngrok-free.app/fileUpload/uploadChecklistAudit',formData);
+        const response = await axios.post('https://bc6c-103-68-187-186.ngrok-free.app/fileUpload/uploadChecklistAudit',formData);
         console.log('67', response);
         auditDetails.checklist_Link = response.data;
         // history.push("/");
@@ -74,7 +74,7 @@ const AddnewChecklist = () => {
     //console.log('74', auditDetails);
     const submit = async(e)=>{
           e.preventDefault();
-          const result = await axios.post('https://b0fa-103-68-187-186.ngrok-free.app/checklist/addChecklist',auditDetails);
+          const result = await axios.post('https://bc6c-103-68-187-186.ngrok-free.app/checklist/addChecklist',auditDetails);
           console.log("78",result);
           history.push("/")
         };

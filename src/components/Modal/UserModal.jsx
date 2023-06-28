@@ -94,10 +94,8 @@ useEffect (() => {
 // }
 
 const loadUser = async() =>{
-    const result = await axios.get('https://00a6-103-68-187-186.ngrok-free.app/audit/getAuditwithId?id='+id);
+    const result = await axios.get('https://bc6c-103-68-187-186.ngrok-free.app/audit/getAuditwithId?id='+id);
     setAuditDetails(result.data.data);
-    console.log('90', result.data.data);
-    console.log("91", auditDetails);
     //setAuditorTokens(auditorTokens);
     //console.log("95",newAuditorTokens)
 }
@@ -118,7 +116,7 @@ const handleUpdate = async(e)=>{
     newAuditorToken: auditorTokens
   }
   console.log('113', data);
-  try{const result = await axios.post('https://00a6-103-68-187-186.ngrok-free.app/audit/editAudit',data);
+  try{const result = await axios.post('https://bc6c-103-68-187-186.ngrok-free.app/audit/editAudit',data);
   console.log('110', result);
   notifySuccess('Successfully Updated')
   }catch(err){
@@ -292,17 +290,12 @@ const handleClose = async (e) =>{
                           </button>
                           </Link>
                       </div>
-              </div>
-
-                
-                
-                
-                <div className="col-md-4">
-                    <button className="btn btn-primary" style={{marginLeft:".1%"}} onClick={()=>{
-                          history.push("/")
-                    }}>Close</button>
-                </div>
-                
+                      <div className="form-group" >
+                          <Link to={`/closeNC/${_id}`}>
+                          <button className="Close-nc-btn" >Close NC</button>
+                          </Link>
+                      </div>
+              </div> 
             </div>
         </form>
         </Box>
