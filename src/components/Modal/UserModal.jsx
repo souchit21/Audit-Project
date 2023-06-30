@@ -75,9 +75,11 @@ const [auditDetails,setAuditDetails] = useState ({
   auditeeTokens:[],
   auditorTokens:[],
   Audit_Proof_Link:[],
+  NC_Closure_date:"yet not closed",
+  timeToClose:"###",
 });
 const {Audit_Link, AuditeeAcceptationStatus, AuditorAcceptationStatus, AuditorpreferredDate, Date, NC_Flag, Scope, Shift, auditMethod, auditTeam,
-  auditType, checklist_Link, _id, auditee, auditeeTokens, auditorTokens, Audit_Proof_Link   } = auditDetails;
+  auditType, checklist_Link, _id, auditee, auditeeTokens, auditorTokens, Audit_Proof_Link, timeToClose, NC_Closure_date } = auditDetails;
 // const onInputchange = e => {
 //     setUser({...users,[e.target.name]: e.target.value})
 // };
@@ -94,8 +96,9 @@ useEffect (() => {
 // }
 
 const loadUser = async() =>{
-    const result = await axios.get('https://bc6c-103-68-187-186.ngrok-free.app/audit/getAuditwithId?id='+id);
+    const result = await axios.get('https://a42f-103-68-187-186.ngrok-free.app/audit/getAuditwithId?id='+id);
     setAuditDetails(result.data.data);
+    console.log('101', auditDetails )
     //setAuditorTokens(auditorTokens);
     //console.log("95",newAuditorTokens)
 }
@@ -116,7 +119,7 @@ const handleUpdate = async(e)=>{
     newAuditorToken: auditorTokens
   }
   console.log('113', data);
-  try{const result = await axios.post('https://bc6c-103-68-187-186.ngrok-free.app/audit/editAudit',data);
+  try{const result = await axios.post('https://a42f-103-68-187-186.ngrok-free.app/audit/editAudit',data);
   console.log('110', result);
   notifySuccess('Successfully Updated')
   }catch(err){
@@ -127,12 +130,36 @@ const handleUpdate = async(e)=>{
   // console.log("138",result);
 }
 function formatDate(dateString) {
-  const formattedDate = moment(dateString).format('DD-MM-YYYY');
-  return formattedDate;
+  // console.log('133', dateString)
+  if(dateString){
+    const formattedDate = moment(dateString).format('DD-MM-YYYY');
+    return formattedDate;
+  }
+  else return "Not yet closed";
+}
+function formatTime(timeTaken) {
+  // console.log('133', dateString)
+  if(timeTaken) return timeTaken;
+  else return "Not yet closed";
 }
 const handleClose = async (e) =>{
   history.push("/");
 };
+// const [isModalOpen, setIsModalOpen] = useState(false);
+// const handleClick = () => {
+//   setIsModalOpen(true);
+// };
+// const handleConfirmCloseNC = () => {
+//   // Perform the actions to close NC here
+//   // e.g., make an API call, update the state, etc.
+  
+//   // After closing the NC, close the modal
+//   setIsModalOpen(false);
+// };
+// const handleCancelCloseNC = () => {
+//   setIsModalOpen(false);
+// };
+
       return (
         <>
         <Sidebar />
@@ -290,10 +317,20 @@ const handleClose = async (e) =>{
                           </button>
                           </Link>
                       </div>
-                      <div className="form-group" >
-                          <Link to={`/closeNC/${_id}`}>
+                      <div className="nc-timeline" style={{display:"flex"}}>
+                        <div className="form-group">
+                              <label style={{ marginBottom:"0rem"}}>Closure Date:</label>
+                              <input type="text" className="form-control-admin-details" id="NC_Closure_date" name="NC_Closure_date"  value={formatDate(NC_Closure_date)} />
+                        </div>
+                        <div className="form-group">
+                              <label style={{ marginBottom:"0rem"}}>Time Taken:</label>
+                              <input type="text" className="form-control-admin-details" id="timeToClose" name="timeToClose"  value={formatTime(timeToClose)} />
+                        </div>
+                      </div>
+                      <div className="form-group">
+                        <Link to={`/closeNC/${_id}`}> 
                           <button className="Close-nc-btn" >Close NC</button>
-                          </Link>
+                         </Link>
                       </div>
               </div> 
             </div>

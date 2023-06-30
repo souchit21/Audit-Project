@@ -210,7 +210,9 @@
 .mr-l {
   margin-left: 0 !important;
 }
-
+.data{
+  display: flex;
+}
 
 @media screen and (max-width: 650px) {
   .project-header {

@@ -17,7 +17,15 @@ import GroupWorkIcon from '@mui/icons-material/GroupWork';
 
 import Logo from '../../assets/favicon.png'
 const Menu = () => {
+  
   const history = useHistory();
+  const userToken = JSON.parse(localStorage.getItem('user'))?.token;
+  const username = JSON.parse(localStorage.getItem('user'))?.username;
+  const dept = JSON.parse(localStorage.getItem('user'))?.dept;
+
+  console.log('23',userToken);
+  console.log('24',username);
+  console.log('26',dept);
 
   return (
     <div className="feed-menu">
@@ -29,6 +37,17 @@ const Menu = () => {
       /> */}
       <p className="logo-text" style={{color:"black"}}>Audit Panel</p>
       <div className="menu-items">
+        <div className="items1">
+          <div>
+          <p style={{marginBottom:".5rem"}}>Welcome! {userToken}, {username}, Dept. - {dept}</p>
+          </div>
+        </div>
+      <Link to="/dashboard" className="menu-item">
+        <div className="items">
+          <DashboardIcon />
+          &nbsp;&nbsp;<span>Dashboard</span>
+          </div>
+        </Link>
       <Link to="/" className="menu-item">
         <div className="items">
           <DashboardIcon />

@@ -162,7 +162,7 @@ const AddAudit =  ()=>{
     formData.append('file', selectedFile);
     //console.log('156', [...formData.entries()]);
     try{
-      const file1 = await axios.post('https://bc6c-103-68-187-186.ngrok-free.app/audit/convertXlsxToJsonAndStorefinal',formData);
+      const file1 = await axios.post('https://a42f-103-68-187-186.ngrok-free.app/audit/convertXlsxToJsonAndStorefinal',formData);
       console.log('161', file1)
       history.push("/");
       notifySuccess("Successfully Uploaded")

@@ -34,10 +34,14 @@ const AuditorTable = () => {
 
 
   const userToken = JSON.parse(localStorage.getItem('user'))?.token;
-  console.log('9',userToken);
+  const username = JSON.parse(localStorage.getItem('user'))?.username;
+
+  // console.log('39',userToken);
+  // console.log('40',username);
+
   const tokenArray = [];
   tokenArray.push(parseInt(userToken, 10));
-  console.log('26', tokenArray);
+  console.log('44', tokenArray);
 
   useEffect (() => {
       PostToken();
@@ -47,7 +51,7 @@ const AuditorTable = () => {
     // e.preventDefault();
     console.log('34', tokenArray)
     try{
-    const result = await axios.get('https://bc6c-103-68-187-186.ngrok-free.app/audit/getCombinedDataWithAuditorToken?auditeeToken='+[tokenArray]);
+    const result = await axios.get('https://a42f-103-68-187-186.ngrok-free.app/audit/getCombinedDataWithAuditorToken?auditeeToken='+[tokenArray]);
     setAuditDetails(result.data)
     console.log("38",result);
     }
@@ -77,7 +81,7 @@ const AuditorTable = () => {
     //   id: rowData._id,
     //   status: value
     // };
-    const result = await axios.post('https://bc6c-103-68-187-186.ngrok-free.app/audit/editAuditofAuditor',{
+    const result = await axios.post('https://a42f-103-68-187-186.ngrok-free.app/audit/editAuditofAuditor',{
       id: rowData._id,
       AuditorAcceptationStatus:value,
       //AuditorpreferredDate:selectedDate
@@ -98,7 +102,7 @@ const AuditorTable = () => {
     console.log('89',date);
     //console.log('90',rowData);
     if(rowData.AuditorAcceptationStatus==="REJECTED"){
-    const dresult = await axios.post('https://bc6c-103-68-187-186.ngrok-free.app/audit/editAuditofAuditor1',{
+    const dresult = await axios.post('https://a42f-103-68-187-186.ngrok-free.app/audit/editAuditofAuditor1',{
       id: rowData._id,
       AuditorpreferredDate:date
     });

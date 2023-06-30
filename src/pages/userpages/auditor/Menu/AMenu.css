@@ -30,13 +30,21 @@
     /* height: 2rem; */
     cursor: pointer;
   }
+  .items1{
+    margin-bottom: 1rem;
+    background-color: #607d8b;
+    color: white;
+    padding: 8px;
+    border-radius: 10px;
+    font-weight: 100;
+  }
   
   .logo-text {
     color: #586F97;
     padding-left: 20px;
     padding-top: 10px;
     font-size: 26px;
-    padding-bottom: 20px;
+    padding-bottom: 1px;
   }
   
   .menu-items {

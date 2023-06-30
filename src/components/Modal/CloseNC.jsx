@@ -32,7 +32,7 @@ const closeNC = (id) =>{
     NC_Closure: true
   }
   try{
-    axios.post('https://bc6c-103-68-187-186.ngrok-free.app/audit/NCclosure?id='+id+'&NC_Closure='+data.NC_Closure).then(
+    axios.post('https://a42f-103-68-187-186.ngrok-free.app/audit/NCclosure?id='+id+'&NC_Closure='+data.NC_Closure).then(
         history.push(`/auditdetails/${id}`),
         notifySuccess('Successfully Closed')
     ).catch((err)=>{

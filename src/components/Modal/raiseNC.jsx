@@ -40,7 +40,16 @@ const RaiseNC =  ()=>{
     const handleFileChange = (event) => {
     setSelectedFiles(event.target.files);
     };
+    const [NC_Form_Link, setLink] = useState([]);
+    const getLink = async (e) => {
+        try{
+            const result = await axios.get("https://bc6c-103-68-187-186.ngrok-free.app/audit/getNCForm");
+            console.log('47', result);
 
+        }catch(err){
+            notifyError("Couldn't get link")
+        }
+    }
     const handleUpload = async (e) => {
             e.preventDefault();
             const formData = new FormData();

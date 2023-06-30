@@ -10,7 +10,7 @@ import SearchModal from "../../components/SearchModal/SearchModal";
 import HomeIcon from "@mui/icons-material/Home";
 import { FiEdit } from "react-icons/fi";
 import { CircularProgress } from "@mui/material";
-import "./Feed.css";
+import "../Feed/Feed.css";
 
 //Header
 import AppBar from '@mui/material/AppBar';
@@ -24,7 +24,7 @@ import FormGroup from '@mui/material/FormGroup';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import Typography from '@mui/material/Typography';
-
+import Dashboard from '../../components/Dashboard/Dashboard';
 // Avatar
 import Avatar from '@mui/material/Avatar';
 import { deepOrange, deepPurple } from '@mui/material/colors';
@@ -32,7 +32,7 @@ import { deepOrange, deepPurple } from '@mui/material/colors';
 // tooltip
 import Tooltip from '@mui/material/Tooltip';
 
-const Feed = () => {
+const FeedDashboard = () => {
   const dispatch = useDispatch();
   const { currentProjects, projectsLoading } = useSelector(projectSelector);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -69,12 +69,12 @@ const Feed = () => {
         </div> */}
       <AppBar className='feed-header-mi'>
       <Toolbar>
-          {/* <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}> */}
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           {/* <HomeIcon /> */}
-          {/* <MaterialMenu className="menu_icon" />
+          <MaterialMenu className="menu_icon" />
             &nbsp;&nbsp;
             <span>Dashboard</span>
-          </Typography> */}
+          </Typography>
           {/* <MaterialMenu /> */}
             <div>
               <Tooltip title="Admin">
@@ -87,7 +87,7 @@ const Feed = () => {
                   color="inherit"
                 >
                   {/* <AccountCircle /> */}
-                  <Avatar sx={{ marginLeft:"1100px", bgcolor: deepOrange[500] }}>A</Avatar>
+                  <Avatar sx={{ bgcolor: deepOrange[500] }}>A</Avatar>
                 </IconButton>
               </Tooltip>
               
@@ -138,10 +138,10 @@ const Feed = () => {
             </>
           </div>
         )} */}
-        <Project />
+        <Dashboard />
       </>
     </Layout>
   );
 };
 
-export default Feed;
+export default FeedDashboard;

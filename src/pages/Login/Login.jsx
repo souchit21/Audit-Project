@@ -84,7 +84,7 @@ const Login = () => {
     console.log('81', process.env.REACT_APP_api_url);
 
     try {
-      let url = 'https://bc6c-103-68-187-186.ngrok-free.app/user/login';
+      let url = 'https://a42f-103-68-187-186.ngrok-free.app/user/login';
        let data=await axios.post(url, {
         token:loginData.token,
         password:loginData.password,
@@ -98,11 +98,13 @@ const Login = () => {
           const userData = {
             username: data.data.loggedInuser.username,
             token: data.data.loggedInuser.token,
+            dept: data.data.loggedInuser.department,
             accesstoken: data.data.accessToken,
-            profile_id: data.data.loggedInuser._id,
+            profile_id: data.data.loggedInuser._id
             // pic: doesPropertyExist("pic", data.profile) ? data.profile.pic : null,
             // savedProjects: temp,
           };
+          console.log('107', userData)
           localStorage.setItem("user", JSON.stringify(userData));
           console.log('166',data)
           if(data.data.loggedInuser.isAdmin===true) history.push("/");

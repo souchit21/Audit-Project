@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { MenuItem,Select, FormControl } from '@material-ui/core';
 
+
+
 import {
   updateUpvoteCount,
   setSavedProjects,
@@ -78,13 +80,14 @@ const Project = ({ project }) => {
     { value: 'ACCEPTED', label: 'Approved' },
     { value: 'Pending', label: 'Pending' },
   ]);
+  
   useEffect(()=>{
     loadCategories();
   },[]);
   
   const loadCategories = async()=>{
      try{
-      const result = await axios.get("https://bc6c-103-68-187-186.ngrok-free.app/audit/getCombinedData");
+      const result = await axios.get("https://a42f-103-68-187-186.ngrok-free.app/audit/getCombinedData");
       setAuditDetails(result.data);
       console.log('90', result);
      }catch(err){
@@ -107,7 +110,7 @@ const Project = ({ project }) => {
     console.log('54', data);
     
     axios
-      .post(`https://bc6c-103-68-187-186.ngrok-free.app/audit/editDateAdmin1?id=${data.id}&AdminAcceptationStatus=${data.AdminAcceptationStatus}`)
+      .post(`https://a42f-103-68-187-186.ngrok-free.app/audit/editDateAdmin1?id=${data.id}&AdminAcceptationStatus=${data.AdminAcceptationStatus}`)
       .then(result => {
         console.log('59', result)
         //setNonverifiedusers(result.data.data);
@@ -136,6 +139,7 @@ const Project = ({ project }) => {
       </Select>
     );
   };
+  
 
 
   const columns = [
@@ -161,9 +165,17 @@ const Project = ({ project }) => {
 //  {   title:'Auditee Status', 
 //         field:'AuditeeAcceptationStatus',
 //  },
-  { title: 'Auditor Preferred Date', field: 'AuditorpreferredDate',
-  render: rowData => moment(rowData.AuditorpreferredDate).format("DD-MM-YYYY")
-}, 
+{ 
+  title: 'Auditor Preferred Date',
+  field: 'AuditorpreferredDate',
+  render: rowData => {
+    if (rowData.AuditorpreferredDate) {
+      return moment(rowData.AuditorpreferredDate).format("DD-MM-YYYY");
+    } else {
+      return "Not yet set by auditor";
+    }
+  }
+},
 { title: 'Approve Date', field: 'AdminAcceptationStatus',
   render: renderVerificationStatus
 
@@ -335,6 +347,8 @@ const Project = ({ project }) => {
       <div>
         
         <FormContainer/>
+        
+       
         <div style={{ height: "600px", width:"1200px", overflow: "auto", marginLeft:"10px", marginRight: "10px"}}>
         <MaterialTable style={{
             margin: "60px 20px 30px 20px",

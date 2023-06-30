@@ -7,6 +7,7 @@ import {
 import Signup from "./pages/Signup/Signup";
 import Login from "./pages/Login/Login";
 import Feed from "./pages/Feed/Feed";
+import FeedDashboard from "./pages/FeedDashboad/FeedDashboard";
 import Profile from "./pages/Profile/Profile";
 import SingleProject from "./pages/SingleProject/ProjectWithComments";
 import Create from "./pages/Create/Create";
@@ -88,6 +89,8 @@ function App() {
         <PrivateRoute path="/auditortable" component={AuditorTable} />
         <PrivateRoute path="/auditeetable" component={AuditeeTable} />
         <PrivateRoute path="/addnewChecklist" component={AddnewChecklist} />
+        {/* <PrivateRoute path="/dashboard" component={Dashboard} /> */}
+
         <PrivateRoute path="/uploadAudit/:id" component={FileUploadModal} />
         <PrivateRoute path="/user/verification" component={Verifyusers} />
         <PrivateRoute path="/userdetails/:id" component={UserDetails} />
@@ -126,6 +129,7 @@ function App() {
         <PrivateRoute path="/clients" component={Clients} />
         <PrivateRoute path="/saved" component={Saved} />
         <PrivateRoute exact path="/" component={Feed} />
+        <PrivateRoute exact path="/dashboard" component={FeedDashboard} />
         <PrivateRoute exact path="/category/edit/:id" component={EditCategoriesModal}/>
         <PrivateRoute exact path="/category/delete/:id" component={EditCategoriesModal}/>
         <PrivateRoute exact path="/auditdetails/:id" component={UserModal}/>

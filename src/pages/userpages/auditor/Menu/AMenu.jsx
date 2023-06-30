@@ -14,8 +14,17 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import GroupWorkIcon from '@mui/icons-material/GroupWork';
 
 
+
 //import Logo from '../../assets/favicon.png'
 const AMenu = () => {
+  const userToken = JSON.parse(localStorage.getItem('user'))?.token;
+  const username = JSON.parse(localStorage.getItem('user'))?.username;
+  const dept = JSON.parse(localStorage.getItem('user'))?.dept;
+
+  console.log('23',userToken);
+  console.log('24',username);
+  console.log('26',dept);
+
   const history = useHistory();
 
   return (
@@ -28,12 +37,11 @@ const AMenu = () => {
       /> */}
       <p className="logo-text" style={{color:"black"}}>Audit Panel</p>
       <div className="menu-items">
-      {/* <Link to="/" className="menu-item">
-        <div className="items">
-          <DashboardIcon />
-          &nbsp;&nbsp;<span>Admin</span>
+        <div className="items1">
+          <div>
+          <p style={{marginBottom:".5rem"}}>Welcome! {userToken}, {username}, {dept}</p>
           </div>
-        </Link> */}
+        </div>
         <Link to="/auditortable" className="menu-item">
         <div className="items">
           <PersonIcon />
