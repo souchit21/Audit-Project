@@ -40,7 +40,7 @@ const ViewAuditeeNC =  ()=>{
 
 
     const loadUser = async() =>{
-        const result = await axios.get('https://bc6c-103-68-187-186.ngrok-free.app/audit/getAuditwithId?id='+id);
+        const result = await axios.get('https://af25-103-68-187-186.ngrok-free.app/audit/getAuditwithId?id='+id);
         setNCLinks(result.data.data.Auditee_NC_Link);
         //console.log('44', result);
         console.log("45", Auditee_NC_Link)

@@ -93,7 +93,7 @@ useEffect (() => {
 // }
 
     const loadUser = async() =>{
-        const result = await axios.get('https://bc6c-103-68-187-186.ngrok-free.app/audit/getAuditwithId?id='+id);
+        const result = await axios.get('https://af25-103-68-187-186.ngrok-free.app/audit/getAuditwithId?id='+id);
         setAuditDetails(result.data.data);
         console.log('90', result.data.data);
         console.log("91", auditDetails);

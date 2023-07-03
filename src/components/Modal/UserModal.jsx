@@ -96,7 +96,7 @@ useEffect (() => {
 // }
 
 const loadUser = async() =>{
-    const result = await axios.get('https://a42f-103-68-187-186.ngrok-free.app/audit/getAuditwithId?id='+id);
+    const result = await axios.get('https://af25-103-68-187-186.ngrok-free.app/audit/getAuditwithId?id='+id);
     setAuditDetails(result.data.data);
     console.log('101', auditDetails )
     //setAuditorTokens(auditorTokens);
@@ -119,7 +119,7 @@ const handleUpdate = async(e)=>{
     newAuditorToken: auditorTokens
   }
   console.log('113', data);
-  try{const result = await axios.post('https://a42f-103-68-187-186.ngrok-free.app/audit/editAudit',data);
+  try{const result = await axios.post('https://c185-103-68-187-186.ngrok-free.app/audit/editAudit',data);
   console.log('110', result);
   notifySuccess('Successfully Updated')
   }catch(err){

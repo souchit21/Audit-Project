@@ -43,8 +43,11 @@ const RaiseNC =  ()=>{
     const [NC_Form_Link, setLink] = useState([]);
     const getLink = async (e) => {
         try{
-            const result = await axios.get("https://bc6c-103-68-187-186.ngrok-free.app/audit/getNCForm");
-            console.log('47', result);
+            const result = await axios.get("https://af25-103-68-187-186.ngrok-free.app/audit/getNCForm");
+            // setLink()
+            console.log('47', result.data[0].download_Nc_Link);
+            window.open(result.data[0].download_Nc_Link, "_blank")
+
 
         }catch(err){
             notifyError("Couldn't get link")
@@ -60,7 +63,7 @@ const RaiseNC =  ()=>{
             console.log('88', formData);
             try {
                 const response = await axios.post(
-                "https://bc6c-103-68-187-186.ngrok-free.app/NcUpload/uploadNcAudit",
+                "https://af25-103-68-187-186.ngrok-free.app/NcUpload/uploadNcAudit",
                 formData
                 );
                 console.log('95', response);
@@ -81,7 +84,7 @@ const RaiseNC =  ()=>{
         console.log('90', data);
         try{
             const result = await axios.post(
-                "https://bc6c-103-68-187-186.ngrok-free.app/audit/uploadNcform",
+                "https://af25-103-68-187-186.ngrok-free.app/audit/uploadNcform",
                 data
             );
             console.log('96', result)
@@ -111,8 +114,7 @@ const RaiseNC =  ()=>{
                     
                         <div className="input1"><button 
                             className="btn-nc"
-                            onClick={() => {
-                                }}>Download </button>
+                            onClick={getLink}>Download </button>
                         </div>
                 </div>
 

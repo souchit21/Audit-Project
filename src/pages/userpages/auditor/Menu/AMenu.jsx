@@ -35,7 +35,7 @@ const AMenu = () => {
         className="logo"
         onClick={() => history.push("/")}
       /> */}
-      <p className="logo-text" style={{color:"black"}}>Audit Panel</p>
+      <p className="logo-text" style={{color:"black"}}>Auditor/Auditee Panel</p>
       <div className="menu-items">
         <div className="items1">
           <div>

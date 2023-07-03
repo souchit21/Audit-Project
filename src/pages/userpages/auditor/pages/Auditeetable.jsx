@@ -55,7 +55,7 @@ const AuditeeTable = () => {
     //   id: rowData._id,
     //   status: value
     // };
-    const result = await axios.post('https://a42f-103-68-187-186.ngrok-free.app/audit/editAuditofAuditee',{
+    const result = await axios.post('https://c185-103-68-187-186.ngrok-free.app/audit/editAuditofAuditee',{
       id: rowData._id,
       AuditeeAcceptationStatus:value,
     });
@@ -67,7 +67,7 @@ const AuditeeTable = () => {
     // e.preventDefault();
     console.log('34', tokenArray)
     try{
-    const result = await axios.get('https://a42f-103-68-187-186.ngrok-free.app/audit/getCombinedDataWithAuditeeToken?auditeeToken='+[tokenArray]);
+    const result = await axios.get('https://c185-103-68-187-186.ngrok-free.app/audit/getCombinedDataWithAuditeeToken?auditeeToken='+[tokenArray]);
     setAuditDetails(result.data);
     // console.log("37",result.data.Data);
     console.log("73",result);

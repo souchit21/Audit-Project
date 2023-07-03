@@ -49,7 +49,7 @@ const UploadEvidence =  ()=>{
             console.log('88', formData);
             try {
                 const response = await axios.post(
-                "https://bc6c-103-68-187-186.ngrok-free.app/NcUpload/uploadNcAudit",
+                "https://af25-103-68-187-186.ngrok-free.app/NcUpload/uploadNcAudit",
                 formData
                 );
                 console.log('95', response);
@@ -70,7 +70,7 @@ const UploadEvidence =  ()=>{
         console.log('90', data);
         try{
             const result = await axios.post(
-                "https://bc6c-103-68-187-186.ngrok-free.app/audit/uploadProof",
+                "https://af25-103-68-187-186.ngrok-free.app/audit/uploadProof",
                 data
             );
             console.log('96', result)

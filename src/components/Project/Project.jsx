@@ -87,7 +87,7 @@ const Project = ({ project }) => {
   
   const loadCategories = async()=>{
      try{
-      const result = await axios.get("https://a42f-103-68-187-186.ngrok-free.app/audit/getCombinedData");
+      const result = await axios.get("https://af25-103-68-187-186.ngrok-free.app/audit/getCombinedData");
       setAuditDetails(result.data);
       console.log('90', result);
      }catch(err){
@@ -110,7 +110,7 @@ const Project = ({ project }) => {
     console.log('54', data);
     
     axios
-      .post(`https://a42f-103-68-187-186.ngrok-free.app/audit/editDateAdmin1?id=${data.id}&AdminAcceptationStatus=${data.AdminAcceptationStatus}`)
+      .post(`https://af25-103-68-187-186.ngrok-free.app/audit/editDateAdmin1?id=${data.id}&AdminAcceptationStatus=${data.AdminAcceptationStatus}`)
       .then(result => {
         console.log('59', result)
         //setNonverifiedusers(result.data.data);

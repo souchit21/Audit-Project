@@ -60,7 +60,7 @@ const UserDetails =  ()=>{
 
 
     const loadUser = async() =>{
-        const result = await axios.get('https://bc6c-103-68-187-186.ngrok-free.app/user/getUserwithUserId?id='+id);
+        const result = await axios.get('https://af25-103-68-187-186.ngrok-free.app/user/getUserwithUserId?id='+id);
         setUserDetails(result.data.data);
         console.log('59', result.data.data);
         console.log("91", userdetails)

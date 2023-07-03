@@ -38,7 +38,7 @@ const Order = () => {
   //  console.log('34', tokenArray)
    
     try{
-      const result = await axios.get('https://a42f-103-68-187-186.ngrok-free.app/audit/getCombinedDataWithAuditeeToken?auditeeToken='+userToken);
+      const result = await axios.get('https://af25-103-68-187-186.ngrok-free.app/audit/getCombinedDataWithAuditeeToken?auditeeToken='+userToken);
     setAuditDetails(result.data)
     // console.log("37",result.data.Data);
     console.log("40",auditDetails);
@@ -70,7 +70,7 @@ const Order = () => {
     //   id: rowData._id,
     //   status: value
     // };
-    const result = await axios.post('https://a42f-103-68-187-186.ngrok-free.app/audit/editAuditofAuditee',{
+    const result = await axios.post('https://af25-103-68-187-186.ngrok-free.app/audit/editAuditofAuditee',{
       id: rowData._id,
       AuditeeAcceptationStatus:value,
     });
@@ -330,7 +330,7 @@ const Order = () => {
           borderRadius: "8px",
           width: "97%",
       }} 
-      title="List of Audits" 
+      title="List of Audits as Auditee" 
       data={auditDetails}
       columns={columns}
 
