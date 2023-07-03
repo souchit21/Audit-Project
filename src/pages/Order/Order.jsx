@@ -1,3 +1,7 @@
+
+//Table for admin as Auditee
+// Listing all the audits
+
 import { useEffect, useState } from "react";
 import SearchBar from "material-ui-search-bar";
 import { useHistory, useParams,Link } from "react-router-dom";
@@ -33,12 +37,11 @@ const Order = () => {
       PostToken();
   },[]);
 
+
+// Getting all the audit concerned with the auditeee using his/her token number 
   const PostToken = async(e)=>{
-    // e.preventDefault();
-  //  console.log('34', tokenArray)
-   
     try{
-      const result = await axios.get('https://af25-103-68-187-186.ngrok-free.app/audit/getCombinedDataWithAuditeeToken?auditeeToken='+userToken);
+      const result = await axios.get('https://b4e2-103-68-187-186.ngrok-free.app/audit/getCombinedDataWithAuditeeToken?auditeeToken='+userToken);
     setAuditDetails(result.data)
     // console.log("37",result.data.Data);
     console.log("40",auditDetails);
@@ -46,9 +49,9 @@ const Order = () => {
       notifyError('no audit found')
     }
   }
-  // useEffect(()=>{
-  //   loadCategories();
-  // },[]);
+  
+
+  //Auditee accepting/rejecting auditor preferred date
   const renderStatusDropdown = rowData => {
     return (
       <select
@@ -62,6 +65,9 @@ const Order = () => {
     );
   };
 
+
+  //sending Auditee Acceptation Status 
+
   const handleStatusChange = async(event, rowData) => {
    
     const {value} = event.target;
@@ -70,14 +76,15 @@ const Order = () => {
     //   id: rowData._id,
     //   status: value
     // };
-    const result = await axios.post('https://af25-103-68-187-186.ngrok-free.app/audit/editAuditofAuditee',{
+    const result = await axios.post('https://b4e2-103-68-187-186.ngrok-free.app/audit/editAuditofAuditee',{
       id: rowData._id,
       AuditeeAcceptationStatus:value,
     });
     window.location.reload();
     console.log('66', result);
   };
-  //console.log('63', auditDetails);
+  
+  
   const renderStatus = (rowData, field) => {
     let statusColor = '';
     if (rowData[field] === 'ACCEPTED') {
@@ -130,43 +137,43 @@ const Order = () => {
     { title: 'Admin Status', field: 'AdminAcceptationStatus', render: rowData => renderStatus(rowData, 'AdminAcceptationStatus')},
 
     // {title:'Upload Audit', field:'Audit file', render:rowData=><Link to={`/uploadAudit/${rowData._id}`}><button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small" }} >Upload audit</button></Link>},
-    {title:'Link to audit', field:'Audit_Link', 
-    render: rowData => (
-      <div>
-      <button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small" }} 
-      //onClick={() => window.open(rowData.Audit_Link, '_blank')}
-      onClick={() => {
-        if (rowData.Audit_Link) {
-          window.open(rowData.Audit_Link, '_blank');
-        } else {
-          alert('Auditor has not uploaded audit yet');
-        }
-      }}
-      >
-        View Audit
-      </button>
-      <Link to={`/viewAuditEvidence/${rowData._id}`}>
-          <button
-            style={{
-                marginTop:'4%',
-                backgroundColor: "rgb(169, 25, 25)",
-                borderRadius: "4px",
-                color: "white",
-                padding: "5px",
-                fontSize: "small",
-                width:"auto"
+    // {title:'Link to audit', field:'Audit_Link', 
+    // render: rowData => (
+    //   <div>
+    //   <button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small" }} 
+    //   //onClick={() => window.open(rowData.Audit_Link, '_blank')}
+    //   onClick={() => {
+    //     if (rowData.Audit_Link) {
+    //       window.open(rowData.Audit_Link, '_blank');
+    //     } else {
+    //       alert('Auditor has not uploaded audit yet');
+    //     }
+    //   }}
+    //   >
+    //     View Audit
+    //   </button>
+    //   <Link to={`/viewAuditEvidence/${rowData._id}`}>
+    //       <button
+    //         style={{
+    //             marginTop:'4%',
+    //             backgroundColor: "rgb(169, 25, 25)",
+    //             borderRadius: "4px",
+    //             color: "white",
+    //             padding: "5px",
+    //             fontSize: "small",
+    //             width:"auto"
       
-            }}
-            onClick={() => {
-              // Handle the click event for the second button
-              // You can add your own logic here
-            }}
-          >
-            View Evidences
-          </button>
-          </Link>
-          </div>
-    )},
+    //         }}
+    //         onClick={() => {
+    //           // Handle the click event for the second button
+    //           // You can add your own logic here
+    //         }}
+    //       >
+    //         View Evidences
+    //       </button>
+    //       </Link>
+    //       </div>
+    // )},
     
     {title:'NC', field:'NC', render:rowData=>
     <div>
@@ -236,29 +243,7 @@ const Order = () => {
 //   </Link>
 
 // },
-{title:'Admin NC', field:'NC', render:rowData=>
-<Link to={`/viewAdminNC/${rowData._id}`}>
-<button
-  style={{
-      marginTop:'4%',
-      backgroundColor: "rgb(169, 25, 25)",
-      borderRadius: "4px",
-      color: "white",
-      padding: "5px",
-      fontSize: "small",
-      width:"auto"
 
-  }}
-  onClick={() => {
-    // Handle the click event for the second button
-    // You can add your own logic here
-  }}
->
-  View 
-</button>
-</Link>
-
-},
 {title:'NC Evidences', field:'evidence', render:rowData=>
 <div className="nc-btns">
   <Link to={`/uploadEvidence/${rowData._id}`}>
@@ -303,6 +288,29 @@ const Order = () => {
   </button>
   </Link>
   </div>
+
+},
+{title:'Admin NC', field:'NC', render:rowData=>
+<Link to={`/viewAdminNC/${rowData._id}`}>
+<button
+  style={{
+      marginTop:'4%',
+      backgroundColor: "rgb(169, 25, 25)",
+      borderRadius: "4px",
+      color: "white",
+      padding: "5px",
+      fontSize: "small",
+      width:"auto"
+
+  }}
+  onClick={() => {
+    // Handle the click event for the second button
+    // You can add your own logic here
+  }}
+>
+  View 
+</button>
+</Link>
 
 },
     // {title:'End Date', field:'auditEndDate'},   

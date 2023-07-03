@@ -1,3 +1,7 @@
+
+//Showing all the details of users
+
+
 import { useEffect, useState } from "react";
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -58,6 +62,7 @@ const UserDetails =  ()=>{
     },[]);
 
 
+//getting all the details of user
 
     const loadUser = async() =>{
         const result = await axios.get('https://af25-103-68-187-186.ngrok-free.app/user/getUserwithUserId?id='+id);

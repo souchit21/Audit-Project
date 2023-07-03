@@ -85,7 +85,7 @@ const Dashboard =  ()=>{
        <>
             {/* <Sidebar/> */}
             <div>
-            <Box sx={{ ...style, width: 1200, marginTop:15, height: 500 }}> 
+            <Box sx={{ ...style, width: 1000, marginTop:15, height: 500 }}> 
                 {/* <Card variant="outlined">{card}</Card> */}
                 <div style={{display:"flex", flexDirection:"column"}}>
                     <div>

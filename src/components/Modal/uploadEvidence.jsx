@@ -1,3 +1,6 @@
+
+//Upload Evidence of NC
+
 import { useEffect, useState } from "react";
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -39,6 +42,8 @@ const UploadEvidence =  ()=>{
     setSelectedFiles(event.target.files);
     };
 
+
+//NC Evidence upload API    
     const handleUpload = async (e) => {
             e.preventDefault();
             const formData = new FormData();
@@ -61,6 +66,9 @@ const UploadEvidence =  ()=>{
                 notifyError("Files couldn't be uploaded");
             }
     };
+
+//Getting link of the uploaded evidences
+
     const PostLinks = async (e) => {
         e.preventDefault();
         const data = {
@@ -80,7 +88,7 @@ const UploadEvidence =  ()=>{
         }
     };
     const handleClose = async (e) =>{
-        history.push("/posts");
+        history.push("/orders");
       };
 
 

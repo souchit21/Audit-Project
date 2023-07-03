@@ -1,3 +1,8 @@
+
+
+//View all the details of Audit to Admin
+
+
 import { useEffect, useState } from "react";
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -30,31 +35,8 @@ const style = {
 
 const UserModal =  ()=>{
     const history = useHistory();
-//     const {id} = useParams();
-//     const [users , setUser] = useState({
-//       categoryName:"",
-//       categoryPriority:"",
-//       id:""
-//   })
-//   useEffect(()=>{
-//     loadCategory();
-//   },[])
-//   const {categoryName,categoryPriority} = users;
-//   const onInputChnage = (e) =>{
-//       setUser({...users,[e.target.name]:e.target.value})
-//   }
 
-//   const onSubmit = async(e)=>{
-//     console.log("41")
-//       // e.preventDefault();
-//       // await axios.post('http://localhost:4000/category/editCategory',users)
-//       // history.push("/")
-//   }
 
-//   const loadCategory = async()=>{
-//   let result = await axios.get('http://localhost:4000/category/getCategory?id='+id);
-//   setUser(result.data)
-// }
 const {id} = useParams();
 //const [newAuditorTokens, setAuditorTokens] = useState([]);
 const [auditDetails,setAuditDetails] = useState ({
@@ -80,35 +62,32 @@ const [auditDetails,setAuditDetails] = useState ({
 });
 const {Audit_Link, AuditeeAcceptationStatus, AuditorAcceptationStatus, AuditorpreferredDate, Date, NC_Flag, Scope, Shift, auditMethod, auditTeam,
   auditType, checklist_Link, _id, auditee, auditeeTokens, auditorTokens, Audit_Proof_Link, timeToClose, NC_Closure_date } = auditDetails;
-// const onInputchange = e => {
-//     setUser({...users,[e.target.name]: e.target.value})
-// };
+
 
 useEffect (() => {
     loadUser();
 },[]);
 
-// const onSubmit = async e =>{
-//     e.preventDefault();
-//     const result = await axios.post('http://localhost:4000/user/update?id='+id,users)
-//     history.push("/users")
-//     console.log("77",result.data)
-// }
 
+
+//getting all the details if audit using audit id
 const loadUser = async() =>{
-    const result = await axios.get('https://af25-103-68-187-186.ngrok-free.app/audit/getAuditwithId?id='+id);
+    const result = await axios.get('https://b4e2-103-68-187-186.ngrok-free.app/audit/getAuditwithId?id='+id);
     setAuditDetails(result.data.data);
     console.log('101', auditDetails )
-    //setAuditorTokens(auditorTokens);
-    //console.log("95",newAuditorTokens)
+   
 }
-//console.log('96',auditorTokens);
-//console.log('78', newAuditorTokens);
+
+
+//handling change of auditor by admin
+
 const onInputchange = e => {
   //setUser({...userdetails,[e.target.name]: e.target.value})
   setAuditDetails({...auditDetails,[e.target.name]: e.target.value})
 };
 console.log('102', auditorTokens)
+
+//Sending new Auditor Token
 
 const handleUpdate = async(e)=>{
   e.preventDefault();
@@ -119,16 +98,24 @@ const handleUpdate = async(e)=>{
     newAuditorToken: auditorTokens
   }
   console.log('113', data);
-  try{const result = await axios.post('https://c185-103-68-187-186.ngrok-free.app/audit/editAudit',data);
+  try{const result = await axios.post('https://b4e2-103-68-187-186.ngrok-free.app/audit/editAudit',data);
   console.log('110', result);
   notifySuccess('Successfully Updated')
   }catch(err){
     notifyError("Couldn't update");
   }
 
-  //history.push("/login")
-  // console.log("138",result);
+ 
 }
+function formatDateAuditorDate(dateString) {
+  // console.log('133', dateString)
+  if(dateString){
+    const formattedDate = moment(dateString).format('DD-MM-YYYY');
+    return formattedDate;
+  }
+  else return Date;
+}
+
 function formatDate(dateString) {
   // console.log('133', dateString)
   if(dateString){
@@ -182,7 +169,7 @@ const handleClose = async (e) =>{
                       </div>
                       <div className="form-group" >
                         <label style={{ marginBottom:"0rem"}}>Final Date:</label>
-                        <input type="text" className="form-control-admin-details" id="AuditorpreferredDate" name="AuditorpreferredDate"  value={formatDate(AuditorpreferredDate)} />
+                        <input type="text" className="form-control-admin-details" id="AuditorpreferredDate" name="AuditorpreferredDate"  value={formatDateAuditorDate(AuditorpreferredDate)} />
                       </div>
                   </div>
                   <div className="form-group">
@@ -220,7 +207,7 @@ const handleClose = async (e) =>{
 
                   <div className="Audit-Team">
                       <div className="form-group">
-                            <label style={{ marginBottom:"0rem"}}>Auditee</label>
+                            <label style={{ marginBottom:"0rem"}}>Auditee:</label>
                             <input type="text" className="form-control-admin-details" id="auditee" name="auditee"  value={auditee} />
                       </div>
                       <div className="form-group">

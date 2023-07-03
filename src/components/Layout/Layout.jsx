@@ -6,8 +6,8 @@ import "./Layout.css";
 const Layout = ({ children }) => {
   return (
     <div className="layout">
-      <div className="layout-left-container">
-        <div className="layout-left">
+      <div className="layout-left-container" style={{width:"330px"}}>
+        <div className="layout-left" >
           <Menu />
         </div>
       </div>

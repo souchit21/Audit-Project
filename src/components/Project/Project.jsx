@@ -1,3 +1,5 @@
+//Shows all audits in admin panel
+
 import { useState, useEffect } from "react";
 import MaterialTable from 'material-table-jspdf-fix';
 import * as React from 'react';
@@ -85,32 +87,34 @@ const Project = ({ project }) => {
     loadCategories();
   },[]);
   
+//api to get all audits in the admin panel
   const loadCategories = async()=>{
      try{
-      const result = await axios.get("https://af25-103-68-187-186.ngrok-free.app/audit/getCombinedData");
+      const result = await axios.get("https://b4e2-103-68-187-186.ngrok-free.app/audit/getCombinedData");
       setAuditDetails(result.data);
       console.log('90', result);
      }catch(err){
       notifyError('No audits to show');
      }
-
-      // setPagination(_(result.data.getorders).slice(0).take(pageSize).value())
       
   }
   const styles = {
-    REJECTED: { color: 'red' },
+    REJECTED: { color: 'red' }, 
     ACCEPTED : { color: 'green' },
     Pending : {color: '#FFA41B'}
   };
+
+//Admin accepting or rejecting the aduitor preferred date
+
   const handleVerificationStatusChange = (event, rowData) => {
     const data = {
       id: rowData._id,
       AdminAcceptationStatus: event.target.value
     };
     console.log('54', data);
-    
+    //sending audit id and admin acceptation status to backend
     axios
-      .post(`https://af25-103-68-187-186.ngrok-free.app/audit/editDateAdmin1?id=${data.id}&AdminAcceptationStatus=${data.AdminAcceptationStatus}`)
+      .post(`https://b4e2-103-68-187-186.ngrok-free.app/audit/editDateAdmin1?id=${data.id}&AdminAcceptationStatus=${data.AdminAcceptationStatus}`)
       .then(result => {
         console.log('59', result)
         //setNonverifiedusers(result.data.data);
@@ -120,6 +124,10 @@ const Project = ({ project }) => {
         console.error(error);
       });
   };
+
+
+  //Admin accepting or rejecting auditor preferred date
+  
   const renderVerificationStatus = (rowData) => {
     //console.log('66', rowData)
 
@@ -129,7 +137,7 @@ const Project = ({ project }) => {
       <Select
         value={rowData.AdminAcceptationStatus}
         onChange={(event) => handleVerificationStatusChange(event, rowData)}
-        style={{currentStyle , width:'100%'} }
+        style={{currentStyle , width:'auto'} }
       >
         {verificationStatuses.map((status) => (
           <MenuItem key={status.value} value={status.value} style={styles[status.value] || styles.default}>
@@ -181,43 +189,43 @@ const Project = ({ project }) => {
 
   },
 
-{title:'Link to audit', field:'Audit_Link', 
-    render: rowData => (
-      <div style={{display:"flex", flexDirection:"column"}}>
-      <button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small", width:'80%' }} 
-      // onClick={() => window.open(rowData.Audit_Link, '_blank')}
-      onClick={() => {
-        if (rowData.Audit_Link) {
-          window.open(rowData.Audit_Link, '_blank');
-        } else {
-          alert('Auditor has not uploaded audit yet');
-        }
-      }}
-      >
-        View 
-      </button>
-      <Link to={`/viewAuditEvidence/${rowData._id}`}>
-          <button
-            style={{
-                marginTop:'5%',
-                backgroundColor: "#007BFF",
-                borderRadius: "4px",
-                color: "white",
-                padding: "5px",
-                fontSize: "small",
-                width:"auto"
+// {title:'Link to audit', field:'Audit_Link', 
+//     render: rowData => (
+//       <div style={{display:"flex", flexDirection:"column"}}>
+//       <button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small", width:'80%' }} 
+//       // onClick={() => window.open(rowData.Audit_Link, '_blank')}
+//       onClick={() => {
+//         if (rowData.Audit_Link) {
+//           window.open(rowData.Audit_Link, '_blank');
+//         } else {
+//           alert('Auditor has not uploaded audit yet');
+//         }
+//       }}
+//       >
+//         View 
+//       </button>
+//       <Link to={`/viewAuditEvidence/${rowData._id}`}>
+//           <button
+//             style={{
+//                 marginTop:'5%',
+//                 backgroundColor: "#007BFF",
+//                 borderRadius: "4px",
+//                 color: "white",
+//                 padding: "5px",
+//                 fontSize: "small",
+//                 width:"auto"
       
-            }}
-            onClick={() => {
-              // Handle the click event for the second button
-              // You can add your own logic here
-            }}
-          >
-            Proofs
-          </button>
-          </Link>
-      </div>
-    )},
+//             }}
+//             onClick={() => {
+//               // Handle the click event for the second button
+//               // You can add your own logic here
+//             }}
+//           >
+//             Proofs
+//           </button>
+//           </Link>
+//       </div>
+//     )},
     
     {title:'NC', field:'NC', render:rowData=>
     <Link to={`/raise/nc/${rowData._id}`}>

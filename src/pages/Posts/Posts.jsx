@@ -1,3 +1,10 @@
+
+
+// Showing all audits to Admin as Auditor
+
+
+
+
 import { useEffect, useState } from "react";
 import SearchBar from "material-ui-search-bar";
 import { useHistory, useParams,Link } from "react-router-dom";
@@ -34,17 +41,23 @@ const Posts = () => {
     PostToken();
 },[]);
 
+
+//api to get all the audits using token of user
+
 const PostToken = async(e)=>{
   // e.preventDefault();
  // console.log('37', tokenArray)
   try{
-    const result = await axios.get('https://af25-103-68-187-186.ngrok-free.app/audit/getCombinedDataWithAuditorToken?auditeeToken='+userToken);
+    const result = await axios.get('https://b4e2-103-68-187-186.ngrok-free.app/audit/getCombinedDataWithAuditorToken?auditeeToken='+userToken);
   setAuditDetails(result.data)
   console.log("34",result);
   }catch(err){
     notifyError("no audit found");
   }
 }
+
+// Handling acceptation status of Date 
+
 const renderStatusDropdown = rowData => {
   return (
     <select
@@ -58,22 +71,27 @@ const renderStatusDropdown = rowData => {
   );
 };
 
+// sending accetation status to the backend
+
 const handleStatusChange = async(event, rowData) => {
  
   const {value} = event.target;
   rowData.AuditorAcceptationStatus  = value;
-  // const data = {
-  //   id: rowData._id,
-  //   status: value
-  // };
-  const result = await axios.post('https://af25-103-68-187-186.ngrok-free.app/audit/editAuditofAuditor',{
+  const result = await axios.post('https://b4e2-103-68-187-186.ngrok-free.app/audit/editAuditofAuditor',{
     id: rowData._id,
     AuditorAcceptationStatus:value,
   });
   window.location.reload();
   console.log('66', result);
 };
+
+
+//Auditor Preferred Date
+
 const [selectedDates, setSelectedDates] = useState("");
+
+//sending preferred date to the backend
+
 const handlePreferredDateChange = async(date, rowData) =>{
   setSelectedDates(prevSelectedDates => ({
     ...prevSelectedDates,
@@ -83,7 +101,7 @@ const handlePreferredDateChange = async(date, rowData) =>{
   console.log('89',date);
   //console.log('90',rowData);
   if(rowData.AuditorAcceptationStatus==="REJECTED"){
-  const dresult = await axios.post('https://af25-103-68-187-186.ngrok-free.app/audit/editAuditofAuditor1',{
+  const dresult = await axios.post('https://b4e2-103-68-187-186.ngrok-free.app/audit/editAuditofAuditor1',{
     id: rowData._id,
     AuditorpreferredDate:date
   });
@@ -94,6 +112,8 @@ else{
   alert('you have already accepted the date')
 }
 }
+
+
 const renderStatus = (rowData, field) => {
   let statusColor = '';
   if (rowData[field] === 'ACCEPTED') {

@@ -1,3 +1,6 @@
+
+// Showing all the NC raised by Admin 
+
 import { useEffect, useState } from "react";
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -36,6 +39,7 @@ const ViewNC =  ()=>{
     },[]);
 
 
+//getting all the NC links 
 
     const loadUser = async() =>{
         const result = await axios.get('https://af25-103-68-187-186.ngrok-free.app/audit/getAuditwithId?id='+id);
@@ -44,16 +48,7 @@ const ViewNC =  ()=>{
         console.log("45", NC_Links)
         //console.log("92",id)
     }
-    // const data = NC_Links.map((link) => ({
-    //     heading: 'Link',
-    //     value: <button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small"}}
-    //     onClick={() => window.open(link, "_blank")}>View NC</button>,
-    // }));
-    // const handleOpenLink = (link) => {
-    //   const embedUrl = `https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(link)}`;
-    //   const win = window.open('', '_blank');
-    //   win.document.write(`<iframe src="${embedUrl}" width="100%" height="100%"></iframe>`);
-    // };
+    
     
 
     const data = NC_Links.map((link) => ({
@@ -67,7 +62,7 @@ const ViewNC =  ()=>{
             padding: "5px",
             fontSize: "small"
           }}
-          onClick={() => window.open(link, "_blank")}
+          onClick={() => window.open(link, "_blank")}    //downloading the NC file
         >
           View NC
         </button>
@@ -90,7 +85,7 @@ const ViewNC =  ()=>{
                             borderRadius: '8px',
                             width: '97%',
                         }}
-                        title="Details of user"
+                        title="NCs raised by Admin"
                         data={data}
                         columns={columns}
                         options={{

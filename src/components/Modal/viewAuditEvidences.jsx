@@ -1,3 +1,7 @@
+
+
+//showing all the evidences of audit
+
 import { useEffect, useState } from "react";
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -38,6 +42,7 @@ const ViewAuditEvidence =  ()=>{
     },[]);
 
 
+//gettting all audit evidences
 
     const loadUser = async() =>{
         const result = await axios.get('https://af25-103-68-187-186.ngrok-free.app/audit/getAuditwithId?id='+id);
@@ -46,6 +51,8 @@ const ViewAuditEvidence =  ()=>{
         console.log("45", Proof_Link)
         //console.log("92",id)
     }
+    //downloading evidences
+    
     const data = Proof_Link.map((link) => ({
         heading: 'Evidence',
         value: <button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small"}}

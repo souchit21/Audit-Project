@@ -61,7 +61,7 @@ const Signup = () => {
 
   // const {id} = useParams();
     
-  const [userdetails,setUser] = useState ({
+  const [userdetails,setUser] = useState ({                   //storing details of user in state
     username:"",
     email:"",
     department:"",
@@ -69,7 +69,7 @@ const Signup = () => {
     password:"",
     contactnumber:"",    
   });
-  const [skills, setStatus] = useState({
+  const [skills, setStatus] = useState({                   //storing details of user in state
     isAdmin:false,
     isAuditor:false,
     isAuditee:false,
@@ -89,47 +89,14 @@ const Signup = () => {
       setUser({...userdetails,[e.target.name]: e.target.value})
   };
 
-  // const [isChecked, setIsChecked] = useState({
-  //   isAdminC:false,
-  //   isAuditorC:false,
-  //   isAuditeeC:false,
-  //   QMSC:false,
-  //   AS9100C:false,
-  //   MfgProcessFDYC:false,
-  //   MfgProcessMCshopC:false,
-  //   ProductFDYC:false,
-  //   ProductMCshopC:false,
-  //   SupplierAuditC:false,
-  // })
-  //const {isAdminC, isAuditeeC, isAuditorC, QMSC, AS9100C, MfgProcessFDYC, MfgProcessMCshopC, ProductFDYC, ProductMCshopC, SupplierAuditC} = isChecked;
+ 
   
   const changeStatus = (e) =>{
     setStatus({...skills, [e.target.name]: true})
     // setIsChecked({...isChecked, [e.target.name]:true});
 
   };
-  // console.log('110', isChecked);
 
-  // useEffect (() => {
-  //     loadUser();
-  // },[]);
-// console.log('107', userdetails);
-// console.log('108', skills);
-  // const onSubmit = async e =>{
-  //     e.preventDefault();
-  //     const result = await axios.post('http://localhost:4000/user/update?id='+id,users)
-  //     history.push("/users")
-  //     console.log("77",result.data)
-  // }
-
-  // const loadUser = async() =>{
-  //     const result = await axios.get('http://localhost:4000/user/getUser?id='+id);
-  //     setUser(result.data.user);
-  //     console.log(users.Sidebar)
-  //     console.log("84",result)
-  //     console.log("85",id)
-    
-  // }
   const formData = {
     username: userdetails.username,
     email: userdetails.email,
@@ -157,12 +124,7 @@ const Signup = () => {
     // console.log("138",result);
   }
 
-  // const CheckboxDiv = () =>{
-  //   const [isChecked, setIsChecked] = useState(false);
-  
-  //   const handleDivClick = () => {
-  //     setIsChecked(!isChecked);
-  //   };
+
 
 
 

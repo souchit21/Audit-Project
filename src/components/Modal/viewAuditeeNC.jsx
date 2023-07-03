@@ -1,3 +1,7 @@
+
+
+//Showing auditee NCs
+
 import { useEffect, useState } from "react";
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -38,39 +42,24 @@ const ViewAuditeeNC =  ()=>{
     },[]);
 
 
+//getting auditee NC
 
     const loadUser = async() =>{
-        const result = await axios.get('https://af25-103-68-187-186.ngrok-free.app/audit/getAuditwithId?id='+id);
+        const result = await axios.get('https://b4e2-103-68-187-186.ngrok-free.app/audit/getAuditwithId?id='+id);
         setNCLinks(result.data.data.Auditee_NC_Link);
         //console.log('44', result);
         console.log("45", Auditee_NC_Link)
         //console.log("92",id)
     }
+
+    //downloading NC
+    
     const data = Auditee_NC_Link.map((link) => ({
         heading: 'Link',
         value: <button style={{backgroundColor:"rgb(169, 25, 25)", borderRadius:"4px", color:"white", padding:"5px", fontSize:"small"}}
         onClick={() => window.open(link, "_blank")}>View NC</button>,
     }));
     
-    // const data = NC_Links.map((link) => ({
-    //   heading: 'Link',
-    //   value: (
-    //     <a
-    //       href={'https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(link)}'}
-    //       target="_blank"
-    //       rel="noopener noreferrer"
-    //       style={{
-    //         backgroundColor: "rgb(169, 25, 25)",
-    //         borderRadius: "4px",
-    //         color: "white",
-    //         padding: "5px",
-    //         fontSize: "small"
-    //       }}
-    //     >
-    //       View NC
-    //     </a>
-    //   ),
-    // }));
       const columns = [
         { title: 'Heading', field: 'heading' },
         { title: 'Value', field: 'value' },
@@ -87,7 +76,7 @@ const ViewAuditeeNC =  ()=>{
                             borderRadius: '8px',
                             width: '97%',
                         }}
-                        title="Details of user"
+                        title="Auditee NCs"
                         data={data}
                         columns={columns}
                         options={{

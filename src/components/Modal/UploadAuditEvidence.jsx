@@ -1,3 +1,6 @@
+
+//Audit Evidence upload Page 
+
 import { useEffect, useState } from "react";
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -33,12 +36,17 @@ const UploadAuditEvidence =  ()=>{
 
     const {id} = useParams();
     console.log('31', id)
+
+
     const [Evidences ,setEvidences] = useState ([]);
     const [selectedFiles, setSelectedFiles] = useState([]);
+
+
     const handleFileChange = (event) => {
     setSelectedFiles(event.target.files);
     };
 
+    //Evidence Upload API
     const handleUpload = async (e) => {
             e.preventDefault();
             const formData = new FormData();
@@ -61,6 +69,8 @@ const UploadAuditEvidence =  ()=>{
                 notifyError("Files couldn't be uploaded");
             }
     };
+    //Sending link of uploaded evidence of audit
+    
     const PostLinks = async (e) => {
         e.preventDefault();
         const data = {

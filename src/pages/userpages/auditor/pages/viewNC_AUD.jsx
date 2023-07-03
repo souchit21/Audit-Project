@@ -86,7 +86,7 @@ const ViewNC_Aud =  ()=>{
                             borderRadius: '8px',
                             width: '97%',
                         }}
-                        title="Details of user"
+                        title="NC raised by Admin"
                         data={data}
                         columns={columns}
                         options={{

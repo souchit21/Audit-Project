@@ -1,3 +1,7 @@
+
+
+//Showing all the audit details to the admin as auditor/auditee
+
 import { useEffect, useState } from "react";
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -29,31 +33,8 @@ const style = {
 
 const ViewAuditDetails =  ()=>{
     const history = useHistory();
-//     const {id} = useParams();
-//     const [users , setUser] = useState({
-//       categoryName:"",
-//       categoryPriority:"",
-//       id:""
-//   })
-//   useEffect(()=>{
-//     loadCategory();
-//   },[])
-//   const {categoryName,categoryPriority} = users;
-//   const onInputChnage = (e) =>{
-//       setUser({...users,[e.target.name]:e.target.value})
-//   }
 
-//   const onSubmit = async(e)=>{
-//     console.log("41")
-//       // e.preventDefault();
-//       // await axios.post('http://localhost:4000/category/editCategory',users)
-//       // history.push("/")
-//   }
 
-//   const loadCategory = async()=>{
-//   let result = await axios.get('http://localhost:4000/category/getCategory?id='+id);
-//   setUser(result.data)
-// }
 const {id} = useParams();
 //const [newAuditorTokens, setAuditorTokens] = useState([]);
 const [auditDetails,setAuditDetails] = useState ({
@@ -85,31 +66,32 @@ useEffect (() => {
     loadUser();
 },[]);
 
-// const onSubmit = async e =>{
-//     e.preventDefault();
-//     const result = await axios.post('http://localhost:4000/user/update?id='+id,users)
-//     history.push("/users")
-//     console.log("77",result.data)
-// }
+// Getting all the details of Audit using audit id
 
     const loadUser = async() =>{
-        const result = await axios.get('https://af25-103-68-187-186.ngrok-free.app/audit/getAuditwithId?id='+id);
+        const result = await axios.get('https://b4e2-103-68-187-186.ngrok-free.app/audit/getAuditwithId?id='+id);
         setAuditDetails(result.data.data);
         console.log('90', result.data.data);
         console.log("91", auditDetails);
         //setAuditorTokens(auditorTokens);
         //console.log("95",newAuditorTokens)
     }
-//console.log('96',auditorTokens);
-//console.log('78', newAuditorTokens);
+
+
+
     const onInputchange = e => {
       //setUser({...userdetails,[e.target.name]: e.target.value})
       setAuditDetails({...auditDetails,[e.target.name]: e.target.value})
     };
-    console.log('102', auditorTokens)
+
+    
+
     function formatDate(dateString) {
+      if(dateString){
       const formattedDate = moment(dateString).format('DD-MM-YYYY');
       return formattedDate;
+    }
+      else return Date;
     }
 
 

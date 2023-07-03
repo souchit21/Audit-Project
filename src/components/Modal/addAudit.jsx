@@ -1,3 +1,6 @@
+//page to add new audit plan
+
+
 import { useEffect, useState, useRef  } from "react";
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -34,127 +37,22 @@ const style = {
   };
 
 const AddAudit =  ()=>{
-    // const [name, setName] = useState('');
-    // const [email, setEmail] = useState('');
-    // const [message, setMessage] = useState('');
-    // Handle form submission
-    // const handleSubmit = (e) => {
-    //   e.preventDefault();
-    //   // Perform any necessary form validation or data processing here
-    //   // You can access the form input values from the state variables (name, email, message)
-    //   console.log('Form submitted:', { name, email, message });
-    // //   onSubmit();    
-    // };
-    // const history = useHistory();
-//     const {id} = useParams();
-    // const [auditDetails , setauditDetails] = useState({
-    //     // id:"",
-    //     auditorId:"",
-    //     auditeeId:"",
-    //     // checklistId:"",
-    //     auditName:"",
-    //     auditStartDate:"",
-    //     auditEndDate:"",
-    //     scope:"",
-    //     shift:"",
-    //     AuditObjectives:"none",
-    //     AuditMethod:"",
-    //     AuditCriteria:"",
-    //     auditType:"",
-        // auditURL:"",
-        // createdAt:"",
-        // updatedAt:"",
-  // })
-  // const {id, auditorId, auditeeId, checklistId, auditName, auditStartDate, auditEndDate, scope, shift, AuditMethod,AuditCriteria, auditType, auditURL, createdAt, updatedAt} = auditDetails;
+   
+ 
 
-  // const onInputchange = (e) =>{
-  //   setauditDetails({...auditDetails,[e.target.name]:e.target.value})
-  // }
-  // console.log('61', auditDetails);
-
-
-  // const [options1, setOptions1] = useState([]);
-
-  // const [options2, setOptions2] = useState([]);
-
-  // const [selectedDate1, setSelectedDate1] = useState(null);
-
-  // const  handleDate1 = (date) =>{
-  //   // const formattedDate1 = format(date, 'dd-mm-yyyy');
-  //   setSelectedDate1(date);
-  // };
-  // auditDetails.auditStartDate = selectedDate1;
-  // console.log('77', auditStartDate);
-
-  // const [selectedDate2, setSelectedDate2] = useState(null);
-
-  // const  handleDate2 = (date) =>{
-  //   // const formattedDate2 = format(date, 'dd-mm-yyyy');
-  //   setSelectedDate2(date);
-  // };
-  // auditDetails.auditEndDate = selectedDate2;
-  // console.log('87', auditEndDate);
-
-
-  // useEffect(() => {
-  //   // Make an API call to fetch options from the backend
-  //   fetchOptions1()
-  //     .then((data) => {
-  //       const users1 = data.data.auditors;
-  //       setOptions1(users1);
-  //     })
-  //     .catch((error) => {
-  //       console.log('Error fetching options:', error);
-  //     });
-  //     fetchOptions2()
-  //     .then((data) => {
-  //       const users2 = data.data.auditees;
-  //       setOptions2(users2);
-  //     })
-  //     .catch((error) => {
-  //       console.log('Error fetching options:', error);
-  //     });
-  // }, []);
-
-  // const fetchOptions1 = async () => {
-  //   // Example API call using fetch
-  //   const response = await axios.get('https://eb02-103-68-187-186.ngrok-free.app/user/auditors');
-  //   const data =  response;
-  //   console.log('116', data);
-  //   return data;
-  // };
-
-  // console.log('92', options1);
-
-  // const fetchOptions2 = async () => {
-  //   // Example API call using fetch
-  //   const response = await axios.get('https://eb02-103-68-187-186.ngrok-free.app/user/auditees');
-  //   const data =  response;
-  //   console.log('126', data);
-  //   return data;
-  // };
-  // console.log('110', options2);
-
-  // const handleOptionChange = e => {
-  //   setauditDetails({...auditDetails,[e.target.name]: e.target.value});
-  // };
-  // console.log('96', auditDetails);
-  // const history = useHistory();
-  // const addaudit = async(e)=>{
-  //   e.preventDefault();
-  //   const result = await axios.post('https://eb02-103-68-187-186.ngrok-free.app/audit/addAudit',auditDetails);
-  //   console.log("139",result);
-  //   history.push("/")
-  // };
-    
   const history = useHistory();
   // Use the `history` object as needed
+
+
+ //Uploading new audit plan
 
   const [selectedFile, setSelectedFile] = useState("");
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
   };
 
+  //sending file 
+  
   const handleUpload = async(e) => {
     e.preventDefault();
     console.log("156",selectedFile)
@@ -171,17 +69,7 @@ const AddAudit =  ()=>{
       notifyError("not uploaded");
     }
   };
-    // fetch('http://localhost:3001/upload', {
-    //   method: 'POST',
-    //   body: formData,
-    // })
-    //   .then((response) => response.text())
-    //   .then((result) => {
-    //     console.log(result);
-    //   })
-    //   .catch((error) => {
-    //     console.error('Error:', error);
-    //   });
+    
     
 
   const handleClose = async (e) =>{

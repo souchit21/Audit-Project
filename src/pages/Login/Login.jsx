@@ -1,3 +1,6 @@
+
+//Login Page
+
 import { useState } from "react";
 import { useHistory, Link } from "react-router-dom";
 import { notifyError } from "../../utils/notifyToasts";
@@ -51,45 +54,29 @@ const Login = () => {
     text: "",
     error: false,
   });
-  // const [guestLoading, setGuestLoading] = useState(false);
+
 
   const handleInputChange = (e) => {
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
   };
-  // console.log('76', loginData);
 
-  // const toggleLoading = (type, value) => {
-  //   if (type === "guest") {
-  //     setGuestLoading(value);
-  //   } else {
-  //     setLoginData({ ...loginData, : value });
-  //   }
-  // };
 
   const login = async (e) => {
     e.preventDefault();
 
-    // const type = isGuestLogin ? "guest" : "user";
-    // const jsonData = isGuestLogin
-    //   ? {
-    //       number: process.env.REACT_APP_TEST_number,
-    //       password: process.env.REACT_APP_TEST_PASSWORD,
-    //     }
-    //   : { number: loginData.number, password: loginData.password };
+   
 
     setToken({ ...token, error: false });
     setPassword({ ...password, error: false });
-    // console.log('77', loginData)
-
-    console.log('81', process.env.REACT_APP_api_url);
+    
 
     try {
-      let url = 'hhttps://af25-103-68-187-186.ngrok-free.app/user/login';
+      let url = 'https://b4e2-103-68-187-186.ngrok-free.app/user/login';    //api for login 
        let data=await axios.post(url, {
         token:loginData.token,
         password:loginData.password,
       });
-      // console.log('165',data);
+       console.log('165',data);
       if(data){
         console.log('151',data)
         // const data = await res.json();
