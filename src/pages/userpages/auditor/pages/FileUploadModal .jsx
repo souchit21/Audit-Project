@@ -1,6 +1,9 @@
 
+
+//Audit upload page
+
 import {  useState} from "react";
-import Layout from "../../../../components/Layout/Layout";
+import ALayout from "../Layout/ALayout";
 import axios from "axios";
 import { Box } from "@mui/material";
 import { notifyError, notifySuccess } from "../../../../utils/notifyToasts";
@@ -25,15 +28,20 @@ const FileUploadModal = () => {
     const {id} = useParams();
     console.log('26', id);
     const history = useHistory();
+
     const [selectedFile, setSelectedFile] = useState("");
     const [auditDetails, setAuditDetails] = useState({
         id: id,
         Audit_Link:""
     })
+
+    //selecting file
     const handleFileChange = (event) => {
         setSelectedFile(event.target.files[0]);
       };
     
+      //uploading the audit
+
       const handleUpload = async(e) => {
         e.preventDefault();
         console.log("39",selectedFile)
@@ -52,11 +60,13 @@ const FileUploadModal = () => {
           notifyError("File couldn't upload");
         }
       };
+      //sending audit id and audit link
+
       const submit = async(e)=>{
         e.preventDefault();
         const result = await axios.post('https://bc6c-103-68-187-186.ngrok-free.app/audit/editAuditform',auditDetails);
         console.log("55",result);
-        // history.push("/auditortable")
+         history.push("/auditeetable")
         notifySuccess('File successfully uploaded')
 
       };
@@ -64,7 +74,7 @@ const FileUploadModal = () => {
         // history.push("/posts");
       };
       return (
-        <Layout>
+        <ALayout>
           
         <div className="container">
         <Box sx={{ ...style}}> 
@@ -82,7 +92,7 @@ const FileUploadModal = () => {
               <div><button className="submit-btn" type="submit" onClick={submit}>Submit</button></div>
               </Box>
     </div>
-  </Layout>
+  </ALayout>
  );
   };
 export default FileUploadModal

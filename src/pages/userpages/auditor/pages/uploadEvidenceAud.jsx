@@ -1,3 +1,6 @@
+
+//NC Evidence upload
+
 import { useEffect, useState } from "react";
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -32,11 +35,17 @@ const UploadEvidenceAud =  ()=>{
 
     const {id} = useParams();
     console.log('31', id)
+
     const [Evidences ,setEvidences] = useState ([]);
     const [selectedFiles, setSelectedFiles] = useState([]);
+
+    //selecting evidences
+
     const handleFileChange = (event) => {
     setSelectedFiles(event.target.files);
     };
+
+    //uploading evidences
 
     const handleUpload = async (e) => {
             e.preventDefault();
@@ -60,6 +69,9 @@ const UploadEvidenceAud =  ()=>{
                 notifyError("Files couldn't be uploaded");
             }
     };
+    
+    //sending link of NC evidence and the id of the audit
+
     const PostLinks = async (e) => {
         e.preventDefault();
         const data = {

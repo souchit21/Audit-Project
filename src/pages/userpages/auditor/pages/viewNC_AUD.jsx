@@ -1,3 +1,6 @@
+//Showing Raised NC to the auditee
+
+
 import { useEffect, useState } from "react";
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -35,7 +38,7 @@ const ViewNC_Aud =  ()=>{
         loadUser();
     },[]);
 
-
+//getting raised NC links using Audit id
 
     const loadUser = async() =>{
         const result = await axios.get('https://bc6c-103-68-187-186.ngrok-free.app/audit/getAuditwithId?id='+id);

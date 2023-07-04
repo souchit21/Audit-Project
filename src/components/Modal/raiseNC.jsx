@@ -1,3 +1,6 @@
+
+// NC raise by Admin
+
 import { useEffect, useState } from "react";
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -35,12 +38,19 @@ const RaiseNC =  ()=>{
 
     const {id} = useParams();
     console.log('31', id)
+
     const [NC_LINKS,setNC_LINKS] = useState ([]);
     const [selectedFiles, setSelectedFiles] = useState([]);
+
+    //selecting files
     const handleFileChange = (event) => {
     setSelectedFiles(event.target.files);
     };
+
     const [NC_Form_Link, setLink] = useState([]);
+
+    //api to get the NC Report Form (for downloading the form)
+
     const getLink = async (e) => {
         try{
             const result = await axios.get("https://af25-103-68-187-186.ngrok-free.app/audit/getNCForm");
@@ -53,6 +63,9 @@ const RaiseNC =  ()=>{
             notifyError("Couldn't get link")
         }
     }
+
+    //Upload NC files
+
     const handleUpload = async (e) => {
             e.preventDefault();
             const formData = new FormData();
@@ -75,6 +88,9 @@ const RaiseNC =  ()=>{
                 notifyError("Files couldn't be uploaded");
             }
     };
+
+    // Sending the links of NC files
+    
     const PostLinks = async (e) => {
         e.preventDefault();
         const data = {

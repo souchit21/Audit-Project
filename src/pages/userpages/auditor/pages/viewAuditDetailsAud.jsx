@@ -1,3 +1,6 @@
+//showing audit details to auditor and auditee
+
+
 import { useEffect, useState } from "react";
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -89,6 +92,8 @@ useEffect (() => {
 //     history.push("/users")
 //     console.log("77",result.data)
 // }
+
+//getting all the information of an audit
 
 const loadUser = async() =>{
     const result = await axios.get('https://a42f-103-68-187-186.ngrok-free.app/audit/getAuditwithId?id='+id);

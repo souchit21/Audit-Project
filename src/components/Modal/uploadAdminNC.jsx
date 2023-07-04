@@ -1,3 +1,6 @@
+//Admin NC upload by Admin
+
+
 import { useEffect, useState } from "react";
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -35,12 +38,16 @@ const UploadAdminNC =  ()=>{
 
     const {id} = useParams();
     console.log('31', id)
+
     const [AdminNC_LINKS,setNC_LINKS] = useState ([]);
     const [selectedFiles, setSelectedFiles] = useState([]);
+
+    //selecting files
     const handleFileChange = (event) => {
     setSelectedFiles(event.target.files);
     };
 
+    //uploading files
     const handleUpload = async (e) => {
             e.preventDefault();
             const formData = new FormData();
@@ -63,6 +70,9 @@ const UploadAdminNC =  ()=>{
                 notifyError("Files couldn't be uploaded");
             }
     };
+
+    //sending links of the NC files
+    
     const PostLinks = async (e) => {
         e.preventDefault();
         const data = {

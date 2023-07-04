@@ -1,3 +1,5 @@
+//Verfication of new signed up users by admin
+
 import { useEffect, useState } from "react";
 // import SearchBar from "material-ui-search-bar";
 import { useHistory, useParams,Link } from "react-router-dom";
@@ -26,15 +28,18 @@ const pageSize = 10;
 const Verifyusers = () => {
   const history = useHistory();
   // const api_url = process.env.REACT_APP_api_url;
+
   const [nonVerifiedUsers,setNonverifiedusers] = useState([]);
   const [count, setCount] = useState({
     unverified: 0,
     verified: 0
   })
+
   const [verificationStatuses, setVerificationStatuses] = useState([
     { value: 'false', label: 'Not Verified' },
     { value: 'true', label: 'Verified' },
   ]);
+
   console.log('33', verificationStatuses)
   
   //const userToken = JSON.parse(localStorage.getItem('user'))?.token;
@@ -51,6 +56,9 @@ const Verifyusers = () => {
   useEffect (() => {
       PostToken();
   },[]);
+
+//sending status of users handled by admin
+
   const handleVerificationStatusChange = (event, rowData) => {
     const data = {
       id: rowData._id,
@@ -69,6 +77,8 @@ const Verifyusers = () => {
         console.error(error);
       });
   };
+
+  //admin verifying users
 
   const renderVerificationStatus = (rowData) => {
     //console.log('66', rowData)
@@ -90,6 +100,8 @@ const Verifyusers = () => {
     );
   };
 
+
+  //getting all the users
   const PostToken = async(e)=>{
     // e.preventDefault();
    // console.log('34', tokenArray)

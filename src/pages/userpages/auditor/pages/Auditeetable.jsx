@@ -1,3 +1,7 @@
+//TABLE FOR AUDITEE
+
+
+
 import { useEffect, useState } from "react";
 // import SearchBar from "material-ui-search-bar";
 import { useHistory, useParams,Link } from "react-router-dom";
@@ -21,6 +25,7 @@ import MaterialTable from 'material-table-jspdf-fix';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 const pageSize = 10;
+
 const AuditeeTable = () => {
   const history = useHistory();
   // const api_url = process.env.REACT_APP_api_url;
@@ -34,6 +39,8 @@ const AuditeeTable = () => {
   useEffect (() => {
       PostToken();
   },[]);
+
+
   const renderStatusDropdown = rowData => {
     return (
       <select
@@ -46,6 +53,9 @@ const AuditeeTable = () => {
       </select>
     );
   };
+
+
+  //handling Auditee Acceptation Date
 
   const handleStatusChange = async(event, rowData) => {
    
@@ -63,6 +73,8 @@ const AuditeeTable = () => {
     window.location.reload();
   };
 
+  //gettting all the Audits of the auditee using the token
+  
   const PostToken = async(e)=>{
     // e.preventDefault();
     console.log('34', tokenArray)

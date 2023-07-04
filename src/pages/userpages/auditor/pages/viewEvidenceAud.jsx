@@ -1,3 +1,7 @@
+
+//Evidences of NC
+
+
 import { useEffect, useState } from "react";
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -34,7 +38,7 @@ const ViewEvidenceAud =  ()=>{
         loadUser();
     },[]);
 
-
+//getting all the NC evidences of an audit using audit id
 
     const loadUser = async() =>{
         const result = await axios.get('https://bc6c-103-68-187-186.ngrok-free.app/audit/getAuditwithId?id='+id);

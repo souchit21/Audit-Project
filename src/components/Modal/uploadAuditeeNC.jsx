@@ -1,3 +1,6 @@
+
+// Auditee(Admin) NC Upload 
+
 import { useEffect, useState } from "react";
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -35,12 +38,16 @@ const UploadAuditeeNC =  ()=>{
 
     const {id} = useParams();
     console.log('31', id)
+
     const [AuditeeNC_LINKS,setNC_LINKS] = useState ([]);
     const [selectedFiles, setSelectedFiles] = useState([]);
+
+    //selecting files(NCs)
     const handleFileChange = (event) => {
     setSelectedFiles(event.target.files);
     };
 
+    //Uploading files
     const handleUpload = async (e) => {
             e.preventDefault();
             const formData = new FormData();
@@ -63,6 +70,8 @@ const UploadAuditeeNC =  ()=>{
                 notifyError("Files couldn't be uploaded");
             }
     };
+//sending links of uploaded NCs
+
     const PostLinks = async (e) => {
         e.preventDefault();
         const data = {

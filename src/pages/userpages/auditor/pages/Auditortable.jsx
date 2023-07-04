@@ -1,3 +1,6 @@
+
+//Table for Auditor
+
 import { useEffect, useState } from "react";
 import SearchBar from "material-ui-search-bar";
 import { useHistory, useParams,Link } from "react-router-dom";
@@ -24,6 +27,8 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 const pageSize = 10;
+
+
 const AuditorTable = () => {
   const history = useHistory();
   // const api_url = process.env.REACT_APP_api_url;
@@ -47,6 +52,9 @@ const AuditorTable = () => {
       PostToken();
   },[]);
 
+
+  //getting all the audits for the auditor
+  
   const PostToken = async(e)=>{
     // e.preventDefault();
     console.log('34', tokenArray)

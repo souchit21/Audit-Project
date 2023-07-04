@@ -1,3 +1,6 @@
+//Dashboard Showing total Audit counts, total NC count , total NC closed count
+
+
 import { useEffect, useState } from "react";
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -63,9 +66,14 @@ const Dashboard =  ()=>{
     
     })
     const {NCClosureCount, NCClosureremaining, totalAuditEvidenceCount, totalAudits, totalNCCount, totalNCEvidenceCount } = dashboardData;
+
+
     useEffect(()=>{
         DashBoardData();
       },[]);
+
+//API for getting data for dashboard
+
       const DashBoardData = async()=>{
         try{
           const result = await axios.get("https://a42f-103-68-187-186.ngrok-free.app/audit/getDashboardData");

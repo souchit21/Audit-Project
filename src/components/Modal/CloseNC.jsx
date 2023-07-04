@@ -1,5 +1,7 @@
 
- import React from 'react'
+//CONFIRMATION FOR NC CLOSE PAGE
+
+import React from 'react'
 import { useEffect, useState } from "react";
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -26,6 +28,9 @@ const CloseNC =  ()=>{
     const history = useHistory();
 
 const {id} = useParams();
+
+//API to close the NC
+
 const closeNC = (id) =>{
   const data = {
     id: id,
@@ -43,6 +48,8 @@ const closeNC = (id) =>{
     notifyError("Couldn't close NC")
   }
 }
+
+//if selecting NO going back to page
 
 const NoSelection = async(id) =>{
   // let result = await axios.post('http://localhost:4000/Order/Orderdelete?id='+id);
